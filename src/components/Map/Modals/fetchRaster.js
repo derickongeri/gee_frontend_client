@@ -11,6 +11,7 @@ export default function setSelectedRaster() {
 
     await selectedVect()
     let eeLayer = null;
+    let layerList = []
 
     //console.log(store.customGeojson, 'fetchRaster')
 
@@ -20,20 +21,33 @@ export default function setSelectedRaster() {
       },
     })
 
-    const mapid = response.data
+    const mapidList = response.data.tileList.reverse()
+    //console.log(response.data)
 
-    eeLayer = L.tileLayer(
-      `https://earthengine.googleapis.com/v1alpha/${mapid}/tiles/{z}/{x}/{y}`,
-      {
-        //layers: `${mapid}`,
-        transparent: true,
-        crs: L.CRS.EPSG4326,
-        format: "image/png",
-        attribution: "google earth engine",
-      }
-    );
 
-    return eeLayer;
+    const createTileLayer = (mapidIndex, mapid) => {
+      eeLayer = L.tileLayer(
+        `https://earthengine.googleapis.com/v1alpha/${mapid}/tiles/{z}/{x}/{y}`,
+        {
+          //layers: `${mapid}`,
+          transparent: true,
+          crs: L.CRS.EPSG4326,
+          format: "image/png",
+          attribution: "google earth engine",
+          zIndex: mapidIndex + 1
+        }
+      );
+
+      layerList.push(eeLayer)
+    }
+
+    for (let i = 0; i < mapidList.length; i++) {
+      createTileLayer(i, mapidList[i])
+    }
+
+    const rasterGroup = L.layerGroup(layerList)
+
+    return rasterGroup;
   };
 
   return {

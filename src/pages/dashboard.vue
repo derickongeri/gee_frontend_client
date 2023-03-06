@@ -1,32 +1,19 @@
 <template>
   <q-page class="bg-grey-10">
-    <q-header  class="bg-grey-10 text-lime-9">
-      <q-toolbar>
-        <div class="q-pa-xs">
-          <img src="~/src/assets/logoipsum-285.svg" />
-        </div>
-      </q-toolbar>
-    </q-header>
-
-    <div class="row bg-white" style="height: 94vh">
+    <q-header reveal class="bg-black">
+        <q-toolbar>
+          <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="menu" />
+          <q-toolbar-title>Header</q-toolbar-title>
+          <q-btn flat @click="drawerRight = !drawerRight" round dense icon="menu" />
+        </q-toolbar>
+      </q-header>
+    <div class="row bg-white" style="height: 100vh">
       <div
         class="col q-pa-none box"
         style="height: 100%; border-radius: 20px"
       >
         <mappanel />
       </div>
-      <!-- <div
-        class="col-6 stats-panell text-grey-9"
-        style="width: 45vw; height: 100%"
-
-      >
-        <div
-          class="q-mx-xs"
-          style="position: relative; top: 0%; width: 96%; height: 100%"
-        >
-          <analysisTab />
-        </div>
-      </div> -->
     </div>
   </q-page>
 </template>

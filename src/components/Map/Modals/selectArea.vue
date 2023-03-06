@@ -1,340 +1,37 @@
 <template>
-  <div class="q-pa-none" style="max-width: 600px">
-    <q-card class="" style="background-color: #00000000">
-      <q-tabs
-        v-model="tab"
+<div>
+      <q-select
+      class="q-my-md"
+        style="min-width: 250px; background-color: #b5caca50"
         dense
-        inline-label
-        class="text-grey-4 q-px-sm justify-left"
-        align="justify"
-        style="background-color: #00000088"
-        indicator-color="transparent"
-        active-color="orange"
+        hide-dropdown-icon
+        clear-icon="mdi-close"
+        color="grey-9"
+        input-class="input-option"
+        options-selected-class="text-green-7"
+        popup-content-class="selection-options"
+        v-model="selectedRegion"
+        :options="filterOptions"
+        @filter="filterFn1"
+        @update:model-value="getselectedRegion"
       >
-        <q-span class="row q-ml-none on-left">
-          <q-tab name="mails" icon="bar_chart" label="Analysis" no-caps />
-          <q-tab
-            name="alarms"
-            icon="mdi-selection-marker"
-            label="Select Area"
-            no-caps
-          />
-        </q-span>
-      </q-tabs>
-
-      <q-separator />
-
-      <q-tab-panels v-model="tab" animated style="background-color: #00000088">
-        <q-tab-panel name="mails" class="q-pa-none">
-          <div class="q-pa-none text-white">
-            <q-list dark separator style="width: 318px">
-              <q-expansion-item
-                expand-separator
-                icon="mdi-fire"
-                label="Account settings"
-                caption="John Doe"
-              >
-                <q-card>
-                  <q-card-section>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Quidem, eius reprehenderit eos corrupti commodi magni
-                    quaerat ex numquam, dolorum officiis modi facere maiores
-                    architecto suscipit iste eveniet doloribus ullam aliquid.
-                  </q-card-section>
-                </q-card>
-              </q-expansion-item>
-              <q-item clickable v-ripple>
-                <q-item-section>
-                  <q-item-label class="text-h6" style="font-size: 1.5em"
-                    >Forest Fire</q-item-label
-                  >
-                  <q-item-label caption>Burn Severity Mapping</q-item-label>
-                </q-item-section>
-
-                <q-menu fit>
-                  <div class="q-pa-md" style="max-width: 300px">
-                    <div class="q-pb-sm">Pre-fire date range</div>
-                    <q-input dark rounded outlined dense readonly>
-                      <template v-slot:prepend>
-                        <q-icon name="event" class="cursor-pointer">
-                          <q-popup-proxy
-                            anchor="bottom left"
-                            self="top left"
-                            transition-show="scale"
-                            transition-hide="scale"
-                          >
-                            <q-date v-model="date" range minimal dark>
-                              <div class="row items-center justify-end">
-                                <q-btn
-                                  v-close-popup
-                                  label="Close"
-                                  color="primary"
-                                  flat
-                                />
-                              </div>
-                            </q-date>
-                          </q-popup-proxy>
-                        </q-icon>
-                        <q-span style="font-size: 0.5em">from:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          {{ date.from }}
-                        </q-chip>
-                        <q-span style="font-size: 0.5em">to:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          {{ date.to }}
-                        </q-chip>
-                      </template>
-                    </q-input>
-                  </div>
-                  <div class="q-pa-md" style="max-width: 300px">
-                    <div class="q-pb-sm">Post-fire date range</div>
-                    <q-input dark rounded outlined dense readonly>
-                      <template v-slot:prepend>
-                        <q-icon name="event" class="cursor-pointer">
-                          <q-popup-proxy
-                            anchor="bottom left"
-                            self="top left"
-                            transition-show="scale"
-                            transition-hide="scale"
-                          >
-                            <q-date v-model="date" range minimal dark>
-                              <div class="row items-center justify-end">
-                                <q-btn
-                                  v-close-popup
-                                  label="Close"
-                                  color="primary"
-                                  flat
-                                />
-                              </div>
-                            </q-date>
-                          </q-popup-proxy>
-                        </q-icon>
-                        <q-span style="font-size: 0.5em">from:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          <q-popup-proxy
-                            anchor="bottom left"
-                            self="top left"
-                            transition-show="scale"
-                            transition-hide="scale"
-                          >
-                            <q-date v-model="date" range minimal dark>
-                              <div class="row items-center justify-end">
-                                <q-btn
-                                  v-close-popup
-                                  label="Close"
-                                  color="primary"
-                                  flat
-                                />
-                              </div>
-                            </q-date>
-                          </q-popup-proxy>
-                          {{ date.from }}
-                        </q-chip>
-                        <q-span style="font-size: 0.5em">to:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          {{ date.to }}
-                        </q-chip>
-                      </template>
-                    </q-input>
-                  </div>
-                </q-menu>
-              </q-item>
-              <q-item clickable v-ripple>
-                <q-item-section>
-                  <q-item-label class="text-h6" style="font-size: 1.5em"
-                    >Forest Fire</q-item-label
-                  >
-                  <q-item-label caption>Burn Severity Mapping</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item clickable v-ripple>
-                <q-item-section>
-                  <q-item-label class="text-h6" style="font-size: 1.5em"
-                    >Forest Fire</q-item-label
-                  >
-                  <q-item-label caption>Burn Severity Mapping</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </div>
-          <!-- <q-splitter v-model="splitterModel" style="height: 250px">
-            <template v-slot:before>
-              <q-tabs
-                dense
-                v-model="innerTab"
-                vertical
-                switch-indicator
-                active-class="text-grey-1"
-                class="text-grey"
-              >
-                <q-tab name="innerMails" icon="mdi-fire" label="Fire" />
-                <q-tab name="innerAlarms" icon="alarm" label="Alarms" />
-                <q-tab name="innerMovies" icon="movie" label="Movies" />
-              </q-tabs>
-            </template>
-
-            <template v-slot:after>
-              <q-tab-panels
-                v-model="innerTab"
-                animated
-                transition-prev="slide-down"
-                transition-next="slide-up"
-                style="background-color: #00000000"
-                class="text-grey-1"
-              >
-                <q-tab-panel name="innerMails">
-                  <div class="text-h6 q-mb-md">Forestfire Assessment</div>
-                  <div class="q-pa-md" style="max-width: 300px">
-                    <q-input dark rounded outlined dense readonly>
-                      <template v-slot:prepend>
-                        <q-icon name="event" class="cursor-pointer">
-                          <q-popup-proxy
-                            anchor="bottom left"
-                            self="top left"
-                            transition-show="scale"
-                            transition-hide="scale"
-                          >
-                            <q-date v-model="date" range minimal dark>
-                              <div class="row items-center justify-end">
-                                <q-btn
-                                  v-close-popup
-                                  label="Close"
-                                  color="primary"
-                                  flat
-                                />
-                              </div>
-                            </q-date>
-                          </q-popup-proxy>
-                        </q-icon>
-                        <q-span style="font-size: 0.5em">from:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          {{ date.from }}
-                        </q-chip>
-                        <q-span style="font-size: 0.5em">to:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          {{ date.to }}
-                        </q-chip>
-                      </template>
-                    </q-input>
-                  </div>
-                  <div class="q-pa-md" style="max-width: 300px">
-                    <q-input dark rounded outlined dense readonly>
-                      <template v-slot:prepend>
-                        <q-icon name="event" class="cursor-pointer">
-                          <q-popup-proxy
-                            anchor="bottom left"
-                            self="top left"
-                            transition-show="scale"
-                            transition-hide="scale"
-                          >
-                            <q-date v-model="date" range minimal dark>
-                              <div class="row items-center justify-end">
-                                <q-btn
-                                  v-close-popup
-                                  label="Close"
-                                  color="primary"
-                                  flat
-                                />
-                              </div>
-                            </q-date>
-                          </q-popup-proxy>
-                        </q-icon>
-                        <q-span style="font-size: 0.5em">from:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          <q-popup-proxy
-                            anchor="bottom left"
-                            self="top left"
-                            transition-show="scale"
-                            transition-hide="scale"
-                          >
-                            <q-date v-model="date" range minimal dark>
-                              <div class="row items-center justify-end">
-                                <q-btn
-                                  v-close-popup
-                                  label="Close"
-                                  color="primary"
-                                  flat
-                                />
-                              </div>
-                            </q-date>
-                          </q-popup-proxy>
-                          {{ date.from }}
-                        </q-chip>
-                        <q-span style="font-size: 0.5em">to:</q-span>
-                        <q-chip
-                          v-if="date"
-                          dense
-                          square
-                          text-color="grey-2"
-                          class="q-my-none q-ml-xs q-mr-none"
-                          style="background-color: #00000000"
-                        >
-                          {{ date.to }}
-                        </q-chip>
-                      </template>
-                    </q-input>
-                  </div>
-                </q-tab-panel>
-
-                <q-tab-panel name="innerAlarms"> </q-tab-panel>
-
-                <q-tab-panel name="innerMovies"> </q-tab-panel>
-              </q-tab-panels>
-            </template>
-          </q-splitter> -->
-        </q-tab-panel>
-      </q-tab-panels>
-    </q-card>
-  </div>
+        <template v-slot:append>
+          <q-icon color="grey-1" name="arrow_drop_down" @click.stop />
+        </template>
+        <template v-slot:selected>
+          <template v-if="selectedRegion">
+            <div style="font-size: 1em" class="selection-content q-px-sm text-grey-1">
+              {{ selectedRegion }}
+            </div>
+          </template>
+          <template v-else>
+            <div style="font-size: 1em" class="selection-content text-grey-9">
+              Select Region
+            </div>
+          </template>
+        </template>
+      </q-select>
+</div>
 </template>
 
 <script>
@@ -349,12 +46,14 @@ import {
 import { useVectorStore } from "src/stores/vector_store/index.js";
 
 export default defineComponent({
+  components: {
+    indicatorSelector: require("../../composables/indicatorSelection.vue")
+      .default,
+  },
   setup() {
     const store = useVectorStore();
 
     const selection = ref(true),
-      date = ref({ from: "2020/07/08", to: "2020/07/17" }),
-      daterange = ref(null),
       filterOptions = ref([]),
       selectedRegion = ref(store.getselectedRegion);
 
@@ -381,13 +80,8 @@ export default defineComponent({
       });
     };
 
-    const setDateRange = function () {
-      daterange.value = date.value.from.concat(" - ", date.value.to);
-    };
-
     onMounted(() => {
       store.fetchRegionNames();
-      daterange.value = date.value.from.concat(" - ", date.value.to);
     });
 
     const getselectedRegion = function (val) {
@@ -409,11 +103,6 @@ export default defineComponent({
       filterFn1,
       selectedRegion,
       getselectedRegion,
-      tab: ref("mails"),
-      innerTab: ref("innerMails"),
-      splitterModel: ref(20),
-      date,
-      daterange,
     };
   },
 });

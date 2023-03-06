@@ -2,10 +2,10 @@
   <div
     class="q-my-none q-mt-none"
     style="
-      max-width: 90%;
+      width: 100%;
+      heiht: 70%;
       border: 0px solid rgb(160, 160, 160);
       position: relative;
-      left: 5%;
     "
   >
     <Bar
@@ -51,13 +51,31 @@ export default {
     chartData: {
       type: Object,
       default: {
-        labels: ["Degraded", "Improved", "Stable"],
+        labels: [
+          "Enhanced Regrowth, High",
+          "Enhanced Regrowth, Low",
+          "Unburned",
+          "Low Severity",
+          "Moderate-low Severity",
+          "Moderate-high Severity",
+          "High Severity",
+          "NA",
+        ],
         datasets: [
           {
-            backgroundColor: ["#b71c1c", "#2e7d32", "#fff9b4"],
-            data: [20, 30, 60],
-            barPercentage: 0.5,
-            categoryPercentage: 0.5,
+            backgroundColor: [
+              "#7a8737",
+              "#acbe4d",
+              "#0ae042",
+              "#fff70b",
+              "#ffaf38",
+              "#ff641b",
+              "#a41fd6",
+              "#ffffff",
+            ],
+            data: [6, 364, 487171, 113675, 89094, 617, 3, 0],
+            barPercentage: 0.75,
+            categoryPercentage: 0.75,
           },
         ],
       },
@@ -72,11 +90,11 @@ export default {
     },
     width: {
       type: Number,
-      default: 400,
+      default: 300,
     },
     height: {
       type: Number,
-      default: 400,
+      default: 200,
     },
     cssClasses: {
       default: "",
@@ -98,12 +116,12 @@ export default {
           padding: 0,
         },
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         plugins: {
           datalabels: {
-            display: 'auto',
-            anchor: 'end',
-            align: 'end',
+            display: "auto",
+            anchor: "end",
+            align: "end",
             offset: 10,
             opacity: 0.9,
             formatter: (val, ctx) => {
@@ -111,19 +129,19 @@ export default {
               const label = ctx.chart.data.labels[ctx.dataIndex];
 
               // Format the number with 2 decimal places
-              const formattedVal = Intl.NumberFormat('en-US', {
+              const formattedVal = Intl.NumberFormat("en-US", {
                 minimumFractionDigits: 1,
               }).format(val);
 
               // Put them together
-              return `${formattedVal} %`;
+              return `${formattedVal}`;
             },
             borderRadius: 5,
             leftborderWidth: 2,
-            borderColor: ['#b71c1c', '#2e7d32', '#fff9b4'],
-            color: '#404040',
-            size: '11',
-            backgroundColor: '#fff',
+            borderColor: ["#b71c1c", "#2e7d32", "#fff9b4"],
+            color: "#404040",
+            size: "11",
+            backgroundColor: "#fff",
           },
           legend: {
             display: false,
@@ -153,13 +171,13 @@ export default {
         scales: {
           x: {
             min: 0,
-            max: 100,
+            //max: 100,
             ticks: {
               callback: function (value) {
                 value = value.toFixed();
                 return `${value}`;
               },
-              color: "",
+              color: "black",
             },
             grid: {
               color: "",
@@ -167,15 +185,15 @@ export default {
           },
           y: {
             ticks: {
-              color: "",
-              tickLength: 0
+              color: "black",
+              tickLength: 0,
             },
             grid: {
               color: "#9e9d24",
               borderDash: [1, 10],
               drawBorder: false,
               tickLength: 0,
-              tickWidth: 0
+              tickWidth: 0,
             },
           },
         },

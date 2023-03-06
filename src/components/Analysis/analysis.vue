@@ -1,59 +1,27 @@
 <template>
-  <div class="q-px-none q-ml-sm q-py-none" style="border-radius: 20px;">
-    <q-tabs v-model="tab" dense inline-label class="text-grey-9 q-px-sm" no-caps active-color="orange"
-      indicator-color="orange" align="justify" narrow-indicator style="width: 100%">
-      <div class="bg-grey-11 q-px-none q-mx-sm q-my-sm" style="border-radius: 20px">
-        <q-tab name="sdg" label="SDG" icon="mdi-earth" />
-      </div>
-      <div class="bg-grey-11 q-px-none q-mx-sm q-my-sm" style="border-radius: 20px">
-        <q-tab name="Forest" label="Forest" icon="mdi-tree-outline" />
-      </div>
-      <div class="bg-grey-11 q-px-none q-mx-sm q-my-sm" style="border-radius: 20px">
-        <q-tab name="Soil" label="Soil" icon="landslide" />
-      </div>
-      <div class="bg-grey-11 q-px-none q-mx-sm q-my-sm" style="border-radius: 20px">
-        <q-tab name="Desertification" label="Desertification" icon="mdi-cactus" />
-      </div>
-      <div class="bg-grey-11 q-px-none q-mx-sm q-my-sm" style="border-radius: 20px">
-        <q-tab name="Coastal" label="Coastal" icon="mdi-water" />
-      </div>
-    </q-tabs>
-
-    <q-tab-panels class="bg-white text-grey-9" style="border-radius:15px;" v-model="tab" animated>
-      <q-tab-panel name="sdg">
-        <sdgTab />
-      </q-tab-panel>
-      <q-tab-panel name="Forest">
-        <forestTab />
-      </q-tab-panel>
-      <q-tab-panel name="Soil">
-        <soilTab />
-      </q-tab-panel>
-    </q-tab-panels>
-
-  </div>
+  <q-card
+    flat
+    class="my-card"
+    style="width: 450px; background-color: #b5caca00; border-radius: 20px"
+  >
+    <q-card-section
+      class="text-white q-px-xs"
+      style="background-color: #00000000"
+    >
+      <sdg />
+    </q-card-section>
+  </q-card>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-
-export default defineComponent({
+export default {
   components: {
-    sdgTab: require("./Modals/sdg.vue").default,
-    forestTab: require("./Modals/Forest.vue").default,
-    soilTab: require("./Modals/soil_erossion.vue").default,
+    sdg: require("./Modals/sdg/sdg.vue").default,
   },
-
   setup() {
-    return {
-      tab: ref("sdg"),
-    };
+    return {};
   },
-});
+};
 </script>
 
-<style lang="scss">
-.chart-card {
-  background: none;
-}
-</style>
+<style scoped></style>
