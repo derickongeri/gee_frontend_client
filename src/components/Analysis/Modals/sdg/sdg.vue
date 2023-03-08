@@ -6,9 +6,9 @@
     style="height: 96vh; min-width: 300px; border-radius: 20px"
   > -->
 
-  <div class="row items-center q-gutter-sm q-px-none q-mb-md" style="max-width: 400px">
+  <div class="row items-center q-gutter-sm q-px-none q-mb-md" style="min-width: 400px">
     <div class="col text-grey-9 q-my-none">
-      <strong> Burn Severity Classes</strong>
+      <strong> Burned Area Severity Statistics</strong>
     </div>
     <q-space />
     <div id="chart-btns">

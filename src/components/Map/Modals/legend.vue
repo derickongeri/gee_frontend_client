@@ -4,7 +4,7 @@
       <h6 class="q-pa-sm q-ma-none">Legend Title</h6>
     </div>
     <div class="col q-pa-sm q-ma-none q-gutter-none" style="max-width:35vw">
-      <div class=" q-gutter-xs q-pa-xs" v-for="(landcover, key) in legendData" :key="key" style="min-width:15vw">
+      <div class=" q-gutter-xs q-pa-xs" v-for="(landcover, key) in legendData" :key="key" style="min-width:12vw">
         <!-- <div
           class="legend-item"
           :style="`border-color:` + landcover.color"
@@ -39,7 +39,7 @@ export default defineComponent({
     const draggableContainer = ref(null)
 
     const setLegendData = function () {
-      legendData.value = setLegendColors("landcover_Kenya");
+      legendData.value = setLegendColors("burnedArea");
     };
 
     onMounted(() => {

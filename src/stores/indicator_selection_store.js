@@ -1,6 +1,9 @@
 import { axios } from "boot/axios";
 import { Loading, QSpinnerOval } from "quasar";
+import { useVectorStore } from "./vector_store/index.js";
 import { defineStore } from "pinia";
+
+const vectStore = useVectorStore()
 
 export const useIndicatorSelectionStore = defineStore('indicator_selection_store', {
   state: () => ({

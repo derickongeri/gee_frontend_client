@@ -52,13 +52,13 @@ export default {
       type: Object,
       default: {
         labels: [
-          "Enhanced Regrowth, High",
-          "Enhanced Regrowth, Low",
+          "Regrowth, High",
+          "Regrowth, Low",
           "Unburned",
           "Low Severity",
-          "Moderate-low Severity",
-          "Moderate-high Severity",
+          "Moderate Severity",
           "High Severity",
+          "Very High Severity",
           "NA",
         ],
         datasets: [
@@ -171,10 +171,10 @@ export default {
         scales: {
           x: {
             min: 0,
-            //max: 100,
+            max: 700000,
             ticks: {
               callback: function (value) {
-                value = value.toFixed();
+                value = value.toFixed() / 1000;
                 return `${value}`;
               },
               color: "black",

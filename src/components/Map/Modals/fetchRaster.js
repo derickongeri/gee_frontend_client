@@ -15,13 +15,18 @@ export default function setSelectedRaster() {
 
     //console.log(store.customGeojson, 'fetchRaster')
 
-    const response = await axios.post("http://127.0.0.1:3000/api/mapid", store.customGeojson.toString(), {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    // const response = await axios.post("http://127.0.0.1:3000/api/mapid", store.customGeojson.toString(), {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
 
-    const mapidList = response.data.tileList.reverse()
+    //const mapidList = response.data.tileList.reverse()
+
+    const mapidList = [
+      "projects/earthengine-legacy/maps/133e3cec43eb01b4e0049a2727d0297c-4aa469c1fdc3d4011fc0f2c6004e56fe",
+      "projects/earthengine-legacy/maps/9b08401ed0b0825029fc6e287f0e8742-dd17fb3271ec193022e9b217b0242e24"
+      ]
     //console.log(response.data)
 
 

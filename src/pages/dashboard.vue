@@ -1,21 +1,25 @@
 <template>
-  <q-page class="bg-grey-10">
-    <q-header reveal class="bg-black">
-        <q-toolbar>
-          <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="menu" />
-          <q-toolbar-title>Header</q-toolbar-title>
-          <q-btn flat @click="drawerRight = !drawerRight" round dense icon="menu" />
-        </q-toolbar>
-      </q-header>
-    <div class="row bg-white" style="height: 100vh">
-      <div
-        class="col q-pa-none box"
-        style="height: 100%; border-radius: 20px"
-      >
+  <q-layout view="hHh lpR fFf">
+    <q-header reveal class="bg-grey-10">
+      <q-toolbar>
+        <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="menu" />
+        <q-toolbar-title>Header</q-toolbar-title>
+        <q-btn
+          flat
+          @click="drawerRight = !drawerRight"
+          round
+          dense
+          icon="menu"
+        />
+      </q-toolbar>
+    </q-header>
+
+    <q-page-container>
+      <q-page class="">
         <mappanel />
-      </div>
-    </div>
-  </q-page>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
@@ -27,7 +31,6 @@ export default {
     analysisTab: require("components/Analysis/analysis.vue").default,
   },
   setup() {
-
     return {
       drawer: ref(false),
       miniState: ref(true),

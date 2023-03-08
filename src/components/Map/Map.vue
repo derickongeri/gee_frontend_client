@@ -1,29 +1,31 @@
 <template>
   <div
-    class="col bg-grey-9 q-pa-none box"
-    style="height: 100%; border-radius: 20px"
+    class="q-pa-none q-gutter- box"
+    style="position: relative; min-height: inherit"
   >
-    <div class="row map-content" id="mapid" style="width: 100%">
+    <div
+      class="col bg-black q-pa-none map-content"
+      id="mapid"
+      style="width: 60%; min-height: 100%; "
+    >
       <div
         class="q-pa-none"
         style="
           position: absolute;
           z-index: 3000;
-          top: 0%;
+          top: 2%;
           left: 1%;
-          max-width: 35%;
-          max-height: 60%;
-          border-radius: 10px;
+          max-width: 40%;
+          max-height: 98%;
+          border-radius: 15px;
+          background-color: #00000088;
         "
-        @mouseover="map.dragging.disable()"
-        @mouseout="map.dragging.enable()"
-        @pointerover="map.dragging.disable()"
-        @pointerout="map.dragging.enable()"
+        @mouseover="map.dragging.disable(), map.smoothWheelZoom.disable()"
+        @mouseout="map.dragging.enable(), map.smoothWheelZoom.enable()"
+        @pointerover="map.dragging.disable(), map.smoothWheelZoom.disable()"
+        @pointerout="map.dragging.enable(), map.smoothWheelZoom.enable()"
       >
-        <div
-          class=""
-          style="z-index: 3000; max-width: 35vw; background-color: #00000000"
-        >
+        <div class="q-pb-sm" style="z-index: 3000; background-color: #00000000">
           <areaSelection
             @mouseover="map.dragging.disable()"
             @mouseout="map.dragging.enable()"
@@ -31,28 +33,10 @@
             @pointerout="map.dragging.enable()"
           />
         </div>
-        <analysisTab />
 
-        <!-- <div class="col bg-grey-1">
-          <div>
-            <span>Layer Opacity</span>
-          </div>
-          <div class="row">
-            <q-slider
-              :min="1"
-              :max="10"
-              :step="1"
-              v-model="opacityValue"
-              color="lime-9"
-              thumb-size="12px"
-              class="row"
-              @mouseenter="handle_opacity"
-            />
-          </div>
-        </div> -->
+        <layersTab />
       </div>
-
-      <div
+      <!-- <div
         class="q-pa-none"
         style="
           position: absolute;
@@ -75,10 +59,10 @@
           @pointerover="map.dragging.disable()"
           @pointerout="map.dragging.enable()"
         />
-      </div>
+      </div> -->
 
       <div
-        class="row zoom-controls q-gutter-xs q-py-sm"
+        class="row zoom-controls q-gutter-xs"
         style="width: fit-content"
       >
         <div class="row q-gutter-xs">
@@ -162,6 +146,33 @@
           <img src="~/src/assets/logos.svg" alt="" />
         </div> -->
     </div>
+    <div class="col" style="max-width: 35%; border-radius: 20px">
+      <div
+        class="q-pa-none"
+        style="
+          position: relative;
+          top: 1%;
+          left: 1%;
+          max-width: 98%;
+          max-height: 60%;
+          border-radius: 10px;
+        "
+        @mouseover="map.dragging.disable()"
+        @mouseout="map.dragging.enable()"
+        @pointerover="map.dragging.disable()"
+        @pointerout="map.dragging.enable()"
+      >
+        <div class="" style="z-index: 3000; background-color: #00000000">
+          <!-- <areaSelection
+            @mouseover="map.dragging.disable()"
+            @mouseout="map.dragging.enable()"
+            @pointerover="map.dragging.disable()"
+            @pointerout="map.dragging.enable()"
+          /> -->
+        </div>
+        <analysisPanel />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -198,8 +209,8 @@ import { axios } from "src/boot/axios.js";
 export default defineComponent({
   components: {
     selectionTab: require("components/Layerselections.vue").default,
-    // analysisTab: require("components/Analysis/analysis.vue").default,
-    analysisTab: require("../composables/indicatortabs.vue").default,
+    analysisPanel: require("../composables/analysisPanel.vue").default,
+    layersTab: require("../composables/indicatortabs.vue").default,
     areaSelection: require("../Map/Modals/selectArea.vue").default,
     Maplegend: require("./Modals/legend.vue").default,
     socials: require("components/socials/shareNetwork.vue").default,
@@ -268,10 +279,10 @@ export default defineComponent({
 
       L.control
         .attribution({
-          position: "bottomleft",
+          position: "bottomright",
         })
         .addTo(map.value);
-      L.control.scale({ position: "bottomleft" }).addTo(map.value);
+      L.control.scale({ position: "bottomright" }).addTo(map.value);
       // ///////////////////hide layers control
       let layerControl = document.getElementsByClassName(
         "leaflet-control-layers"
@@ -678,7 +689,7 @@ export default defineComponent({
 
 .box {
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
   height: 100%;
 }
 

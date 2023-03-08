@@ -1,9 +1,8 @@
 <template>
-  <div class="q-pa-none text-lime-9">
+  <div class="q-pa-none q-ma-none text-lime-9" style="min-width: 15vw">
     <q-list
       padding
-      class="rounded-borders"
-      style="min-width: 328px"
+      class="rounded-borders q-pa-none q-ma-none"
     >
       <!-- --------------------------------FOREST FIRE INDICATORS---------------------------------------------   -->
       <q-expansion-item
@@ -19,13 +18,13 @@
             Forest Fire
           </q-item-section>
         </template>
-        <q-card class="bg-grey-4">
+        <q-card class="bg-grey-1">
           <q-card-section>
             <forestfires/>
           </q-card-section>
         </q-card>
       </q-expansion-item>
-     
+
       <!-- --------------------------------VEGETATION INDICATORS---------------------------------------------   -->
       <q-expansion-item
         group="indicatorgroup"

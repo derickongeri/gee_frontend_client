@@ -1,37 +1,52 @@
 <template>
-<div>
-      <q-select
-      class="q-my-md"
-        style="min-width: 250px; background-color: #b5caca50"
-        dense
-        hide-dropdown-icon
-        clear-icon="mdi-close"
-        color="grey-9"
-        input-class="input-option"
-        options-selected-class="text-green-7"
-        popup-content-class="selection-options"
-        v-model="selectedRegion"
-        :options="filterOptions"
-        @filter="filterFn1"
-        @update:model-value="getselectedRegion"
-      >
-        <template v-slot:append>
-          <q-icon color="grey-1" name="arrow_drop_down" @click.stop />
+  <div
+    style="
+      min-width: 250px;
+      background-color: #b5caca00;
+      border-radius: 20px;
+    "
+  >
+  <div class="q-px-sm text-grey-4 text-h6" style="height: 5vh"></div>
+  <div class="q-px-sm text-grey-4 text-h6">Select Area</div>
+    <q-select
+      class="q-px-sm q-py-sm"
+      bg-color="white"
+      dense
+      standout
+      hide-dropdown-icon
+      clear-icon="mdi-close"
+      color="grey-9"
+      input-class="input-option"
+      options-selected-class="text-green-7"
+      popup-content-class="selection-options"
+      v-model="selectedRegion"
+      :options="filterOptions"
+      @filter="filterFn1"
+      @update:model-value="getselectedRegion"
+    >
+      <template v-slot:prepend>
+        <q-icon size="xs" color="grey-9" name="mdi-selection-marker" @click.stop />
+      </template>
+      <template v-slot:append>
+        <q-icon color="grey-9" name="arrow_drop_down" @click.stop />
+      </template>
+      <template v-slot:selected>
+        <template v-if="selectedRegion">
+          <div
+            style="font-size: 1em"
+            class="selection-content q-px-sm text-grey-9"
+          >
+            {{ selectedRegion }}
+          </div>
         </template>
-        <template v-slot:selected>
-          <template v-if="selectedRegion">
-            <div style="font-size: 1em" class="selection-content q-px-sm text-grey-1">
-              {{ selectedRegion }}
-            </div>
-          </template>
-          <template v-else>
-            <div style="font-size: 1em" class="selection-content text-grey-9">
-              Select Region
-            </div>
-          </template>
+        <template v-else>
+          <div style="font-size: 1em" class="selection-content text-grey-9">
+            Select Region
+          </div>
         </template>
-      </q-select>
-</div>
+      </template>
+    </q-select>
+  </div>
 </template>
 
 <script>
