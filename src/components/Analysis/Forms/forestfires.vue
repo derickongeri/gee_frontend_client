@@ -1,7 +1,7 @@
 <template>
   <q-form @submit="onSubmit">
     <div class="q-pa-xs" style="max-width: fit-content">
-      <div class="q-pb-sm">Period Before Fire</div>
+      <div class="q-pb-sm">Select Period Before the Fire</div>
       <q-input rounded outlined dense readonly>
         <template v-slot:prepend>
           <q-icon size="xs" name="event" class="cursor-pointer">
@@ -11,15 +11,18 @@
               transition-show="scale"
               transition-hide="scale"
             >
-              <q-date
-                v-model="preFiredates"
-                mask="YYYY-MM-DD"
-                range
-                minimal
-                @range-start="closePopUp = false"
-                @range-end="closePopUp = true"
-                v-close-popup="closePopUp"
-              />
+              <q-date v-model="preFiredates" mask="YYYY-MM-DD" range minimal>
+                <div class="row items-center justify-end q-gutter-sm">
+                  <q-btn label="Cancel" color="primary" flat v-close-popup />
+                  <q-btn
+                    label="OK"
+                    color="primary"
+                    flat
+                    @click="save"
+                    v-close-popup
+                  />
+                </div>
+              </q-date>
             </q-popup-proxy>
           </q-icon>
           <q-span style="font-size: 0.5em">from:</q-span>
@@ -64,7 +67,7 @@
       </q-input>
     </div>
     <div class="q-pa-xs" style="max-width: fit-content">
-      <div class="q-pb-sm">Period After Fire</div>
+      <div class="q-pb-sm">Select Period After the Fire</div>
       <q-input rounded outlined dense readonly>
         <template v-slot:prepend>
           <q-icon size="xs" name="event" class="cursor-pointer">
@@ -78,11 +81,20 @@
                 v-model="postFiredates"
                 mask="YYYY-MM-DD"
                 range
+                :disable="disableDates"
                 minimal
-                @range-start="closePopUp = false"
-                @range-end="closePopUp = true"
-                v-close-popup="closePopUp"
-              />
+              >
+                <div class="row items-center justify-end q-gutter-sm">
+                  <q-btn label="Cancel" color="primary" flat v-close-popup />
+                  <q-btn
+                    label="OK"
+                    color="primary"
+                    flat
+                    @click="save"
+                    v-close-popup
+                  />
+                </div>
+              </q-date>
             </q-popup-proxy>
           </q-icon>
           <q-span style="font-size: 0.5em">from:</q-span>
@@ -145,33 +157,25 @@
 <script>
 import { ref, defineComponent } from "vue";
 import { Notify } from "quasar";
+import moment from "moment/dist/moment.js";
+import { useVectorStore } from "../../../stores/vector_store/index.js";
 
 export default defineComponent({
   setup() {
+    const store = useVectorStore()
     const preFiredates = ref(null),
       postFiredates = ref(null),
       closePopUp = ref(false);
 
-    const closepopup = () => {
-      closePopUp.value = true;
-    };
-
     const daterangeSubmit = () => {
       let dates = [preFiredates.value, postFiredates.value];
-      console.log(dates);
-    };
-
-    const setEditingRange = () => {
-      return { from: preFiredates.value.to, to: void 0 };
+      store.setDatesSelected(dates)
     };
 
     return {
-      closePopUp,
-      closepopup,
       preFiredates,
       postFiredates,
       daterangeSubmit,
-      setEditingRange,
     };
   },
 });

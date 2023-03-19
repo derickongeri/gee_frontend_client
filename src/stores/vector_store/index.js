@@ -8,11 +8,16 @@ export const useVectorStore = defineStore({
     regionNames: [],
     countryNames: [],
     subRegionNames: [],
-    selectedRegion: "Aberdare NP",
+    selectedRegion: "",
     slectedCountry: "",
     selectedSubregion: "",
     selectedYear: 2010,
     customGeojson: null,
+    datesSelected: [
+      { from: '2023-01-01', to: '2023-01-31' },
+      { from: '2023-02-15', to: '2023-02-23' }
+    ],
+    // statistics: null
   }),
   getters: {
     getRegionNames: (state) => state.regionNames,
@@ -20,6 +25,9 @@ export const useVectorStore = defineStore({
     getselectedCountry: (state) => state.slectedCountry,
     getselectedSubRegion: (state) => state.selectedSubregion,
     getYearSelected: (state) => state.selectedYear,
+    getDatesSelected: (state) => state.datesSelected,
+    //getStoredStats: (state) => state.statistics,
+    getCustomGeojson: (state) => state.customGeojson
   },
   actions: {
     async fetchRegionNames() {
@@ -49,8 +57,13 @@ export const useVectorStore = defineStore({
       console.log(typeof(this.customGeojson), "in store");
     },
 
+    setDatesSelected(val) {
+      this.datesSelected = val
+    },
+
     setRegionSelected(val) {
       this.selectedRegion = val;
+      console.log(this.selectedRegion)
     },
     setCountrySelected(val) {
       this.slectedCountry = val;
@@ -62,5 +75,9 @@ export const useVectorStore = defineStore({
       this.selectedYear = val;
       console.log(this.selectedYear);
     },
+
+    // setStats(val){
+    //   this.statistics = val
+    // }
   },
 });

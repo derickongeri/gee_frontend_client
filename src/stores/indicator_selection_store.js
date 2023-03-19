@@ -1,33 +1,21 @@
-import { axios } from "boot/axios";
-import { Loading, QSpinnerOval } from "quasar";
 import { useVectorStore } from "./vector_store/index.js";
 import { defineStore } from "pinia";
 
-const vectStore = useVectorStore()
+const vectStore = useVectorStore();
 
-export const useIndicatorSelectionStore = defineStore('indicator_selection_store', {
-  state: () => ({
-    selections: "", //holds  user selections
-    expansion_items: "", //holds  user selections
-    note_key:"", // holds the selected indicator key to get note value
-  }),
-  getters: {
-    getIndicatorSelections: (state) => state.selections, // get user selections
-    getIndicatorNoteKey: (state) => state.note_key, // get selected indicator note key
-    getExpansionItems: (state) => state.expansion_items, // get expansion items state
-  },
-  actions: {
-    // store the user  indicator selections
-    setIndicatorSelections(selections) {
-      this.selections = selections
+export const useIndicatorSelectionStore = defineStore(
+  "indicator_selection_store",
+  {
+    state: () => ({
+      firePeriod: {},
+      geometryData: null,
+    }),
+    getters: {
+      getFirePeriod: (state) => state.firePeriod,
+      getGeometryData: (state) => state.geometryData,
     },
-    // store the expansion item state
-    setExpansionItemSelections(expansion_items) {
-      this.expansion_items = expansion_items
+    actions: {
+      
     },
-    // store the note key to get the indicator notes
-    setIndicatorNotes(note_key) {
-      this.note_key = note_key
-    },
-    },
-});
+  }
+);

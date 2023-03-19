@@ -32,7 +32,7 @@ import { ref } from "vue";
 
 export default {
   components: {
-    Stats: require("../Analysis/analysis.vue").default,
+   // Stats: require("../Analysis/analysis.vue").default,
     Selection: require("./indicatorSelection.vue").default,
     Legend: require("../Map/Modals/legend.vue").default,
   },

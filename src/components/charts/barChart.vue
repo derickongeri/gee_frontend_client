@@ -73,7 +73,7 @@ export default {
               "#a41fd6",
               "#ffffff",
             ],
-            data: [6, 364, 487171, 113675, 89094, 617, 3, 0],
+            data: [0, 0, 0, 0, 0, 0, 0, 0],
             barPercentage: 0.75,
             categoryPercentage: 0.75,
           },
@@ -97,7 +97,7 @@ export default {
       default: 200,
     },
     cssClasses: {
-      default: "",
+      default: "my-font text-grey-9",
       type: String,
     },
     styles: {
@@ -171,13 +171,13 @@ export default {
         scales: {
           x: {
             min: 0,
-            max: 700000,
+            // max: ,
             ticks: {
               callback: function (value) {
                 value = value.toFixed() / 1000;
                 return `${value}`;
               },
-              color: "black",
+              color: "#424242",
             },
             grid: {
               color: "",
@@ -185,7 +185,7 @@ export default {
           },
           y: {
             ticks: {
-              color: "black",
+              color: "#424242",
               tickLength: 0,
             },
             grid: {

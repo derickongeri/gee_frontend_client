@@ -1,9 +1,9 @@
 <template>
   <div ref="draggableContainer" id="draggable-container" class="legend">
-    <div class="col" id="draggable-header" @touchstart="dragMouseDown" @mousedown="dragMouseDown">
-      <h6 class="q-pa-sm q-ma-none">Legend Title</h6>
-    </div>
-    <div class="col q-pa-sm q-ma-none q-gutter-none" style="max-width:35vw">
+    <!-- <div class="col" id="draggable-header" @touchstart="dragMouseDown" @mousedown="dragMouseDown">
+      <p class="my-font q-pa-sm q-ma-none" style="font-weight: bold">Burnt Area</p>
+    </div> -->
+    <div class="col q-pa-sm q-ma-none q-gutter-none" style="max-width:fit">
       <div class=" q-gutter-xs q-pa-xs" v-for="(landcover, key) in legendData" :key="key" style="min-width:12vw">
         <!-- <div
           class="legend-item"
@@ -13,9 +13,9 @@
         <div class="text-center" style="font-size: 0.65rem">
           {{ landcover.landcover }}
         </div> -->
-        <i :style="`background:` + landcover.color" class="q-px-sm q-my-sm"
-          style="border: 0px outset black; border-radius: 20px"></i>
-        <span class="q-px-sm q-my-sm">{{ landcover.landcover }}</span>
+        <i :style="`background:` + landcover.color" class="q-px-sm q-my-xs"
+          style="font-size:0.75em; border: 0px outset black; border-radius: 12px;"></i>
+        <span class="my-font q-px-sm q-my-sm" style="font-size:0.75rem; font-weight: normal;">{{ landcover.landcover }}</span>
         <br />
       </div>
     </div>
@@ -92,7 +92,7 @@ export default defineComponent({
   // position: absolute;
   // bottom: 1%;
   // left: 1%;
-  max-width: fit-content;
+  //max-width: fit-content;
   z-index: 3000;
   min-width: 10vw;
   // max-width: 250px;

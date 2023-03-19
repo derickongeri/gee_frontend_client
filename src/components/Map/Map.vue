@@ -1,13 +1,9 @@
 <template>
   <div
-    class="q-pa-none q-gutter- box"
-    style="position: relative; min-height: inherit"
+    class="q-pa-none bg-grey-2 box"
+    style="position: relative; min-height: 100%; min-width: 100%"
   >
-    <div
-      class="col bg-black q-pa-none map-content"
-      id="mapid"
-      style="width: 60%; min-height: 100%; "
-    >
+    <div class="col bg-black q-mx-none map-content" id="mapid" style="">
       <div
         class="q-pa-none"
         style="
@@ -15,37 +11,9 @@
           z-index: 3000;
           top: 2%;
           left: 1%;
-          max-width: 40%;
+          max-width: 60%;
           max-height: 98%;
           border-radius: 15px;
-          background-color: #00000088;
-        "
-        @mouseover="map.dragging.disable(), map.smoothWheelZoom.disable()"
-        @mouseout="map.dragging.enable(), map.smoothWheelZoom.enable()"
-        @pointerover="map.dragging.disable(), map.smoothWheelZoom.disable()"
-        @pointerout="map.dragging.enable(), map.smoothWheelZoom.enable()"
-      >
-        <div class="q-pb-sm" style="z-index: 3000; background-color: #00000000">
-          <areaSelection
-            @mouseover="map.dragging.disable()"
-            @mouseout="map.dragging.enable()"
-            @pointerover="map.dragging.disable()"
-            @pointerout="map.dragging.enable()"
-          />
-        </div>
-
-        <layersTab />
-      </div>
-      <!-- <div
-        class="q-pa-none"
-        style="
-          position: absolute;
-          z-index: 3000;
-          bottom: 2%;
-          right: 1%;
-          max-width: 40%;
-          max-height: 98%;
-          border-radius: 10px;
           background-color: #00000000;
         "
         @mouseover="map.dragging.disable(), map.smoothWheelZoom.disable()"
@@ -53,18 +21,76 @@
         @pointerover="map.dragging.disable(), map.smoothWheelZoom.disable()"
         @pointerout="map.dragging.enable(), map.smoothWheelZoom.enable()"
       >
+        <div class="" style="z-index: 3000; background-color: #00000000">
+          <areaSelection
+            @mouseover="map.dragging.disable()"
+            @mouseout="map.dragging.enable()"
+            @pointerover="map.dragging.disable()"
+            @pointerout="map.dragging.enable()"
+          />
+        </div>
+      </div>
+      <div
+        class="q-pa-none"
+        style="
+          position: absolute;
+          z-index: 3000;
+          bottom: 2%;
+          left: 1%;
+          max-width: 40%;
+          max-height: 98%;
+          border-radius: 10px;
+          background-color: #ffffff;
+        "
+        @mouseover="map.dragging.disable(), map.smoothWheelZoom.disable()"
+        @mouseout="map.dragging.enable(), map.smoothWheelZoom.enable()"
+        @pointerover="map.dragging.disable(), map.smoothWheelZoom.disable()"
+        @pointerout="map.dragging.enable(), map.smoothWheelZoom.enable()"
+      >
+        <div class="col q-pa-sm" style="border-radius: 15px">
+          <div class="row">
+            <span class="my-font q-px-xs q-ma-none" style="font-weight: bold"
+              >Burnt Area</span
+            >
+            <q-space />
+            <q-icon
+              name="mdi-circle-opacity"
+              size="16px"
+              class="cursor-pointer"
+            >
+              <q-popup-proxy
+                fit
+                anchor="top left"
+                self="bottom left"
+                :offset="[60, 10]"
+              >
+                <div style="min-width: 150px">
+                  <span class="my-font q-px-xs">Layer Opacity</span>
+                  <q-slider
+                    :min="1"
+                    :max="10"
+                    :step="1"
+                    v-model="opacityValue"
+                    color="lime-9"
+                    track-size="2px"
+                    thumb-size="10px"
+                    class="row q-pa-sm"
+                    @mouseenter="handle_opacity"
+                  />
+                </div>
+              </q-popup-proxy>
+            </q-icon>
+          </div>
+        </div>
         <Maplegend
           @mouseover="map.dragging.disable()"
           @mouseout="map.dragging.enable()"
           @pointerover="map.dragging.disable()"
           @pointerout="map.dragging.enable()"
         />
-      </div> -->
+      </div>
 
-      <div
-        class="row zoom-controls q-gutter-xs"
-        style="width: fit-content"
-      >
+      <div class="row zoom-controls q-gutter-xs" style="width: fit-content">
         <div class="row q-gutter-xs">
           <div class="col-2 q-gutter-sm q-py-sm" id="#v-step-1">
             <div class="row">
@@ -136,17 +162,11 @@
           </div>
         </div>
       </div>
-      <!-- <div class="" style="
-            position: absolute;
-            z-index: 3000;
-            bottom: 1.5vh;
-            right: 1%;
-            width: fit-content;
-          ">
-          <img src="~/src/assets/logos.svg" alt="" />
-        </div> -->
     </div>
-    <div class="col" style="max-width: 35%; border-radius: 20px">
+    <!-- <div
+      class="col q-mb-sm q-mx-sm q-mt-none"
+      style="max-width: fit-content; max-height: inherit; border-radius: 20px"
+    >
       <div
         class="q-pa-none"
         style="
@@ -155,24 +175,19 @@
           left: 1%;
           max-width: 98%;
           max-height: 60%;
-          border-radius: 10px;
+          border-radius: 20px;
         "
-        @mouseover="map.dragging.disable()"
-        @mouseout="map.dragging.enable()"
-        @pointerover="map.dragging.disable()"
-        @pointerout="map.dragging.enable()"
       >
-        <div class="" style="z-index: 3000; background-color: #00000000">
-          <!-- <areaSelection
-            @mouseover="map.dragging.disable()"
-            @mouseout="map.dragging.enable()"
-            @pointerover="map.dragging.disable()"
-            @pointerout="map.dragging.enable()"
-          /> -->
-        </div>
+        <div
+          style="
+            z-index: 3000;
+            background-color: #00000000;
+            border-radius: 20px;
+          "
+        ></div>
         <analysisPanel />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -203,14 +218,11 @@ import baselayers from "./Modals/baselayers";
 
 import setSelectedVect from "./Modals/fetchVectors";
 import setSelectedRaster from "./Modals/fetchRaster";
-import Legend from "./Modals/legend.vue";
-import { axios } from "src/boot/axios.js";
 
 export default defineComponent({
   components: {
     selectionTab: require("components/Layerselections.vue").default,
     analysisPanel: require("../composables/analysisPanel.vue").default,
-    layersTab: require("../composables/indicatortabs.vue").default,
     areaSelection: require("../Map/Modals/selectArea.vue").default,
     Maplegend: require("./Modals/legend.vue").default,
     socials: require("components/socials/shareNetwork.vue").default,
@@ -231,13 +243,15 @@ export default defineComponent({
       base_map_ctrl_cliked = ref(false),
       opacityValue = ref(10),
       currentRasterLayer = ref(null),
+      currentBaseLayer = ref(null),
       currentVectLayer = ref(null),
-      // editableLayer = ref(null),
+      //editableLayer = ref(null),
       customGeometry = ref(null),
       currentFeatureLayer = ref(null),
       rasterYear = ref(null);
 
     let drawingTools = ref(false);
+    let layerControl = ref(null);
 
     let setLabels = ref(false);
     let mapLabels = ref(null);
@@ -277,11 +291,11 @@ export default defineComponent({
 
       current_top_base_layer.value = "satellite";
 
-      L.control
-        .attribution({
-          position: "bottomright",
-        })
-        .addTo(map.value);
+      // L.control
+      //   .attribution({
+      //     position: "bottomright",
+      //   })
+      //   .addTo(map.value);
       L.control.scale({ position: "bottomright" }).addTo(map.value);
       // ///////////////////hide layers control
       let layerControl = document.getElementsByClassName(
@@ -294,6 +308,18 @@ export default defineComponent({
 
     const zoom_in = function () {
       map.value.setZoom(map.value.getZoom() + 1);
+    };
+
+    const switchLayer = (selectedLayer) => {
+      const layer1 = currentRasterLayer.value.getLayers()[0];
+      const layer2 = currentRasterLayer.value.getLayers()[1];
+      if (selectedLayer === "layer1" && !map.value.hasLayer(layer1)) {
+        map.value.removeLayer(layer2);
+        map.value.addLayer(layer1);
+      } else if (selectedLayer === "layer2" && !map.value.hasLayer(layer2)) {
+        map.value.removeLayer(layer1);
+        map.value.addLayer(layer2);
+      }
     };
 
     const zoom_out = function () {
@@ -315,18 +341,19 @@ export default defineComponent({
       const selected_base_map = baseMaps.value[basemap];
       map.value.addLayer(selected_base_map);
       selected_base_map.bringToFront();
+      currentBaseLayer.value.bringToFront();
       currentRasterLayer.value.bringToFront();
       currentVectLayer.value.bringToFront();
     };
 
     const setUpGeoman = function () {
       let editableLayer = new L.FeatureGroup();
-      map.value.addLayer(editableLayer);
+      //map.value.addLayer(editableLayer).bringToFront();
 
       // Initialise the draw control and pass it the FeatureGroup of editable layers
       map.value.addControl(
         new L.Control.Draw({
-          position: "topleft",
+          position: "topright",
           draw: {
             polygon: {
               allowIntersection: false, // Restricts shapes to simple polygons
@@ -356,8 +383,8 @@ export default defineComponent({
             circlemarker: false,
           },
           edit: {
-            featureGroup: editableLayer, //REQUIRED!!
-            // remove: true,
+            featureGroup: editableLayer,
+            //remove: true,
           },
         })
       );
@@ -365,32 +392,29 @@ export default defineComponent({
       map.value.on(L.Draw.Event.CREATED, function (e) {
         var type = e.layerType,
           layer = e.layer;
-
         if (type === "polygon") {
           layer.bindPopup("A popup!");
         }
-
-        store.setCustomGeometryData(null);
-
         editableLayer.addLayer(layer);
+        map.value.addLayer(editableLayer);
         drawCustomPolygon(layer);
-        map.value.removeLayer(currentVectLayer.value);
         setRasterLayer();
       });
 
       map.value.on("draw:deleted", function (e) {
+        map.value.removeLayer(currentBaseLayer.value);
         map.value.removeLayer(currentRasterLayer.value);
         map.value.removeLayer(customGeometry.value);
         customGeometry.value = null;
-        store.setCustomGeometryData("");
+        // store.setCustomGeometryData("");
         setCurrentVector();
-        setRasterLayer();
+        //setRasterLayer();
       });
     };
 
     const toggleDrawingTools = function () {
       const box = document.getElementsByClassName(
-        "leaflet-top leaflet-left"
+        "leaflet-top leaflet-right"
       )[0];
       if (box.style.display === "none") {
         box.style.display = "block";
@@ -400,10 +424,14 @@ export default defineComponent({
     };
 
     const drawCustomPolygon = function (layer) {
-      if (currentVectLayer.value) map.value.removeLayer(currentVectLayer.value);
+      if (currentVectLayer.value) {
+        map.value.removeLayer(currentVectLayer.value);
+      }
       if (customGeometry.value) map.value.removeLayer(customGeometry.value);
       if (customGeometry.value) customGeometry.value = null;
-      if (currentRasterLayer) map.value.removeLayer(currentRasterLayer.value);
+      if (currentBaseLayer.value) map.value.removeLayer(currentBaseLayer.value);
+      if (currentRasterLayer.value)
+        map.value.removeLayer(currentRasterLayer.value);
       const geojson = JSON.stringify(layer.toGeoJSON().geometry);
       console.log(geojson, "custom area");
       store.setCustomGeometryData(geojson);
@@ -417,6 +445,13 @@ export default defineComponent({
       try {
         if (currentVectLayer.value) {
           map.value.removeLayer(currentVectLayer.value);
+          currentVectLayer.value = null;
+        }
+        if (currentBaseLayer.value) {
+          map.value.removeLayer(currentBaseLayer.value);
+        }
+        if (currentRasterLayer.value) {
+          map.value.removeLayer(currentRasterLayer.value);
         }
 
         let vectLayer = await selectedVect();
@@ -425,7 +460,7 @@ export default defineComponent({
           JSON.stringify(vectLayer.features[0].geometry)
         );
 
-        currentVectLayer.value = L.geoJSON([vectLayer], {
+        currentVectLayer.value = new L.geoJSON([vectLayer], {
           style: {
             fillOpacity: 0,
             fillColor: "#424242",
@@ -433,22 +468,11 @@ export default defineComponent({
             color: "#484c4d",
           },
           onEachFeature: function (feature, layer) {
-            feature = layer
-              .bindPopup(
-                "<br><strong>" +
-                  feature.properties.NAME_1 +
-                  "</strong><br><br> <button id='pop-up-selector' class='pop-up-btn'>Analyze</button>"
-              )
-              .on("popupopen", function () {
-                selectedPopupFeature.value = feature.feature.properties.NAME_1;
-
-                map.value._popup._closeButton.addEventListener(
-                  "click",
-                  (event) => {
-                    event.preventDefault();
-                  }
-                );
-              });
+            feature = layer.bindPopup(
+              "<br><strong>" +
+                feature.properties.NAME_1 +
+                "</strong><br><br> <button id='pop-up-selector' class='pop-up-btn'>Analyze</button>"
+            );
           },
         });
 
@@ -494,21 +518,30 @@ export default defineComponent({
           message: "Fetching map data...",
         });
 
+        if (currentBaseLayer.value) {
+          map.value.removeLayer(currentBaseLayer.value);
+        }
         if (currentRasterLayer.value) {
           map.value.removeLayer(currentRasterLayer.value);
         }
 
-        let rasterLayers = [];
+        //let rasterLayers = [];
 
-        currentRasterLayer.value = await getRasterLayer(store.customGeojson);
+        let rasterLayers = await getRasterLayer(store.customGeojson);
+
+        currentBaseLayer.value = rasterLayers[0];
+        currentRasterLayer.value = rasterLayers[1];
 
         currentRasterLayer.value.addTo(map.value);
 
-        // currentRasterLayer.value.on("layeradd", () => {
-        //   Loading.hide();
-        // });
-        Loading.hide();
+        currentBaseLayer.value.addTo(map.value).on("load", () => {
+          Loading.hide();
+        });
+        //Loading.hide();
+
+        // getRasterStats();
       } catch (error) {
+        Loading.hide();
         console.log(error);
       }
     };
@@ -553,17 +586,29 @@ export default defineComponent({
     });
 
     const selecteVector = computed(() => {
-      return store.getselectedSubRegion;
+      return store.getselectedRegion;
     });
 
     watch(selecteVector, () => {
+      setCurrentVector().then(() => {
+        //setRasterLayer();
+      });
+    });
+
+    const selecteDates = computed(() => {
+      return store.getDatesSelected;
+    });
+
+    watch(selecteDates, () => {
       setCurrentVector();
       setRasterLayer();
     });
 
     watch(customGeometry.value, () => {
-      setRasterLayer();
-      map.value.removeLayer(currentVectLayer.value);
+      () => {
+        map.value.removeLayer(currentVectLayer.value);
+        setRasterLayer();
+      };
     });
 
     const setRasterYear = computed(() => {
@@ -575,15 +620,11 @@ export default defineComponent({
       setRasterLayer();
     });
 
-    onBeforeMount(() => {
-      setCurrentVector();
-      //setRasterLayer();
-    });
-
     onMounted(() => {
       setLeafletMap();
-      setCurrentVector();
-      setRasterLayer();
+      setCurrentVector().then(() => {
+        setRasterLayer();
+      });
     });
 
     const openCloseStats = function () {
@@ -609,6 +650,7 @@ export default defineComponent({
       resetZoomLevel,
       handle_opacity,
       setLabels,
+      layerControl,
     };
   },
 });
@@ -651,7 +693,7 @@ export default defineComponent({
   z-index: 2000;
   //width: 300px;
   // height: 20px;
-  right: 1vw;
+  right: 2vw;
   top: 2%;
   width: fit-content;
 }
@@ -724,7 +766,7 @@ export default defineComponent({
 
 // overwrite the leaflet top control
 .leaflet-top {
-  margin: 40vh 6px;
+  margin: 20vh 6px;
   display: none;
 }
 
@@ -748,5 +790,39 @@ export default defineComponent({
   padding: 7px;
   background-color: white;
   cursor: pointer;
+}
+
+.layer-control {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  padding: 10px;
+}
+.layer-control label {
+  display: block;
+  margin-bottom: 5px;
+  z-index: 50000;
+}
+.layer-control input[type="radio"] {
+  margin-right: 5px;
+}
+.map-container {
+  height: 500px;
+}
+
+@media screen and (max-width: 768px) {
+  .map-content {
+    min-width: 70%;
+    border-radius: 0px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .map-content {
+    min-width: 70%;
+    border-radius: 15px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 }
 </style>

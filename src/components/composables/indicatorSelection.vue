@@ -1,55 +1,118 @@
 <template>
-  <div class="q-pa-none q-ma-none text-lime-9" style="min-width: 15vw">
-    <q-list
-      padding
-      class="rounded-borders q-pa-none q-ma-none"
-    >
-      <!-- --------------------------------FOREST FIRE INDICATORS---------------------------------------------   -->
-      <q-expansion-item
-        group="indicatorgroup"
-        v-model="indicator_expansions.expand_forest_fire"
-        @update:model-value="updateUserSelection"
-      >
-        <template v-slot:header>
-          <q-item-section avatar>
-            <q-avatar icon="mdi-fire" size="xl"/>
-          </q-item-section>
-          <q-item-section class="indicator-header text-h6">
-            Forest Fire
-          </q-item-section>
-        </template>
-        <q-card class="bg-grey-1">
-          <q-card-section>
-            <forestfires/>
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
+  <div class="q-pa-none" style="position: relative; max-width: 250px; top: 10%">
+    <q-list v-if="!mobileView">
+      <q-item clickable v-ripple @click="seamless = !seamless">
+        <q-item-section class="text-center">
+          <q-item-label
+            ><q-icon name="mdi-fire" color="grey-10" size="md"
+          /></q-item-label>
+          <q-item-label caption style="font-size: 0.75em"
+            >BURNED <BR /> AREA</q-item-label
+          >
+        </q-item-section>
+        <q-popup-proxy anchor="top right" self="top left" :offset="[10, 0]">
+          <q-card
+            class="my-font"
+            style="max-width: fit-content; background-color: #e7e4df00"
+          >
+            <q-card-section class="row items-center q-pb-none">
+              <div
+                class="text-h6"
+                style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
+              >
+                Burned Area Analysis
+              </div>
+              <q-space />
+              <q-btn icon="close" size="sm" flat round dense v-close-popup />
+            </q-card-section>
 
-      <!-- --------------------------------VEGETATION INDICATORS---------------------------------------------   -->
-      <q-expansion-item
-        group="indicatorgroup"
-        v-model="indicator_expansions.expand_vegetation_indicators"
-        @update:model-value="updateUserSelection"
-      >
-        <template v-slot:header>
-          <q-item-section avatar>
-            <q-avatar icon="mdi-fire" size="xl" />
-          </q-item-section>
-          <q-item-section class="indicator-header">
-            Vegetation
-          </q-item-section>
-        </template>
-        <q-card class="bg-grey-9" style="max-width:328px">
-          <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem,
-            eius reprehenderit eos corrupti commodi magni quaerat ex numquam,
-            dolorum officiis modi facere maiores architecto suscipit iste
-            eveniet doloribus ullam aliquid.
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
-      <q-separator />
+            <q-card-section>
+              <forestfires />
+            </q-card-section>
+          </q-card>
+        </q-popup-proxy>
+      </q-item>
+
+      <q-item clickable v-ripple>
+        <q-item-section class="text-center">
+          <q-item-label
+            ><q-icon name="mdi-leaf" color="grey-7" size="md"
+          /></q-item-label>
+          <q-item-label style="font-size: 0.75em" caption
+            >VEGETATION <BR /> QUALITY</q-item-label
+          >
+        </q-item-section>
+      </q-item>
+
+      <q-item clickable v-ripple>
+        <q-item-section class="text-center">
+          <q-item-label
+            ><q-icon name="mdi-water" color="grey-7" size="md"
+          /></q-item-label>
+          <q-item-label style="font-size: 0.75em" caption
+            >SURFACE <BR /> WATER</q-item-label
+          >
+        </q-item-section>
+      </q-item>
     </q-list>
+
+    <div v-else>
+      <q-list class="row">
+      <q-item clickable v-ripple @click="seamless = !seamless">
+        <q-item-section class="text-center">
+          <q-item-label
+            ><q-icon name="mdi-fire" color="grey-10" size="md"
+          /></q-item-label>
+          <q-item-label caption style="font-size: 0.75em"
+            >BURNED <BR /> AREA</q-item-label
+          >
+        </q-item-section>
+        <q-popup-proxy anchor="top right" self="top left" :offset="[10, 0]">
+          <q-card
+            class="bg-white my-font"
+            style="max-width: fit-content; background-color: #e7e4df00"
+          >
+            <q-card-section class="row items-center q-pb-none">
+              <div
+                class="text-h6"
+                style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
+              >
+                Burned Area Analysis
+              </div>
+              <q-space />
+              <q-btn icon="close" size="sm" flat round dense v-close-popup />
+            </q-card-section>
+
+            <q-card-section>
+              <forestfires />
+            </q-card-section>
+          </q-card>
+        </q-popup-proxy>
+      </q-item>
+
+      <q-item clickable v-ripple>
+        <q-item-section class="text-center">
+          <q-item-label
+            ><q-icon name="mdi-leaf" color="grey-7" size="md"
+          /></q-item-label>
+          <q-item-label style="font-size: 0.75em" caption
+            >VEGETATION <BR /> QUALITY</q-item-label
+          >
+        </q-item-section>
+      </q-item>
+
+      <q-item clickable v-ripple>
+        <q-item-section class="text-center">
+          <q-item-label
+            ><q-icon name="mdi-water" color="grey-7" size="md"
+          /></q-item-label>
+          <q-item-label style="font-size: 0.75em" caption
+            >SURFACE <BR /> WATER</q-item-label
+          >
+        </q-item-section>
+      </q-item>
+      </q-list>
+    </div>
   </div>
 </template>
 
@@ -88,7 +151,7 @@ export default {
 
     const updateUserSelection = () => {
       setExpansionItemSelections(indicator_expansions.value);
-      console.log(indicator_expansions.value)
+      console.log(indicator_expansions.value);
     };
 
     watch(props.active_indicator_selection, (val) => {
@@ -99,14 +162,16 @@ export default {
     return {
       indicator_expansions,
       updateUserSelection,
+      seamless: ref(false),
+      mobileView: ref(window.matchMedia("(max-width: 768px)").matches)
     };
   },
 };
 </script>
 
 <style scoped>
-.indicator-header{
+.indicator-header {
   font-size: 12pt;
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
 }
 </style>

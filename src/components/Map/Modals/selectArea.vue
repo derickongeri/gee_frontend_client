@@ -1,18 +1,11 @@
 <template>
-  <div
-    style="
-      min-width: 250px;
-      background-color: #b5caca00;
-      border-radius: 20px;
-    "
-  >
-  <div class="q-px-sm text-grey-4 text-h6" style="height: 5vh"></div>
-  <div class="q-px-sm text-grey-4 text-h6">Select Area</div>
     <q-select
-      class="q-px-sm q-py-sm"
+    style="min-width: 15vw"
+      class="q-px-none"
       bg-color="white"
       dense
-      standout
+      rounded
+      outlined
       hide-dropdown-icon
       clear-icon="mdi-close"
       color="grey-9"
@@ -46,7 +39,6 @@
         </template>
       </template>
     </q-select>
-  </div>
 </template>
 
 <script>
@@ -97,6 +89,7 @@ export default defineComponent({
 
     onMounted(() => {
       store.fetchRegionNames();
+      store.setRegionSelected("Aberdare NP");
     });
 
     const getselectedRegion = function (val) {

@@ -4,29 +4,30 @@ import { axios } from "src/boot/axios";
 import setSelectedVect from "./fetchVectors";
 
 export default function setSelectedRaster() {
-  const { selectedVect} = setSelectedVect();
+
   const store = useVectorStore();
 
   const getRasterLayer = async function () {
 
-    await selectedVect()
+    //await selectedVect()
     let eeLayer = null;
     let layerList = []
 
+
     //console.log(store.customGeojson, 'fetchRaster')
+    let params = {geometry: store.customGeojson.toString(), dates: store.datesSelected}
 
-    // const response = await axios.post("http://127.0.0.1:3000/api/mapid", store.customGeojson.toString(), {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
+    const response = await axios.post("http://78.141.234.158:3000/api/mapid", params, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
 
-    //const mapidList = response.data.tileList.reverse()
+    //console.log(response.data)
 
-    const mapidList = [
-      "projects/earthengine-legacy/maps/133e3cec43eb01b4e0049a2727d0297c-4aa469c1fdc3d4011fc0f2c6004e56fe",
-      "projects/earthengine-legacy/maps/9b08401ed0b0825029fc6e287f0e8742-dd17fb3271ec193022e9b217b0242e24"
-      ]
+    const mapidList = response.data.tileList.reverse()
+
+    //const mapidList = ["projects/earthengine-legacy/maps/873c0b5937d2adb49736554cc966df9a-b1d87d2ce20709815373b413dfeb270a","projects/earthengine-legacy/maps/416c60ec75e3c993e5aeb5f460ffa9d8-3b236b8f4e3ad110962c77c4a41eca79"]
     //console.log(response.data)
 
 
@@ -39,7 +40,7 @@ export default function setSelectedRaster() {
           crs: L.CRS.EPSG4326,
           format: "image/png",
           attribution: "google earth engine",
-          zIndex: mapidIndex + 1
+          zIndex: mapidIndex + 2
         }
       );
 
@@ -52,7 +53,9 @@ export default function setSelectedRaster() {
 
     const rasterGroup = L.layerGroup(layerList)
 
-    return rasterGroup;
+    console.log(layerList, 'layers')
+
+    return layerList;
   };
 
   return {
