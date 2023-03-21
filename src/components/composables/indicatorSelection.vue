@@ -7,7 +7,7 @@
             ><q-icon name="mdi-fire" color="grey-10" size="md"
           /></q-item-label>
           <q-item-label caption style="font-size: 0.75em"
-            >BURNED <BR /> AREA</q-item-label
+            >BURNED <br/> AREA</q-item-label
           >
         </q-item-section>
         <q-popup-proxy anchor="top right" self="top left" :offset="[10, 0]">
@@ -39,7 +39,7 @@
             ><q-icon name="mdi-leaf" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >VEGETATION <BR /> QUALITY</q-item-label
+            >VEGETATION <br /> QUALITY</q-item-label
           >
         </q-item-section>
       </q-item>
@@ -50,7 +50,7 @@
             ><q-icon name="mdi-water" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >SURFACE <BR /> WATER</q-item-label
+            >SURFACE <br /> WATER</q-item-label
           >
         </q-item-section>
       </q-item>
@@ -64,7 +64,7 @@
             ><q-icon name="mdi-fire" color="grey-10" size="md"
           /></q-item-label>
           <q-item-label caption style="font-size: 0.75em"
-            >BURNED <BR /> AREA</q-item-label
+            >BURNED <br /> AREA</q-item-label
           >
         </q-item-section>
         <q-popup-proxy anchor="top right" self="top left" :offset="[10, 0]">
@@ -96,7 +96,7 @@
             ><q-icon name="mdi-leaf" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >VEGETATION <BR /> QUALITY</q-item-label
+            >VEGETATION <br /> QUALITY</q-item-label
           >
         </q-item-section>
       </q-item>
@@ -107,7 +107,7 @@
             ><q-icon name="mdi-water" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >SURFACE <BR /> WATER</q-item-label
+            >SURFACE <br /> WATER</q-item-label
           >
         </q-item-section>
       </q-item>

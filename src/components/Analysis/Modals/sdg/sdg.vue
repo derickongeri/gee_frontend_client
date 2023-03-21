@@ -103,10 +103,9 @@
 
     <div class="text-justify my-font">
       <p class="my-font" style="font-size: 16px">
-        The total number of burned area is 21,846, with the
-        majority of burned areas falling into the categories of moderate-low and
-        low severity. There were no pixels classified as high severity or
-        enhanced regrowth.
+        The total number of burned area is 21,846, with the majority of burned
+        areas falling into the categories of moderate-low and low severity.
+        There were no pixels classified as high severity or enhanced regrowth.
       </p>
     </div>
 
@@ -141,7 +140,6 @@
       </q-inner-loading>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -171,7 +169,7 @@ export default {
   },
 
   setup() {
-    const store = useVectorStore();
+       const store = useVectorStore();
     const { stackBarChart } = setChartMethods();
     const { getRasterStats } = setLayerStats();
 
@@ -298,9 +296,10 @@ export default {
       a = null;
     };
 
-    // onMounted(()=>{
+    // onBeforeMount(()=>{
     //   showTextLoading()
     // })
+
     const vector = computed(() => {
       selectedVector.value = store.getCustomGeojson;
       return selectedVector.value;

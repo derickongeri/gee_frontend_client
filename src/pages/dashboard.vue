@@ -63,9 +63,14 @@
 
         <div
           v-show="showLayerSelection"
-          style="position: absolute; bottom: 0%; min-height:50vh; z-index: 5000"
+          style="
+            position: absolute;
+            bottom: 0%;
+            min-height: 50vh;
+            z-index: 5000;
+          "
         >
-          <div style="position:absolute; bottom:0%;max-height: 50vh; width: 100vw">
+          <!-- <div style="position:absolute; bottom:0%;max-height: 50vh; width: 100vw">
             <div class="row bg-white">
               <h6 class="my-font q-pa-md q-ma-none">Layer Settings</h6>
               <q-space />
@@ -83,14 +88,92 @@
             <div clickable @click="showLayerSelection = !showLayerSelection" class="bg-white q-py-md" style="min-height: 25vh">
               <selectionsTab />
             </div>
-          </div>
+          </div> -->
+
+          <q-tab-panels
+            class="q-pa-none q-ma-none"
+            v-model="tab"
+            animated
+            keep-alive
+            style="
+              position: absolute;
+              bottom: 0vh;
+              border-radius: 15px 15px 0px 0px;
+            "
+          >
+            <q-tab-panel name="mails" class="q-pa-none q-ma-none">
+              <div class="row bg-white">
+                <h6 class="my-font q-pa-md q-ma-none">Layer Settings</h6>
+                <q-space />
+                <div class="show-stats-btn-mobile q-pa-md" style="">
+                  <q-btn
+                    class="p-py-sm"
+                    icon="expand_more"
+                    flat
+                    round
+                    dense
+                    @click="showLayerSelection = !showLayerSelection"
+                  />
+                </div>
+              </div>
+              <div
+                clickable
+                @click="showLayerSelection = !showLayerSelection"
+                class="bg-white q-py-md"
+                style="min-height: 25vh; min-width: 100vw"
+              >
+                <selectionsTab />
+              </div>
+            </q-tab-panel>
+
+            <q-tab-panel name="alarms" class="q-pa-none q-ma-none">
+              <div class="row bg-white">
+                <h6 class="my-font q-pa-md q-ma-none">Statistics</h6>
+                <q-space />
+                <div class="show-stats-btn-mobile q-pa-md" style="">
+                  <q-btn
+                    class="p-py-sm"
+                    icon="expand_more"
+                    flat
+                    round
+                    dense
+                    @click="showLayerSelection = !showLayerSelection"
+                  />
+                </div>
+              </div>
+              <div
+                class="bg-white q-py-none"
+                style="min-height: 25vh; min-width: 100vw"
+              >
+                <analysisPanel class="" style="" />
+              </div>
+            </q-tab-panel>
+
+            <q-tab-panel name="movies">
+              <div class="text-h6">Movies</div>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </q-tab-panel>
+          </q-tab-panels>
         </div>
       </q-page>
     </q-page-container>
 
     <q-footer bordered class="mobile-veiw bg-white">
       <q-toolbar>
-        <div class="row" style="min-width: 100%">
+        <q-tabs
+          style="min-width: 100%"
+          v-model="tab"
+          dense
+          class="bg-wite text-grey-10"
+          align="justify"
+          narrow-indicator
+          @click="showLayerSelection = true"
+        >
+          <q-tab name="mails" icon="mdi-layers" label="Layers" />
+          <q-tab name="alarms" icon="mdi-poll" label="Analysis" />
+          <q-tab name="movies" icon="mdi-map-marker-circle" label="Explore" />
+        </q-tabs>
+        <!-- <div class="row" style="min-width: 100%">
           <div class="col">
             <q-item>
               <q-item-section class="items-center">
@@ -131,7 +214,7 @@
               </q-item-section>
             </q-item>
           </div>
-        </div>
+        </div> -->
       </q-toolbar>
     </q-footer>
   </q-layout>
@@ -165,6 +248,7 @@ export default {
       showLayerSelection: ref(false),
       matchMediaDesktop,
       matchMediaMobile,
+      tab: ref("mails"),
     };
   },
 };

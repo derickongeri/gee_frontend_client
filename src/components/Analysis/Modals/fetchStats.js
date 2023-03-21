@@ -22,8 +22,10 @@ export default function setLayerStats() {
         dates: store.datesSelected,
       };
 
+      //store.setStats(null);
+
       const response = await axios.post(
-        "http://78.141.234.158:3000/api/stats",
+        "http://127.0.0.1:3000/api/stats",
         params,
         {
           headers: {
@@ -76,14 +78,16 @@ export default function setLayerStats() {
 
       console.log(statsObj);
 
-      //store.setStats(statsObj);
+      // store.setStats(statsObj).then(() => {
+      //   store.setStatsVisibility(true)
+      // });
 
       return statsObj;
     } catch (error) {
       // Notify.create("Danger, Will Robinson! Danger!");
       // or with a config object:
       Notify.create({
-        message: "Error fetching chart response!",
+        message: `${error} Error fetching chart response!`,
         color: 'red'
       });
     }

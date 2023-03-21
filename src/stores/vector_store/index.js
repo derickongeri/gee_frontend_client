@@ -17,7 +17,36 @@ export const useVectorStore = defineStore({
       { from: '2023-01-01', to: '2023-01-31' },
       { from: '2023-02-15', to: '2023-02-23' }
     ],
-    // statistics: null
+    statistics: {
+      labels: [
+        "Regrowth, High",
+        "Regrowth, Low",
+        "Unburned",
+        "Low Severity",
+        "Moderate Severity",
+        "High Severity",
+        "Very High Severity",
+        "NA",
+      ],
+      datasets: [
+        {
+          backgroundColor: [
+            "#7a8737",
+            "#acbe4d",
+            "#0ae042",
+            "#fff70b",
+            "#ffaf38",
+            "#ff641b",
+            "#a41fd6",
+            "#ffffff",
+          ],
+          data: [0, 0, 0, 0, 0, 0, 0, 0],
+          barPercentage: 0.75,
+          categoryPercentage: 0.75,
+        },
+      ],
+    },
+    statsVisibility: false,
   }),
   getters: {
     getRegionNames: (state) => state.regionNames,
@@ -26,8 +55,9 @@ export const useVectorStore = defineStore({
     getselectedSubRegion: (state) => state.selectedSubregion,
     getYearSelected: (state) => state.selectedYear,
     getDatesSelected: (state) => state.datesSelected,
-    //getStoredStats: (state) => state.statistics,
-    getCustomGeojson: (state) => state.customGeojson
+    getStoredStats: (state) => state.statistics,
+    getCustomGeojson: (state) => state.customGeojson,
+    getStatsVisibility: (state) => state.statsVisibility
   },
   actions: {
     async fetchRegionNames() {
@@ -76,8 +106,12 @@ export const useVectorStore = defineStore({
       console.log(this.selectedYear);
     },
 
-    // setStats(val){
-    //   this.statistics = val
-    // }
+    setStats(val){
+      this.statistics = val
+    },
+
+    setStatsVisibility(val){
+      this.statsVisibility = val
+    }
   },
 });
