@@ -1,7 +1,6 @@
-import { Loading, QSpinnerOval, QSpinnerFacebook, QSpinnerGears } from "quasar";
 import { useVectorStore } from "../../../stores/vector_store/index.js";
 import { axios } from "src/boot/axios";
-import setSelectedVect from "./fetchVectors";
+
 
 export default function setSelectedRaster() {
 
@@ -17,7 +16,7 @@ export default function setSelectedRaster() {
     //console.log(store.customGeojson, 'fetchRaster')
     let params = {geometry: store.customGeojson.toString(), dates: store.datesSelected}
 
-    const response = await axios.post("http://127.0.0.1:3000/api/mapid", params, {
+    const response = await axios.post("http://78.141.234.158:3000/api/mapid", params, {
       headers: {
         "Content-Type": "application/json",
       },

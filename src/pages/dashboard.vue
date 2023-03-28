@@ -11,7 +11,7 @@
         <q-toolbar-title
           class="text-h6"
           style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
-          >FOREST</q-toolbar-title
+          >GREEN<span style="color: #000000; font-weight: normal">EYE</span></q-toolbar-title
         >
       </q-toolbar>
     </q-header>
@@ -171,7 +171,6 @@
         >
           <q-tab name="mails" icon="mdi-layers" label="Layers" />
           <q-tab name="alarms" icon="mdi-poll" label="Analysis" />
-          <q-tab name="movies" icon="mdi-map-marker-circle" label="Explore" />
         </q-tabs>
         <!-- <div class="row" style="min-width: 100%">
           <div class="col">

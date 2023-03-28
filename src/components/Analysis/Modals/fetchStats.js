@@ -25,7 +25,7 @@ export default function setLayerStats() {
       //store.setStats(null);
 
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/stats",
+        "http://78.141.234.158:3000/api/stats",
         params,
         {
           headers: {
@@ -88,7 +88,7 @@ export default function setLayerStats() {
       // or with a config object:
       Notify.create({
         message: `${error} Error fetching chart response!`,
-        color: 'red'
+        color: "red",
       });
     }
   };

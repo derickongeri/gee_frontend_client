@@ -5,23 +5,29 @@
   >
     <div class="col bg-black q-mx-none map-content" id="mapid" style="">
       <div
-        class="q-pa-none"
-        style="
-          position: absolute;
-          z-index: 3000;
-          top: 2%;
-          left: 1%;
-          max-width: 60%;
-          max-height: 98%;
-          border-radius: 15px;
-          background-color: #00000000;
-        "
+        class="row items-center area-selection"
+        style=""
         @mouseover="map.dragging.disable(), map.smoothWheelZoom.disable()"
         @mouseout="map.dragging.enable(), map.smoothWheelZoom.enable()"
         @pointerover="map.dragging.disable(), map.smoothWheelZoom.disable()"
         @pointerout="map.dragging.enable(), map.smoothWheelZoom.enable()"
       >
         <div class="" style="z-index: 3000; background-color: #00000000">
+          <div class="q-pa-none q-px-md">
+            <q-btn
+              class="bg-white"
+              size="md"
+              round
+              flat
+              color="grey-9"
+              icon="mdi-selection-drag"
+              @click="toggleDrawingTools"
+              ><q-tooltip class="bg-black">drawing tools</q-tooltip>
+            </q-btn>
+          </div>
+        </div>
+        <q-separator vertical inset />
+        <div class="col" style="z-index: 3000; background-color: #00000000">
           <areaSelection
             @mouseover="map.dragging.disable()"
             @mouseout="map.dragging.enable()"
@@ -54,32 +60,29 @@
             >
             <q-space />
             <q-icon
+              clickable
               name="mdi-circle-opacity"
               size="16px"
               class="cursor-pointer"
-            >
-              <q-popup-proxy
-                fit
-                anchor="top left"
-                self="bottom left"
-                :offset="[60, 10]"
-              >
-                <div style="min-width: 150px">
-                  <span class="my-font q-px-xs">Layer Opacity</span>
-                  <q-slider
-                    :min="1"
-                    :max="10"
-                    :step="1"
-                    v-model="opacityValue"
-                    color="lime-9"
-                    track-size="2px"
-                    thumb-size="10px"
-                    class="row q-pa-sm"
-                    @mouseenter="handle_opacity"
-                  />
-                </div>
-              </q-popup-proxy>
-            </q-icon>
+              @click="opacityslider = !opacityslider"
+            />
+          </div>
+          <div class="row" v-show="opacityslider">
+            <div class="row items-center bg-grey-2" style="min-width: 100%">
+              <span class="my-font q-px-xs">Opacity</span>
+              <q-slider
+                dense
+                :min="1"
+                :max="10"
+                :step="1"
+                v-model="opacityValue"
+                color="lime-9"
+                track-size="2px"
+                thumb-size="10px"
+                class="col q-pa-sm"
+                @mouseenter="handle_opacity"
+              />
+            </div>
           </div>
         </div>
         <Maplegend
@@ -137,7 +140,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <q-btn
                 class="bg-white"
                 size="sm"
@@ -158,36 +161,11 @@
                 icon="mdi-chart-bar"
                 @click="openCloseStats"
               />
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
-    <!-- <div
-      class="col q-mb-sm q-mx-sm q-mt-none"
-      style="max-width: fit-content; max-height: inherit; border-radius: 20px"
-    >
-      <div
-        class="q-pa-none"
-        style="
-          position: relative;
-          top: 1%;
-          left: 1%;
-          max-width: 98%;
-          max-height: 60%;
-          border-radius: 20px;
-        "
-      >
-        <div
-          style="
-            z-index: 3000;
-            background-color: #00000000;
-            border-radius: 20px;
-          "
-        ></div>
-        <analysisPanel />
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -248,7 +226,8 @@ export default defineComponent({
       //editableLayer = ref(null),
       customGeometry = ref(null),
       currentFeatureLayer = ref(null),
-      rasterYear = ref(null);
+      rasterYear = ref(null),
+      opacityslider = ref(false);
 
     let drawingTools = ref(false);
     let layerControl = ref(null);
@@ -353,7 +332,7 @@ export default defineComponent({
       // Initialise the draw control and pass it the FeatureGroup of editable layers
       map.value.addControl(
         new L.Control.Draw({
-          position: "topright",
+          position: "topleft",
           draw: {
             polygon: {
               allowIntersection: false, // Restricts shapes to simple polygons
@@ -414,7 +393,7 @@ export default defineComponent({
 
     const toggleDrawingTools = function () {
       const box = document.getElementsByClassName(
-        "leaflet-top leaflet-right"
+        "leaflet-top leaflet-left"
       )[0];
       if (box.style.display === "none") {
         box.style.display = "block";
@@ -621,7 +600,9 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      setLeafletMap();
+      setLeafletMap().then(() => {
+        toggleDrawingTools()
+      });
       setCurrentVector().then(() => {
         setRasterLayer();
       });
@@ -651,6 +632,7 @@ export default defineComponent({
       handle_opacity,
       setLabels,
       layerControl,
+      opacityslider,
     };
   },
 });
@@ -693,7 +675,7 @@ export default defineComponent({
   z-index: 2000;
   //width: 300px;
   // height: 20px;
-  right: 2vw;
+  right: 1vw;
   top: 2%;
   width: fit-content;
 }
@@ -766,7 +748,7 @@ export default defineComponent({
 
 // overwrite the leaflet top control
 .leaflet-top {
-  margin: 20vh 6px;
+  margin: 7vh 0px;
   display: none;
 }
 
@@ -815,9 +797,40 @@ export default defineComponent({
     min-width: 70%;
     border-radius: 0px;
   }
+
+  .area-selection {
+    position: absolute;
+    z-index: 3000;
+    top: 0%;
+    left: 0%;
+    min-width: 100%;
+    border-radius: 0px;
+    background-color: #fffdfd;
+  }
+
+  .zoom-controls {
+    position: absolute;
+    // background: rgb(153, 150, 150);
+    z-index: 2000;
+    //width: 300px;
+    // height: 20px;
+    right: 2vw;
+    top: 7vh;
+    width: fit-content;
+  }
 }
 
 @media screen and (min-width: 768px) {
+  .area-selection {
+    position: absolute;
+    z-index: 3000;
+    top: 2%;
+    left: 1%;
+    max-width: 60%;
+    max-height: 98%;
+    border-radius: 10px;
+    background-color: #ffffff;
+  }
   .map-content {
     min-width: 70%;
     border-radius: 15px;

@@ -296,9 +296,9 @@ export default {
       a = null;
     };
 
-    // onBeforeMount(()=>{
-    //   showTextLoading()
-    // })
+    onMounted(()=>{
+      showTextLoading()
+    })
 
     const vector = computed(() => {
       selectedVector.value = store.getCustomGeojson;
