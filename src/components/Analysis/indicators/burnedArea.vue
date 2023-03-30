@@ -155,17 +155,17 @@ import {
 } from "vue";
 
 import { Loading, QSpinnerFacebook, QSpinnerIos, QSpinnerOval } from "quasar";
-import setChartMethods from "../../../../composables/chartMethods.js";
-import setLayerStats from "../fetchStats";
-import { useVectorStore } from "../../../../stores/vector_store/index.js";
+import setChartMethods from "../../../composables/chartMethods.js";
+import setLayerStats from "./fetchStats";
+import { useVectorStore } from "../../../stores/vector_store/index.js";
 
 export default {
   components: {
-    stackedBarChart: require("../../../charts/stackedBar.vue").default,
-    pieChart: require("../../../charts/pieChart.vue").default,
-    lineChart: require("../../../charts/lineChart.vue").default,
-    barChart: require("../../../charts/barChart.vue").default,
-    socials: require("../../../../components/socials/shareNetwork.vue").default,
+    stackedBarChart: require("../../charts/stackedBar.vue").default,
+    pieChart: require("../../charts/pieChart.vue").default,
+    lineChart: require("../../charts/lineChart.vue").default,
+    barChart: require("../../charts/barChart.vue").default,
+    socials: require("../../socials/shareNetwork.vue").default,
   },
 
   setup() {

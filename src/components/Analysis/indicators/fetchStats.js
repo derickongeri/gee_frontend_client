@@ -1,6 +1,6 @@
 import { Notify } from "quasar";
 import { useVectorStore } from "../../../stores/vector_store/index.js";
-import { axios } from "src/boot/axios";
+import { api, baseURL, axios } from "src/boot/axios";
 import setSelectedVect from "../../Map/Modals/fetchVectors";
 
 export default function setLayerStats() {
@@ -12,6 +12,7 @@ export default function setLayerStats() {
       let layerStats = null;
       let classes = [];
       let area = [];
+      let color = [];
       let statsObj = {};
 
       await selectedVect();
@@ -23,57 +24,35 @@ export default function setLayerStats() {
       };
 
       //store.setStats(null);
+      if (process.env.DEV) console.log(params);
 
-      const response = await axios.post(
-        "http://78.141.234.158:3000/api/stats",
-        params,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await api.post(`${baseURL}api/stats`, params, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      console.log(response.data);
+      if (process.env.DEV) console.log(response.data);
       layerStats = response.data.stats;
 
-      // layerStats = [
-      //   { Class: "NA", Pixels: 0 },
-      //   { Class: "High Severity", Pixels: 24 },
-      //   { Class: "Moderate-high Severity", Pixels: 15261 },
-      //   { Class: "Moderate-low Severity", Pixels: 149024 },
-      //   { Class: "Low Severity", Pixels: 199547 },
-      //   { Class: "Unburned", Pixels: 496483 },
-      //   { Class: "Enhanced Regrowth, Low", Pixels: 3251 },
-      //   { Class: "Enhanced Regrowth, High", Pixels: 274 },
-      // ];
-
-      const createStatsObj = (classname, val) => {
+      const createStatsObj = (classname, area_ha, classColor) => {
         classes.push(classname);
-        area.push(val);
+        area.push(area_ha);
+        color.push(classColor);
       };
 
       for (let i = 0; i < layerStats.length; i++) {
-        createStatsObj(layerStats[i].Class, layerStats[i].Pixels);
+        createStatsObj(
+          layerStats[i].Class,
+          layerStats[i].Hectares,
+          layerStats[i].color
+        );
       }
-      console.log(layerStats);
-
-      let classColors = [
-        "#7a8737",
-        "#acbe4d",
-        "#0ae042",
-        "#fff70b",
-        "#ffaf38",
-        "#ff641b",
-        "#a41fd6",
-      ];
-
-      classColors = classColors.reverse();
 
       statsObj = {
         labels: classes,
         data: area,
-        palette: classColors,
+        palette: color,
       };
 
       console.log(statsObj);
@@ -87,7 +66,7 @@ export default function setLayerStats() {
       // Notify.create("Danger, Will Robinson! Danger!");
       // or with a config object:
       Notify.create({
-        message: `${error} Error fetching chart response!`,
+        message: `${error} Error fetching chart!`,
         color: "red",
       });
     }

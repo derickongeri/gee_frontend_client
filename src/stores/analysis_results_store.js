@@ -1,8 +1,4 @@
 import { defineStore } from 'pinia';
-import { storeToRefs } from 'pinia';
-import {useVectorStore} from "src/stores/vector_store/index"
-
-const {getCustomGeojson, getDatesSelected} = storeToRefs(useVectorStore())
 
 export const useAnalysisResultsStore = defineStore('analysis_results_store', {
   state: () => ({

@@ -88,16 +88,34 @@ export default {
     chartData: {
       type: Object,
       default: {
-        labels: ["Degraded", "new", "Improved", "Stable"],
+        labels: [
+        "Regrowth, High",
+        "Regrowth, Low",
+        "Unburned",
+        "Low Severity",
+        "Moderate Severity",
+        "High Severity",
+        "Very High Severity",
+        "NA",
+      ],
         datasets: [{
-          backgroundColor: ['#b71c1c','blue', '#2e7d32', '#fff9b4'],
+          backgroundColor: [
+        "#ffffff",
+        "#7a8737",
+        "#acbe4d",
+        "#0ae042",
+        "#fff70b",
+        "#ffaf38",
+        "#ff641b",
+        "#a41fd6",
+      ],
           borderColor: "rgba(0, 0, 0, 0)",
           borderRadius: 0,
           borderWidth: 0,
           spacing: 0,
-          cutout: "75",
+          cutout: "50",
           radius: "80%",
-          data: [15, 2, 30, 60]
+          data: [0, 0, 222, 44172, 38545, 37938, 2, 0]
         }],
       },
       required: true

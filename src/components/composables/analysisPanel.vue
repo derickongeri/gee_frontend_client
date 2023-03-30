@@ -34,28 +34,13 @@
       </q-scroll-area>
     </div>
 
-    <div v-else class="bg-white mobile-veiw">
+    <div v-if="matchMediaMobile" class="bg-white mobile-veiw">
       <q-scroll-area
         class="q-ma-none q-pa-none"
         :thumb-style="thumbStyle"
         :bar-style="barStyle"
         style="position: relative; height: 50vh; width: 100vw"
       >
-        <!-- <q-card flat bordered class="q-mb-sm q-mx-sm">
-          <q-card-section class="bg-grey-4 text-grey-9">
-            <div class="text-h6">Some Title Here</div>
-            <div class="text-subtitle2">some caption here</div>
-          </q-card-section>
-
-          <q-separator />
-          <q-card-section>
-            <div class="text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-              mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-            </div>
-          </q-card-section>
-        </q-card> -->
-
         <q-card flat bordered class="q-ma-sm">
           <q-card-section>
             <Analysis />
@@ -80,7 +65,7 @@ import {
 
 export default {
   components: {
-    Analysis: require("../Analysis/Modals/sdg/sdg.vue").default,
+    Analysis: require("../Analysis/indicators/burnedArea.vue").default,
   },
 
   setup() {
