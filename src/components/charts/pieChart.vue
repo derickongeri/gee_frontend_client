@@ -55,7 +55,7 @@ export default {
               }).format(val);
 
               // Put them together
-              return `${formattedVal} %`;
+              return `${formattedVal} Ha`;
             },
             borderRadius: 5,
             leftborderWidth: 2,

@@ -103,9 +103,7 @@
 
     <div class="text-justify my-font">
       <p class="my-font" style="font-size: 16px">
-        The total number of burned area is 21,846, with the majority of burned
-        areas falling into the categories of moderate-low and low severity.
-        There were no pixels classified as high severity or enhanced regrowth.
+        The total burned area was <b>{{totalArea}}Ha</b>, which is a sum of all the burn Severity categories i.e very high severity <b>{{arealist[0]}}Ha</b>, High severity <b>{{arealist[1]}}Ha</b>, Moderate severity <b>{{arealist[2]}}Ha</b> and the Low severity <b>{{arealist[3]}}Ha</b>.
       </p>
     </div>
 
@@ -118,7 +116,7 @@
       />
     </div>
 
-    <pieChart id="chart-canvas" ref="chartRef" v-if="chartType === 'pie'" />
+    <pieChart :chartData="piechartData" id="chart-canvas" ref="chartRef" v-if="chartType === 'pie'" />
 
     <div>
       <q-inner-loading
@@ -174,6 +172,8 @@ export default {
     const { getRasterStats } = setLayerStats();
 
     const chartType = ref("bar");
+    const totalArea = ref(0);
+    const arealist = ref([0, 0, 0, 0]);
     const tsChartType = ref("bar-stacked");
     const selectedChartID = ref("stackedBar");
     const activeBtn = ref(["grey-7", "orange", "grey-7", "orange"]);
@@ -271,13 +271,17 @@ export default {
               borderRadius: 0,
               borderWidth: 0,
               spacing: 0,
-              cutout: "50",
+              cutout: "75",
               radius: "80%",
               data: chartDataProps.data,
             },
           ],
         };
         console.log(barchartData.value, "updated");
+
+        arealist.value = chartDataProps.data;
+
+        totalArea.value = chartDataProps.data.reduce((a, b) => a + b, 0);
 
         return barchartData.value;
       } catch (error) {}
@@ -378,6 +382,9 @@ export default {
       exportChart,
       stackedBarChartOptions,
       stackChart,
+      piechartData,
+      totalArea,
+      arealist
     };
   },
 };
