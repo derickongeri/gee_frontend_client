@@ -13,15 +13,25 @@
       >
         <q-card flat bordered class="q-mb-sm q-mx-sm">
           <q-card-section class="bg-grey-4 text-grey-9">
-            <div class="text-h6">Some Title Here</div>
-            <div class="text-subtitle2">some caption here</div>
+            <div class="text-h6">{{ selectedArea }} Burned Area</div>
+            <div class="text-subtitle2">
+              fire occured between {{ fireperiod[0].to }} and
+              {{ fireperiod[1].from }}
+            </div>
           </q-card-section>
 
           <q-separator />
           <q-card-section>
             <div class="text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-              mollitia, molestiae quas vel sint commodi repudiandae consequuntur
+              The burned area is calculated from pre and post-fire images to
+              creates burn severity assessment maps. The classification of burn
+              severity follows USGS proposed classification system for burn
+              severity ranges.
+              <a
+                href="https://www.un-spider.org/advisory-support/recommended-practices/recommended-practice-burn-severity/burn-severity-earth-engine"
+              >
+                More info</a
+              >
             </div>
           </q-card-section>
         </q-card>
@@ -63,12 +73,18 @@ import {
   watch,
 } from "vue";
 
+import { useVectorStore } from "../../stores/vector_store/index.js";
+
 export default {
   components: {
     Analysis: require("../Analysis/indicators/burnedArea.vue").default,
   },
 
   setup() {
+    const store = useVectorStore();
+    const selectedArea = ref(store.getselectedRegion);
+    const fireperiod = ref(store.getDatesSelected);
+
     const showAnalysismobile = ref(false);
     const matchMediaMobile = ref(false);
     const matchMediaDesktop = ref(true);
@@ -103,6 +119,8 @@ export default {
       hideAnalysismobile,
       matchMediaMobile,
       matchMediaDesktop,
+      selectedArea,
+      fireperiod,
     };
   },
 };

@@ -169,7 +169,7 @@ export default {
   },
 
   setup() {
-       const store = useVectorStore();
+    const store = useVectorStore();
     const { stackBarChart } = setChartMethods();
     const { getRasterStats } = setLayerStats();
 
@@ -211,6 +211,39 @@ export default {
         },
       ],
     });
+    const piechartData = ref({
+      labels: [
+        "Regrowth, High",
+        "Regrowth, Low",
+        "Unburned",
+        "Low Severity",
+        "Moderate Severity",
+        "High Severity",
+        "Very High Severity",
+        "NA",
+      ],
+      datasets: [
+        {
+          backgroundColor: [
+            "#ffffff",
+            "#7a8737",
+            "#acbe4d",
+            "#0ae042",
+            "#fff70b",
+            "#ffaf38",
+            "#ff641b",
+            "#a41fd6",
+          ],
+          borderColor: "rgba(0, 0, 0, 0)",
+          borderRadius: 0,
+          borderWidth: 0,
+          spacing: 0,
+          cutout: "50",
+          radius: "80%",
+          data: [0, 0, 0, 0, 0, 0, 0, 0],
+        },
+      ],
+    });
     const selectedVector = ref(null);
 
     const fetchChartData = async () => {
@@ -226,6 +259,21 @@ export default {
               data: chartDataProps.data,
               barPercentage: 0.75,
               categoryPercentage: 0.75,
+            },
+          ],
+        };
+        piechartData.value = {
+          labels: chartDataProps.labels,
+          datasets: [
+            {
+              backgroundColor: chartDataProps.palette,
+              borderColor: "rgba(0, 0, 0, 0)",
+              borderRadius: 0,
+              borderWidth: 0,
+              spacing: 0,
+              cutout: "50",
+              radius: "80%",
+              data: chartDataProps.data,
             },
           ],
         };
@@ -296,9 +344,9 @@ export default {
       a = null;
     };
 
-    onMounted(()=>{
-      showTextLoading()
-    })
+    onMounted(() => {
+      showTextLoading();
+    });
 
     const vector = computed(() => {
       selectedVector.value = store.getCustomGeojson;

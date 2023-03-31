@@ -114,8 +114,8 @@ export default {
           borderWidth: 0,
           spacing: 0,
           cutout: "50",
-          radius: "80%",
-          data: [0, 0, 222, 44172, 38545, 37938, 2, 0]
+          radius: "75%",
+          data: [0, 0, 0, 0, 0, 0, 0, 0]
         }],
       },
       required: true

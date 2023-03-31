@@ -12,7 +12,6 @@ export default function setSelectedRaster() {
     let eeLayer = null;
     let layerList = []
 
-
     //console.log(store.customGeojson, 'fetchRaster')
     let params = {geometry: store.customGeojson.toString(), dates: store.datesSelected}
 
@@ -49,11 +48,6 @@ export default function setSelectedRaster() {
     for (let i = 0; i < mapidList.length; i++) {
       createTileLayer(i, mapidList[i])
     }
-
-    const rasterGroup = L.layerGroup(layerList)
-
-    console.log(layerList, 'layers')
-
     return layerList;
   };
 

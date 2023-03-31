@@ -13,6 +13,8 @@
           style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
           >GREEN<span style="color: #000000; font-weight: normal">EYE</span></q-toolbar-title
         >
+        <q-btn flat round dense icon="mdi-human-male-board" />
+        <q-btn flat round dense icon="mdi-information-outline" />
       </q-toolbar>
     </q-header>
     <q-page-container style="padding-bottom: 0px">
