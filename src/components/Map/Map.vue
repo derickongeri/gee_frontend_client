@@ -3,6 +3,26 @@
     class="q-pa-none bg-grey-2 box"
     style="position: relative; min-height: 100%; min-width: 100%"
   >
+    <h6
+      class="title bg-white"
+      style="display: none; width: 100%; position:absolute; z-index:10000"
+      leaflet-browser-print-content
+    >
+      Leaflet Browser print TITLE
+    </h6>
+    <div
+      class="my-font sub-content"
+      style="display: none"
+      leaflet-browser-print-content
+    >
+      <p class="text-justify" style="font-size: 0.75em; max-width: 200px">
+        Neither UN-SPIDER nor the Regional Support Offices (RSOs) or their
+        partners take any responsibility for the correctness of outputs from
+        this recommended practice or decisions derived as a consequence.
+      </p>
+      <Maplegend/>
+    </div>
+
     <div class="col bg-black q-mx-none map-content" id="mapid" style="">
       <div
         class="row items-center area-selection"
@@ -140,17 +160,18 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
               <q-btn
                 class="bg-white"
                 size="sm"
                 round
                 flat
                 color="lime-9"
-                icon="mdi-select-drag"
-                @click="toggleDrawingTools"
+                icon="mdi-printer"
+                @click="printLayer"
               />
             </div>
+            <!--
             <div class="row">
               <q-btn
                 class="bg-white"
@@ -188,6 +209,7 @@ import "leaflet-draw/dist/leaflet.draw-src";
 import "leaflet-draw/dist/leaflet.draw-src.css";
 import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
+import "leaflet.browser.print/dist/leaflet.browser.print";
 import "./Modals/mask";
 import "./Modals/smoothWheelZoom";
 import "./WMTS";
@@ -276,6 +298,13 @@ export default defineComponent({
       //   })
       //   .addTo(map.value);
       L.control.scale({ position: "bottomright" }).addTo(map.value);
+      L.control
+        .browserPrint({
+          position: "bottomright",
+          title: `print map`,
+          documentTitle: "Map printed using leaflet.browser.print plugin",
+        })
+        .addTo(map.value);
       // ///////////////////hide layers control
       let layerControl = document.getElementsByClassName(
         "leaflet-control-layers"
@@ -289,16 +318,16 @@ export default defineComponent({
       map.value.setZoom(map.value.getZoom() + 1);
     };
 
-    const switchLayer = (selectedLayer) => {
-      const layer1 = currentRasterLayer.value.getLayers()[0];
-      const layer2 = currentRasterLayer.value.getLayers()[1];
-      if (selectedLayer === "layer1" && !map.value.hasLayer(layer1)) {
-        map.value.removeLayer(layer2);
-        map.value.addLayer(layer1);
-      } else if (selectedLayer === "layer2" && !map.value.hasLayer(layer2)) {
-        map.value.removeLayer(layer1);
-        map.value.addLayer(layer2);
-      }
+    const printLayer = () => {
+      resetZoomLevel().then(() => {
+        var options = {
+          documentTitle: ``,
+          closePopupsOnPrint: false,
+          manualMode: false,
+        };
+        var browserPrint = L.browserPrint(map.value, options);
+        browserPrint.print(L.BrowserPrint.Mode.Landscape());
+      });
     };
 
     const zoom_out = function () {
@@ -465,16 +494,16 @@ export default defineComponent({
       }
     };
 
-    const resetZoomLevel = function () {
+    const resetZoomLevel = async function () {
       if (customGeometry.value) {
         map.value.fitBounds(customGeometry.value.getBounds(), {
           //
-          setZoom: 2,
+          setZoom: 4,
         });
       } else {
         map.value.fitBounds(currentVectLayer.value.getBounds(), {
           // paddingBottomRight: [600, 0],
-          setZoom: 2,
+          setZoom: 4,
         });
       }
     };
@@ -601,7 +630,7 @@ export default defineComponent({
 
     onMounted(() => {
       setLeafletMap().then(() => {
-        toggleDrawingTools()
+        toggleDrawingTools();
       });
       setCurrentVector().then(() => {
         setRasterLayer();
@@ -633,6 +662,7 @@ export default defineComponent({
       setLabels,
       layerControl,
       opacityslider,
+      printLayer,
     };
   },
 });
@@ -748,7 +778,7 @@ export default defineComponent({
 
 // overwrite the leaflet top control
 .leaflet-top {
-  margin: 7vh 0px;
+  margin: 10vh 0px;
   display: none;
 }
 
@@ -791,6 +821,38 @@ export default defineComponent({
 .map-container {
   height: 500px;
 }
+
+// leaflet-browser-print-content {
+//   .grid-print-container {
+//     // grid holder that holds all content (map and any other content)
+//     grid-template: auto 1fr auto / 1fr;
+//     background-color: orange;
+//   }
+//   .grid-map-print {
+//     // map container itself
+//     grid-row: 2;
+//   }
+
+//   .grid-print-container > .title,
+//   .grid-print-container > .sub-content {
+//     color: white;
+//   }
+
+//   .title {
+//     // Dynamic title styling
+//     grid-row: 1;
+//     justify-self: center;
+//     text-align: center;
+//     color: grey;
+//     box-sizing: border-box;
+//     margin-top: 0;
+//   }
+//   .sub-content {
+//     // Dynamic sub content styling
+//     grid-row: 5;
+//     padding-left: 10px;
+//   }
+// }
 
 @media screen and (max-width: 768px) {
   .map-content {
@@ -837,5 +899,48 @@ export default defineComponent({
     margin-top: 8px;
     margin-bottom: 8px;
   }
+}
+</style>
+
+<style>
+.grid-print-container {
+  display: grid;
+  grid-template: auto 1fr / 1fr auto;
+  background-color: rgb(255, 255, 255);
+}
+
+.title {
+  justify-self: center;
+  text-align: center;
+  color: grey;
+  box-sizing: border-box;
+  margin-top: 0;
+}
+
+.grid-map-print {
+  grid-row: 1;
+  /* grid-column: 1; Updated grid-column */
+}
+
+.grid-print-container > .title,
+.grid-print-container > .sub-content {
+  color: rgb(2, 2, 2);
+}
+
+.sub-content {
+  grid-row: 1; /* Updated grid-row */
+  /* grid-column: 2; */
+  max-width: fit-content;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+</style>
+<style>
+[leaflet-browser-print-pages] {
+  display: none;
+}
+
+.pages-print-container [leaflet-browser-print-pages] {
+  display: block;
 }
 </style>

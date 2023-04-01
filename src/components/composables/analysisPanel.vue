@@ -13,10 +13,10 @@
       >
         <q-card flat bordered class="q-mb-sm q-mx-sm">
           <q-card-section class="bg-grey-4 text-grey-9">
-            <div class="text-h6">{{ selectedArea }} Burned Area</div>
+            <div class="text-h6"><b>{{ selectedArea }}</b> Burned Area</div>
             <div class="text-subtitle2">
-              fire occured between {{ fireperiod[0].to }} and
-              {{ fireperiod[1].from }}
+              fire occurred between <b>{{ fireperiod[0].to }}</b> and
+              <b>{{ fireperiod[1].from }}</b>
             </div>
           </q-card-section>
 

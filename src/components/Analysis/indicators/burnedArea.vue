@@ -101,22 +101,34 @@
       </div>
     </div>
 
-    <div class="text-justify my-font">
-      <p class="my-font" style="font-size: 16px">
-        The total burned area was <b>{{totalArea}}Ha</b>, which is a sum of all the burn Severity categories i.e very high severity <b>{{arealist[0]}}Ha</b>, High severity <b>{{arealist[1]}}Ha</b>, Moderate severity <b>{{arealist[2]}}Ha</b> and the Low severity <b>{{arealist[3]}}Ha</b>.
-      </p>
-    </div>
+    <div class="sub-content">
+      <div class="text-justify my-font">
+        <p class="my-font" style="font-size: 16px">
+          The <b>total burned area</b> was <b>{{ totalArea }}Ha</b>, which
+          coresponds to the sum of all burn Severity categories i.e very high
+          severity <b>{{ arealist[0] }}Ha</b>, High severity
+          <b>{{ arealist[1] }}Ha</b>, Moderate severity
+          <b>{{ arealist[2] }}Ha</b> and the Low severity
+          <b>{{ arealist[3] }}Ha</b>.
+        </p>
+      </div>
 
-    <div>
-      <barChart
-        :chartData="barchartData"
+      <div>
+        <barChart
+          :chartData="barchartData"
+          id="chart-canvas"
+          ref="chartRef"
+          v-if="chartType === 'bar'"
+        />
+      </div>
+
+      <pieChart
+        :chartData="piechartData"
         id="chart-canvas"
         ref="chartRef"
-        v-if="chartType === 'bar'"
+        v-if="chartType === 'pie'"
       />
     </div>
-
-    <pieChart :chartData="piechartData" id="chart-canvas" ref="chartRef" v-if="chartType === 'pie'" />
 
     <div>
       <q-inner-loading
@@ -384,7 +396,7 @@ export default {
       stackChart,
       piechartData,
       totalArea,
-      arealist
+      arealist,
     };
   },
 };
