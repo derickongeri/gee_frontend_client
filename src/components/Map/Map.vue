@@ -4,23 +4,155 @@
     style="position: relative; min-height: 100%; min-width: 100%"
   >
     <h6
-      class="title bg-white"
-      style="display: none; width: 100%; position:absolute; z-index:10000"
+      class="title bg-white q-px-md q-py-none"
+      style="
+        text-decoration: underline;
+        display: none;
+        top: 2px;
+        width: 98.5%;
+        position: fixed;
+        z-index: 10000;
+      "
       leaflet-browser-print-content
     >
-      Leaflet Browser print TITLE
+      {{ selectedArea }} Burned Area {{ fireDates[0].to.replace(/-/g, "/") }} -
+      {{ fireDates[1].from.replace(/-/g, "/") }}
     </h6>
     <div
-      class="my-font sub-content"
+      class="north-arrow"
+      style="
+        width: fit-content;
+        height: fit-content;
+        display: none;
+        position: absolute;
+        z-index: 100000;
+        top: 10%;
+        right: 250px;
+      "
+      leaflet-browser-print-content
+    >
+      <q-avatar square size="50px" class="q-ma-none">
+        <img
+          src="~/src/assets/northarrow2.png"
+          style="position: relative; width: 100%; height: 100%; left: -1%"
+        />
+      </q-avatar>
+    </div>
+    <div
+      class="target-div"
+      style="
+        width: fit-content;
+        height: fit-content;
+        display: none;
+        position: absolute;
+        z-index: 100000;
+        bottom: 4%;
+        left: 3%;
+      "
+      leaflet-browser-print-content
+    ></div>
+    <div
+      class="my-font sub-content q-mt-none q-ml-none q-pa-none"
       style="display: none"
       leaflet-browser-print-content
     >
-      <p class="text-justify" style="font-size: 0.75em; max-width: 200px">
-        Neither UN-SPIDER nor the Regional Support Offices (RSOs) or their
-        partners take any responsibility for the correctness of outputs from
-        this recommended practice or decisions derived as a consequence.
-      </p>
-      <Maplegend/>
+      <div
+        class="column justify-between q-ma-none q-px-xs"
+        style="position: relative; height: 100%"
+      >
+        <h6 class="q-mt-none"></h6>
+        <div class="q-pa-xs gutter-md">
+          <h6 class="q-my-none" style="font-size: 1em; font-weight: bold">
+            Note:
+          </h6>
+          <p class="text-justify" style="font-size: 0.75em; max-width: 200px">
+            Burn severity map generated automatically using Normalized Burn
+            Ratio (NBR),using near-infrared (NIR) and shortwave-infrared (SWIR)
+            wavelengths. The post-fire image is subtracted from the pre-fire
+            image to create the delta NBR (dNBR), which can be used to assess
+            burn severity
+          </p>
+          <div class="row" style="font-size: 0.75em;min-width: 200px" >
+            <div class="col-6"><b>Data-Source</b></div>
+            <div class="col-6"><b>Sentinel 2</b></div>
+          </div>
+          <div class="row" style="font-size: 0.75em;min-width: 200px">
+            <div class="col-6"><b>Pre-fire Date</b></div>
+            <div class="col-6">
+              <div class="row">
+                <span>From:</span><q-space /><span>{{
+                  fireDates[0].from
+                }}</span>
+              </div>
+              <div class="row">
+                <span>To:</span><q-space /><span>{{ fireDates[0].to }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row text-justify" style="font-size: 0.75em;min-width: 200px">
+            <div class="col-6"><b>Post-fire Dates</b></div>
+            <div class="col-6">
+              <div class="row">
+                <span>From:</span><q-space /><span>{{
+                  fireDates[1].from
+                }}</span>
+              </div>
+              <div class="row">
+                <span>To:</span><q-space /><span>{{ fireDates[1].to }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row q-ma-none">
+          <div class="q-pa-xs" style="border: 1px solid grey; min-width:200px">
+            <h6 class="q-my-none" style="font-size: 1em; font-weight: bold">
+              Burned Area Severity
+            </h6>
+            <Maplegend />
+          </div>
+        </div>
+
+        <div class="row q-mt-xs q-mb-xs">
+          <div class="q-my-none q-pa-xs">
+            <h6 class="q-my-none" style="font-size: 1em; font-weight: bold">
+              Disclaimer
+            </h6>
+            <p
+              class="text-justify q-my-none"
+              style="font-size: 0.75em; max-width: 200px"
+            >
+              The developer of the application from which this map document was
+              generated is not liable for the correctness of outputs or
+              decisions derived as a consequence.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="row items-center q-mt-xs q-mb-xs"
+          style="max-width: 100px; max-height: 100px"
+        >
+          <q-avatar square size="50px" class="q-ma-none">
+            <img
+              src="~/src/assets/africa.png"
+              style="position: relative; width: 100%; height: 100%; left: -1%"
+            />
+          </q-avatar>
+          <div
+            class="col text-h6"
+            style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
+          >
+            GREEN<span style="color: #000000; font-weight: normal">EYE</span>
+          </div>
+          <span
+            class="my-font"
+            style="min-width: 200px; font-weight: light; font-size: 0.75em"
+            >created by
+            <a href="https://derickongeri.github.io">Derick Ongeri</a></span
+          >
+        </div>
+      </div>
     </div>
 
     <div class="col bg-black q-mx-none map-content" id="mapid" style="">
@@ -44,6 +176,7 @@
               @click="toggleDrawingTools"
               ><q-tooltip class="bg-black">drawing tools</q-tooltip>
             </q-btn>
+            <!-- {{ scaleBar }} -->
           </div>
         </div>
         <q-separator vertical inset />
@@ -160,7 +293,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row" id="printmap">
               <q-btn
                 class="bg-white"
                 size="sm"
@@ -211,6 +344,7 @@ import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 import "leaflet.browser.print/dist/leaflet.browser.print";
 import "./Modals/mask";
+import "./Modals/betterScale";
 import "./Modals/smoothWheelZoom";
 import "./WMTS";
 import { Loading, QSpinnerOval, QSpinnerFacebook, QSpinnerGears } from "quasar";
@@ -218,6 +352,7 @@ import baselayers from "./Modals/baselayers";
 
 import setSelectedVect from "./Modals/fetchVectors";
 import setSelectedRaster from "./Modals/fetchRaster";
+import html2canvas from "html2canvas";
 
 export default defineComponent({
   components: {
@@ -249,6 +384,9 @@ export default defineComponent({
       customGeometry = ref(null),
       currentFeatureLayer = ref(null),
       rasterYear = ref(null),
+      scaleBar = ref(null),
+      pngUrl = ref(null),
+      targetDiv = ref(null),
       opacityslider = ref(false);
 
     let drawingTools = ref(false);
@@ -297,14 +435,22 @@ export default defineComponent({
       //     position: "bottomright",
       //   })
       //   .addTo(map.value);
-      L.control.scale({ position: "bottomright" }).addTo(map.value);
       L.control
-        .browserPrint({
+        .betterscale({
           position: "bottomright",
-          title: `print map`,
-          documentTitle: "Map printed using leaflet.browser.print plugin",
+          metric: true,
         })
         .addTo(map.value);
+
+      // const scaleBarElement = document.getElementsByClassName(
+      //   ".leaflet-control-better-scale"
+      // );
+
+      L.control.browserPrint({
+        position: "bottomright",
+        title: `print map`,
+        documentTitle: "Map printed using leaflet.browser.print plugin",
+      });
       // ///////////////////hide layers control
       let layerControl = document.getElementsByClassName(
         "leaflet-control-layers"
@@ -318,14 +464,45 @@ export default defineComponent({
       map.value.setZoom(map.value.getZoom() + 1);
     };
 
+    const generatePng = async () => {
+      let sourceDiv = document.querySelector(".leaflet-control-better-scale");
+      console.log(sourceDiv);
+      html2canvas(sourceDiv[0], { useCORS: true, allowTaint: true }).then(
+        (canvas) => {
+          console.log(canvas);
+          canvas.toBlob((blob) => {
+            console.log(blob);
+            if (blob) {
+              const reader = new FileReader();
+              reader.readAsDataURL(blob);
+              reader.onloadend = () => {
+                pngUrl.value = reader.result;
+              };
+            } else {
+              console.error("Failed to create a Blob object from the canvas");
+            }
+          }, "image/png");
+        }
+      );
+    };
+
     const printLayer = () => {
       resetZoomLevel().then(() => {
+        const targetDiv = document.querySelector(".target-div");
+        scaleBar.value = document.querySelector(
+          ".leaflet-control-better-scale"
+        );
+
+        console.log(scaleBar.value, "div scalebar");
+
+        targetDiv.appendChild(scaleBar.value);
+
         var options = {
           documentTitle: ``,
           closePopupsOnPrint: false,
           manualMode: false,
         };
-        var browserPrint = L.browserPrint(map.value, options);
+        var browserPrint = L.browserPrint(map.value, scaleBar.value, options);
         browserPrint.print(L.BrowserPrint.Mode.Landscape());
       });
     };
@@ -498,12 +675,12 @@ export default defineComponent({
       if (customGeometry.value) {
         map.value.fitBounds(customGeometry.value.getBounds(), {
           //
-          setZoom: 4,
+          setZoom: 3,
         });
       } else {
         map.value.fitBounds(currentVectLayer.value.getBounds(), {
           // paddingBottomRight: [600, 0],
-          setZoom: 4,
+          setZoom: 3,
         });
       }
     };
@@ -663,6 +840,18 @@ export default defineComponent({
       layerControl,
       opacityslider,
       printLayer,
+      selectedArea: ref(store.getselectedRegion),
+      fireDates: ref(store.getDatesSelected),
+      scaleBar,
+      pngUrl,
+      reverseString: ref((str) => {
+        // empty string
+        let newString = "";
+        for (let i = str.length - 1; i >= 0; i--) {
+          newString += str[i];
+        }
+        return newString;
+      }),
     };
   },
 });
@@ -782,6 +971,10 @@ export default defineComponent({
   display: none;
 }
 
+.leaflet-right {
+  margin-right: 1vw;
+}
+
 //
 .custom-map-tools-section {
   position: absolute;
@@ -822,37 +1015,11 @@ export default defineComponent({
   height: 500px;
 }
 
-// leaflet-browser-print-content {
-//   .grid-print-container {
-//     // grid holder that holds all content (map and any other content)
-//     grid-template: auto 1fr auto / 1fr;
-//     background-color: orange;
-//   }
-//   .grid-map-print {
-//     // map container itself
-//     grid-row: 2;
-//   }
-
-//   .grid-print-container > .title,
-//   .grid-print-container > .sub-content {
-//     color: white;
-//   }
-
-//   .title {
-//     // Dynamic title styling
-//     grid-row: 1;
-//     justify-self: center;
-//     text-align: center;
-//     color: grey;
-//     box-sizing: border-box;
-//     margin-top: 0;
-//   }
-//   .sub-content {
-//     // Dynamic sub content styling
-//     grid-row: 5;
-//     padding-left: 10px;
-//   }
-// }
+leaflet-browser-print-content {
+  .leaflet-control-better-scale {
+    position: absolute;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .map-content {
@@ -880,6 +1047,10 @@ export default defineComponent({
     top: 7vh;
     width: fit-content;
   }
+
+  #printmap {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -905,34 +1076,36 @@ export default defineComponent({
 <style>
 .grid-print-container {
   display: grid;
-  grid-template: auto 1fr / 1fr auto;
+  grid-template-columns: auto 1fr 1fr auto;
   background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .title {
-  justify-self: center;
+  grid-row: 1 / span 4;
   text-align: center;
-  color: grey;
+  color: rgb(15, 15, 15);
   box-sizing: border-box;
   margin-top: 0;
+  margin: 1px;
+  /* border: 1px solid rgb(0, 0, 0); */
 }
 
 .grid-map-print {
   grid-row: 1;
-  /* grid-column: 1; Updated grid-column */
-}
-
-.grid-print-container > .title,
-.grid-print-container > .sub-content {
-  color: rgb(2, 2, 2);
+  max-height: 93%;
+  max-width: 98%;
+  top: 5%;
+  left: 2%;
+  border: 4px solid rgb(12, 12, 12);
 }
 
 .sub-content {
-  grid-row: 1; /* Updated grid-row */
-  /* grid-column: 2; */
+  grid-row: 1;
   max-width: fit-content;
   padding-left: 10px;
   box-sizing: border-box;
+  margin-bottom: 3%;
 }
 </style>
 <style>
@@ -942,5 +1115,67 @@ export default defineComponent({
 
 .pages-print-container [leaflet-browser-print-pages] {
   display: block;
+}
+</style>
+<style leaflet-browser-print-content>
+.leaflet-control-better-scale {
+  height: 15px;
+  padding: 2px;
+}
+.leaflet-control-better-scale-upper-first-piece {
+  top: 0%;
+  left: 0%;
+  width: 25%;
+}
+.leaflet-control-better-scale-upper-second-piece {
+  top: 0%;
+  left: 50%;
+  width: 25%;
+}
+.leaflet-control-better-scale-lower-first-piece {
+  top: 50%;
+  left: 25%;
+  width: 25%;
+}
+.leaflet-control-better-scale-lower-second-piece {
+  top: 50%;
+  left: 75%;
+  width: 30%;
+}
+.leaflet-control-better-scale-ruler-block {
+  overflow: hidden;
+  position: absolute;
+  height: 50%;
+  background-color: #444444;
+}
+.leaflet-control-better-scale-ruler {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 7px;
+  background-color: White;
+  border: 1px solid #444444;
+}
+.leaflet-control-better-scale-label-div {
+  position: relative;
+  width: 100%;
+}
+.leaflet-control-better-scale-label {
+  position: absolute;
+  width: 10%;
+  text-align: center;
+  color: #fff;
+  font: sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  height: 5px;
+  top: -1px;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+.leaflet-control-better-scale-first-number {
+  left: 45%;
+}
+.leaflet-control-better-scale-second-number {
+  left: 95%;
 }
 </style>
