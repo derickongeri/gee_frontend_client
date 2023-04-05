@@ -9,12 +9,17 @@
           />
         </q-avatar>
         <q-toolbar-title
-          class="text-h6"
+          class="text-h6 q-pa-none q-ma-none item-center"
           style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
-          >GREEN<span style="color: #000000; font-weight: normal"
-            >EYE</span
-          ></q-toolbar-title
-        >
+          >GREEN<span style="font-weight: light"
+            ><q-icon
+              id="pulse"
+              square
+              size="md"
+              class="q-ma-none q-pa-none"
+              name="mdi-pulse"
+          /></span>
+        </q-toolbar-title>
         <q-btn
           id="tour-btn"
           flat
@@ -249,13 +254,18 @@ export default {
 
     function alert() {
       $q.dialog({
-        title: "Alert",
-        message: "Some message",
+        title: "Confirm",
+        message: "Would you like to take a tour?",
+        cancel: true,
+        persistent: true,
       })
         .onOk(() => {
           // console.log('OK')
           const el = document.getElementById("tour-btn");
           el.click();
+        })
+        .onOk(() => {
+          // console.log('>>>> second OK catcher')
         })
         .onCancel(() => {
           // console.log('Cancel')
@@ -292,6 +302,21 @@ export default {
 </script>
 
 <style lang="scss">
+#pulse {
+  animation-name: beat;
+  animation-duration: 1.5s;
+  animation-iteration-count: 5;
+}
+
+@keyframes beat {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .q-dialog_top25 .q-dialog_inner-top {
   top: 600px;
 }

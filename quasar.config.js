@@ -151,9 +151,9 @@ module.exports = configure(function (ctx) {
 
 
       manifest: {
-        name: `Misland webmap`,
-        short_name: `Misland webmap`,
-        description: `misland application`,
+        name: `greenpulse`,
+        short_name: `TGP`,
+        description: `Monitor environmental changes, track natural disasters, and stay informed about the latest climate events with our app.`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -218,7 +218,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'misland'
+        appId: 'greenpulse'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
