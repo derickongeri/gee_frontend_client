@@ -171,6 +171,34 @@
             </q-tab-panel>
           </q-tab-panels>
         </div>
+        <div class="my-font q-pa-md q-gutter-sm">
+          <q-dialog v-model="confirm" persistent >
+            <q-card class="my-font q-pa-md" style="min-width:fit-content">
+              <q-card-section class="row items-center q-pb-none" style="min-width:40vw">
+                <div class="text-h6" style="font-weight:bold">Welcome to GreenPulse Dashboard!</div>
+                <q-space />
+                <q-btn icon="close" color="grey-9" flat round dense v-close-popup />
+              </q-card-section>
+
+              <q-card-section class="row items-center">
+                <q-avatar
+                  icon="mdi-human-male-board"
+                  color="white"
+                  text-color="orange"
+                />
+                <span class="q-ml-none"
+                  >Would you like to take a quick, step by step guided
+                  tour of how to navigate through the dashboard?</span
+                ><q-btn icon="mdi-arrow-right-bold" color="orange" flat round dense @click="this.$tours['myTour'].start()" />
+              </q-card-section>
+
+              <!-- <q-card-actions align="right">
+                <q-btn flat label="Show me" color="primary" v-close-popup />
+                <q-btn flat label="I'm a pro" color="primary" v-close-popup />
+              </q-card-actions> -->
+            </q-card>
+          </q-dialog>
+        </div>
       </q-page>
     </q-page-container>
 
@@ -250,33 +278,34 @@ export default {
     tour: require("components/tour.vue"),
   },
   setup() {
-    const $q = useQuasar();
+    // const $q = useQuasar();
 
-    function alert() {
-      $q.dialog({
-        title: "Confirm",
-        message: "Would you like to take a tour?",
-        cancel: true,
-        persistent: true,
-      })
-        .onOk(() => {
-          // console.log('OK')
-          const el = document.getElementById("tour-btn");
-          el.click();
-        })
-        .onOk(() => {
-          // console.log('>>>> second OK catcher')
-        })
-        .onCancel(() => {
-          // console.log('Cancel')
-        })
-        .onDismiss(() => {
-          // console.log('I am triggered on both OK and Cancel')
-        });
-    }
+    // function alert() {
+    //   $q.dialog({
+    //     title: "Confirm",
+    //     message: "Would you like to take a tour?",
+    //     cancel: true,
+    //     persistent: true,
+    //   })
+    //     .onOk(() => {
+    //       // console.log('OK')
+    //       const el = document.getElementById("tour-btn");
+    //       el.click();
+    //     })
+    //     .onOk(() => {
+    //       // console.log('>>>> second OK catcher')
+    //     })
+    //     .onCancel(() => {
+    //       // console.log('Cancel')
+    //     })
+    //     .onDismiss(() => {
+    //       // console.log('I am triggered on both OK and Cancel')
+    //     });
+    // }
 
     const matchMediaDesktop = ref(false),
-      matchMediaMobile = ref(false);
+      matchMediaMobile = ref(false),
+      confirm = ref(false);
 
     onBeforeMount(() => {
       matchMediaMobile.value = window.matchMedia("(max-width: 768px)").matches;
@@ -285,7 +314,7 @@ export default {
     });
 
     onMounted(() => {
-      alert();
+      confirm.value = true;
     });
     return {
       drawer: ref(false),
@@ -296,6 +325,7 @@ export default {
       matchMediaDesktop,
       matchMediaMobile,
       tab: ref("mails"),
+      confirm,
     };
   },
 };
