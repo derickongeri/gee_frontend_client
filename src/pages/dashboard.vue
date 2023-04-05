@@ -171,7 +171,7 @@
             </q-tab-panel>
           </q-tab-panels>
         </div>
-        <div class="my-font q-pa-md q-gutter-sm">
+        <div class="my-font q-pa-none q-gutter-sm">
           <q-dialog v-model="confirm" persistent >
             <q-card class="my-font q-pa-md" style="min-width:fit-content">
               <q-card-section class="row items-center q-pb-none" style="min-width:40vw">
@@ -213,7 +213,7 @@
           narrow-indicator
           @click="showLayerSelection = true"
         >
-          <q-tab name="mails" icon="mdi-layers" label="Layers" />
+          <q-tab name="mails" icon="mdi-map-plus" label="Layers" />
           <q-tab name="alarms" icon="mdi-poll" label="Analysis" />
         </q-tabs>
         <!-- <div class="row" style="min-width: 100%">

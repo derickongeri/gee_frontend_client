@@ -259,7 +259,7 @@
         style="width: fit-content"
         id="mapcontrols"
       >
-        <div class="q-pa-none q-gutter-sm">
+        <div class="q-pa-none q-gutter-sm desktop-control">
           <q-btn
             size="sm"
             flat
@@ -271,7 +271,7 @@
             label="Map"
             icon="mdi-tune-vertical"
           >
-            <q-menu flat auto-close class="q-pa-sm menu-card" :offset="[0, 0]">
+            <q-menu flat auto-close class="q-pa-sm menu-card" :offset="[10, 10]">
               <div class="">
                 <div
                   class="menu-content bg-grey-2 q-pa-sm q-ma-sm"
@@ -372,7 +372,7 @@
             rounded
             no-caps
             align="between"
-            class="bg-white btn-fixed-width q-px-md"
+            class="bg-white btn-fixed-width q-px-md desktop-control"
             color="lime-9"
             label="Share"
             icon="mdi-share-variant"
@@ -388,7 +388,7 @@
             rounded
             no-caps
             align="between"
-            class="bg-white btn-fixed-width q-px-md"
+            class="bg-white btn-fixed-width q-px-md desktop-control"
             color="lime-9"
             label="Help"
             icon="mdi-help-circle-outline"
@@ -449,7 +449,7 @@
             rounded
             no-caps
             align="between"
-            class="bg-white btn-fixed-width q-px-md"
+            class="bg-white btn-fixed-width q-px-md desktop-control"
             color="lime-9"
             label="Feedback"
             icon="mdi-comment-quote-outline"
@@ -512,18 +512,112 @@
             @click="printLayer"
           />
         </div>
-        <!--
-            <div class="row">
+
+            <div class="row q-my-sm">
+              <q-space />
               <q-btn
                 class="bg-white"
                 size="sm"
                 round
                 flat
                 color="lime-9"
-                icon="mdi-chart-bar"
+                icon="mdi-layers"
                 @click="openCloseStats"
-              />
-            </div> -->
+              ><q-menu flat auto-close class="q-pa-sm menu-card" anchor="center left" self="center right" :offset="[0, 0]">
+              <div class="row">
+                <div
+                  class="menu-content bg-grey-2 q-pa-sm q-ma-sm"
+                  style="border-radius: 5px"
+                >
+                  <span
+                    class="q-mx-sm"
+                    style="font-size: 0.75em; font-color: #838c48"
+                    >Select Base Map</span
+                  >
+                  <q-separator />
+                  <div class="q-my-sm q-mx-sm" style="min-width: 150px">
+                    <div class="map-selection q-pa-xs" style="">
+                      <q-list class="row" style="min-width: 100px">
+                        <q-item
+                          class="col q-px-none"
+                          clickable
+                          v-ripple
+                          @click="change_base_map('OSM')"
+                        >
+                          <q-item-section class="row q-px-sm">
+                            <q-avatar rounded>
+                              <img
+                                src="https://res.cloudinary.com/dv3id0zrx/image/upload/v1649099828/Screenshot_from_2022-04-04_22-14-36_z8raar.png"
+                              />
+                            </q-avatar>
+                            <div
+                              class="row justify-center"
+                              style="font-size: 0.75em"
+                            >
+                              Mapbox
+                            </div>
+                          </q-item-section>
+                        </q-item>
+                        <q-item
+                          class="col q-px-none"
+                          clickable
+                          @click="change_base_map('satellite')"
+                        >
+                          <q-item-section class="q-px-sm">
+                            <q-avatar rounded>
+                              <img
+                                src="https://res.cloudinary.com/dv3id0zrx/image/upload/v1649099830/Screenshot_from_2022-04-04_22-14-04_tnx5m7.png"
+                              />
+                            </q-avatar>
+                            <div
+                              class="row justify-center"
+                              style="font-size: 0.75em"
+                            >
+                              Satellite
+                            </div>
+                          </q-item-section>
+                        </q-item>
+                        <q-item
+                          class="col q-px-none"
+                          clickable
+                          @click="change_base_map('darkMap')"
+                        >
+                          <q-item-section class="q-px-sm">
+                            <q-avatar rounded>
+                              <img
+                                src="https://res.cloudinary.com/dv3id0zrx/image/upload/v1649099827/Screenshot_from_2022-04-04_22-16-08_mu5dfk.png"
+                              />
+                            </q-avatar>
+                            <div
+                              class="row justify-center"
+                              style="font-size: 0.75em"
+                            >
+                              dark
+                            </div>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </div>
+                  </div>
+                  <q-separator />
+                  <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em"
+                    >Map Labels</span
+                  >
+                  <div class="q-my-sm q-mx-sm" style="min-width: 150px">
+                    <q-toggle
+                      dense
+                      size="sm"
+                      v-model="setLabels"
+                      color="lime-9"
+                      label="Show Map Labels"
+                      left-label
+                    />
+                  </div>
+                </div>
+                <div class="arrow-up q-ma-xs" style="left: 89%;top:50%;"></div>
+              </div>
+            </q-menu></q-btn>
+            </div>
       </div>
     </div>
     <tour />
@@ -1248,6 +1342,10 @@ leaflet-browser-print-content {
 }
 
 @media screen and (max-width: 768px) {
+  .desktop-control{
+    display: none;
+  }
+
   .map-content {
     min-width: 70%;
     border-radius: 0px;
