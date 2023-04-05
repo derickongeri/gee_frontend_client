@@ -25,7 +25,8 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
-      'VueSocialSharing'
+      'VueSocialSharing',
+      'tour'
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
@@ -106,7 +107,8 @@ module.exports = configure(function (ctx) {
       plugins: [
         'Meta',
         'Loading',
-        'Notify'
+        'Notify',
+        'Dialog'
       ]
     },
 

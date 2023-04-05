@@ -72,11 +72,11 @@
             image to create the delta NBR (dNBR), which can be used to assess
             burn severity
           </p>
-          <div class="row" style="font-size: 0.75em;min-width: 200px" >
+          <div class="row" style="font-size: 0.75em; min-width: 200px">
             <div class="col-6"><b>Data-Source</b></div>
             <div class="col-6"><b>Sentinel 2</b></div>
           </div>
-          <div class="row" style="font-size: 0.75em;min-width: 200px">
+          <div class="row" style="font-size: 0.75em; min-width: 200px">
             <div class="col-6"><b>Pre-fire Date</b></div>
             <div class="col-6">
               <div class="row">
@@ -89,7 +89,10 @@
               </div>
             </div>
           </div>
-          <div class="row text-justify" style="font-size: 0.75em;min-width: 200px">
+          <div
+            class="row text-justify"
+            style="font-size: 0.75em; min-width: 200px"
+          >
             <div class="col-6"><b>Post-fire Dates</b></div>
             <div class="col-6">
               <div class="row">
@@ -105,7 +108,7 @@
         </div>
 
         <div class="row q-ma-none">
-          <div class="q-pa-xs" style="border: 1px solid grey; min-width:200px">
+          <div class="q-pa-xs" style="border: 1px solid grey; min-width: 200px">
             <h6 class="q-my-none" style="font-size: 1em; font-weight: bold">
               Burned Area Severity
             </h6>
@@ -165,7 +168,7 @@
         @pointerout="map.dragging.enable(), map.smoothWheelZoom.enable()"
       >
         <div class="" style="z-index: 3000; background-color: #00000000">
-          <div class="q-pa-none q-px-md">
+          <div class="q-pa-none q-px-md" id="drawingtools">
             <q-btn
               class="bg-white"
               size="md"
@@ -180,7 +183,11 @@
           </div>
         </div>
         <q-separator vertical inset />
-        <div class="col" style="z-index: 3000; background-color: #00000000">
+        <div
+          class="col"
+          style="z-index: 3000; background-color: #00000000"
+          id="selectarea"
+        >
           <areaSelection
             @mouseover="map.dragging.disable()"
             @mouseout="map.dragging.enable()"
@@ -191,6 +198,7 @@
       </div>
       <div
         class="q-pa-none"
+        id="maplegend"
         style="
           position: absolute;
           z-index: 3000;
@@ -246,65 +254,265 @@
         />
       </div>
 
-      <div class="row zoom-controls q-gutter-xs" style="width: fit-content">
-        <div class="row q-gutter-xs">
-          <div class="col-2 q-gutter-sm q-py-sm" id="#v-step-1">
-            <div class="row">
-              <div
-                class="bg-white q-pa-none q-ma-none"
-                style="border-radius: 20px"
-              >
-                <div>
-                  <q-btn
-                    class="bg-white"
-                    size="sm"
-                    round
-                    flat
-                    color="lime-9"
-                    icon="add"
-                    @click="zoom_in"
-                  />
-                </div>
-
-                <q-separator />
-                <div>
-                  <q-btn
-                    class="bg-white"
-                    size="sm"
-                    round
-                    flat
-                    color="lime-9"
-                    icon="mdi-refresh"
-                    @click="resetZoomLevel"
-                  />
-                </div>
-                <q-separator />
-
-                <div>
-                  <q-btn
-                    class="bg-white"
-                    size="sm"
-                    round
-                    flat
-                    color="lime-9"
-                    icon="remove"
-                    @click="zoom_out"
-                  />
+      <div
+        class="zoom-controls q-gutter-xs"
+        style="width: fit-content"
+        id="mapcontrols"
+      >
+        <div class="q-pa-none q-gutter-sm">
+          <q-btn
+            size="sm"
+            flat
+            rounded
+            no-caps
+            align="between"
+            class="bg-white btn-fixed-width q-px-md"
+            color="lime-9"
+            label="Map"
+            icon="mdi-tune-vertical"
+          >
+            <q-menu flat auto-close class="q-pa-sm menu-card" :offset="[0, 0]">
+              <div class="">
+                <div
+                  class="menu-content bg-grey-2 q-pa-sm q-ma-sm"
+                  style="border-radius: 5px"
+                >
+                  <div class="arrow-up q-ma-xs" style="left: 10%"></div>
+                  <span
+                    class="q-mx-sm"
+                    style="font-size: 0.75em; font-color: #838c48"
+                    >Select Base Map</span
+                  >
+                  <q-separator />
+                  <div class="q-my-sm q-mx-sm" style="min-width: 150px">
+                    <div class="map-selection q-pa-xs" style="">
+                      <q-list class="row" style="min-width: 100px">
+                        <q-item
+                          class="col q-px-none"
+                          clickable
+                          v-ripple
+                          @click="change_base_map('OSM')"
+                        >
+                          <q-item-section class="row q-px-sm">
+                            <q-avatar rounded>
+                              <img
+                                src="https://res.cloudinary.com/dv3id0zrx/image/upload/v1649099828/Screenshot_from_2022-04-04_22-14-36_z8raar.png"
+                              />
+                            </q-avatar>
+                            <div
+                              class="row justify-center"
+                              style="font-size: 0.75em"
+                            >
+                              Mapbox
+                            </div>
+                          </q-item-section>
+                        </q-item>
+                        <q-item
+                          class="col q-px-none"
+                          clickable
+                          @click="change_base_map('satellite')"
+                        >
+                          <q-item-section class="q-px-sm">
+                            <q-avatar rounded>
+                              <img
+                                src="https://res.cloudinary.com/dv3id0zrx/image/upload/v1649099830/Screenshot_from_2022-04-04_22-14-04_tnx5m7.png"
+                              />
+                            </q-avatar>
+                            <div
+                              class="row justify-center"
+                              style="font-size: 0.75em"
+                            >
+                              Satellite
+                            </div>
+                          </q-item-section>
+                        </q-item>
+                        <q-item
+                          class="col q-px-none"
+                          clickable
+                          @click="change_base_map('darkMap')"
+                        >
+                          <q-item-section class="q-px-sm">
+                            <q-avatar rounded>
+                              <img
+                                src="https://res.cloudinary.com/dv3id0zrx/image/upload/v1649099827/Screenshot_from_2022-04-04_22-16-08_mu5dfk.png"
+                              />
+                            </q-avatar>
+                            <div
+                              class="row justify-center"
+                              style="font-size: 0.75em"
+                            >
+                              dark
+                            </div>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </div>
+                  </div>
+                  <q-separator />
+                  <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em"
+                    >Map Labels</span
+                  >
+                  <div class="q-my-sm q-mx-sm" style="min-width: 150px">
+                    <q-toggle
+                      dense
+                      size="sm"
+                      v-model="setLabels"
+                      color="lime-9"
+                      label="Show Map Labels"
+                      left-label
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row" id="printmap">
+            </q-menu>
+          </q-btn>
+          <q-btn
+            size="sm"
+            flat
+            rounded
+            no-caps
+            align="between"
+            class="bg-white btn-fixed-width q-px-md"
+            color="lime-9"
+            label="Share"
+            icon="mdi-share-variant"
+            @click="share = true"
+          >
+            <q-dialog v-model="share">
+              <socials />
+            </q-dialog>
+          </q-btn>
+          <q-btn
+            size="sm"
+            flat
+            rounded
+            no-caps
+            align="between"
+            class="bg-white btn-fixed-width q-px-md"
+            color="lime-9"
+            label="Help"
+            icon="mdi-help-circle-outline"
+          >
+            <q-menu
+              flat
+              auto-close
+              class="q-pa-sm menu-card"
+              :offset="[150, 0]"
+            >
+              <div class="">
+                <div
+                  class="menu-content bg-grey-2 q-pa-sm q-ma-sm"
+                  style="border-radius: 5px"
+                >
+                  <div class="arrow-up q-ma-xs" style="left: 60%"></div>
+                  <span class="text-lime-9 q-mx-sm" style="font-size: 0.75em"
+                    >What would you like to do?</span
+                  >
+                  <q-separator />
+                  <div class="q-my-none q-mx-none" style="min-width: 150px">
+                    <div class="map-selection q-pa-xs" style="">
+                      <div class="q-my-sm" style="max-width: 250px">
+                        <q-btn
+                          flat
+                          align="left"
+                          color="lime-9"
+                          no-caps
+                          class="q-py-xs full-width"
+                          label="Show Welcome Message"
+                        />
+                        <q-btn
+                          flat
+                          align="left"
+                          color="lime-9"
+                          no-caps
+                          class="q-py-xs full-width"
+                          label="Visit Documentation"
+                        />
+                        <q-btn
+                          flat
+                          align="left"
+                          color="lime-9"
+                          no-caps
+                          class="q-py-xs full-width"
+                          label="Take a Tour"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </q-menu>
+          </q-btn>
+          <q-btn
+            size="sm"
+            flat
+            rounded
+            no-caps
+            align="between"
+            class="bg-white btn-fixed-width q-px-md"
+            color="lime-9"
+            label="Feedback"
+            icon="mdi-comment-quote-outline"
+          >
+            <a href="malito:derickongeri@gmail.com" />
+          </q-btn>
+        </div>
+
+        <div class="row q-gutter-xs q-mt-sm">
+          <q-space />
+          <div class="bg-white q-pa-none q-ma-none" style="border-radius: 20px">
+            <div>
               <q-btn
                 class="bg-white"
                 size="sm"
                 round
                 flat
                 color="lime-9"
-                icon="mdi-printer"
-                @click="printLayer"
+                icon="add"
+                @click="zoom_in"
               />
             </div>
-            <!--
+
+            <q-separator />
+            <div>
+              <q-btn
+                class="bg-white"
+                size="sm"
+                round
+                flat
+                color="lime-9"
+                icon="mdi-refresh"
+                @click="resetZoomLevel"
+              />
+            </div>
+            <q-separator />
+
+            <div>
+              <q-btn
+                class="bg-white"
+                size="sm"
+                round
+                flat
+                color="lime-9"
+                icon="remove"
+                @click="zoom_out"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row" id="printmap">
+          <q-space />
+          <q-btn
+            class="bg-white"
+            size="sm"
+            round
+            flat
+            color="lime-9"
+            icon="mdi-printer"
+            @click="printLayer"
+          />
+        </div>
+        <!--
             <div class="row">
               <q-btn
                 class="bg-white"
@@ -316,10 +524,9 @@
                 @click="openCloseStats"
               />
             </div> -->
-          </div>
-        </div>
       </div>
     </div>
+    <tour />
   </div>
 </template>
 
@@ -360,6 +567,8 @@ export default defineComponent({
     analysisPanel: require("../composables/analysisPanel.vue").default,
     areaSelection: require("../Map/Modals/selectArea.vue").default,
     Maplegend: require("./Modals/legend.vue").default,
+    socials: require("components/socials/shareNetwork.vue").default,
+    tour: require("components/tour.vue").default,
     socials: require("components/socials/shareNetwork.vue").default,
   },
 
@@ -844,14 +1053,7 @@ export default defineComponent({
       fireDates: ref(store.getDatesSelected),
       scaleBar,
       pngUrl,
-      reverseString: ref((str) => {
-        // empty string
-        let newString = "";
-        for (let i = str.length - 1; i >= 0; i--) {
-          newString += str[i];
-        }
-        return newString;
-      }),
+      share: ref(false),
     };
   },
 });
@@ -862,6 +1064,30 @@ export default defineComponent({
 //   box-sizing: border-box;
 //   outline: 3px solid limegreen !important;
 // }
+.arrow-up {
+  position: absolute;
+  left: 44%;
+  top: 6%;
+  width: 12px;
+  height: 12px;
+  // z-index: 1;
+  // border-left: 9px solid transparent;
+  // border-right: 9px solid transparent;
+  // border-bottom: 9px solid #f5f5f5;
+  // box-shadow: 0 1px 5px rgb(0 0 0 / 20%), 0 2px 2px rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%);
+  background: #f5f5f5;
+  border-left-color: #f5f5f5;
+  border-right: none;
+  transform-origin: 0 0;
+  transform: rotate(-45deg);
+  border-bottom-color: #f5f5f5;
+  box-shadow: 1px -2px 3px 0 rgb(85 85 85 / 15%);
+}
+
+.menu-card {
+  background: rgba(255, 255, 255, 0);
+  box-shadow: none;
+}
 
 .scroll-area::-webkit-scrollbar {
   width: 2px;

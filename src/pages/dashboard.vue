@@ -11,9 +11,18 @@
         <q-toolbar-title
           class="text-h6"
           style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
-          >GREEN<span style="color: #000000; font-weight: normal">EYE</span></q-toolbar-title
+          >GREEN<span style="color: #000000; font-weight: normal"
+            >EYE</span
+          ></q-toolbar-title
         >
-        <q-btn flat round dense icon="mdi-human-male-board" />
+        <q-btn
+          id="tour-btn"
+          flat
+          round
+          dense
+          icon="mdi-human-male-board"
+          @click="this.$tours['myTour'].start()"
+        />
         <q-btn flat round dense icon="mdi-information-outline" />
       </q-toolbar>
     </q-header>
@@ -218,11 +227,13 @@
         </div> -->
       </q-toolbar>
     </q-footer>
+    <tour />
   </q-layout>
 </template>
 
 <script>
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, onMounted } from "vue";
+import { useQuasar } from "quasar";
 export default {
   name: "my-tour",
   components: {
@@ -231,8 +242,29 @@ export default {
       .default,
     analysisPanel: require("../components/composables/analysisPanel.vue")
       .default,
+    tour: require("components/tour.vue"),
   },
   setup() {
+    const $q = useQuasar();
+
+    function alert() {
+      $q.dialog({
+        title: "Alert",
+        message: "Some message",
+      })
+        .onOk(() => {
+          // console.log('OK')
+          const el = document.getElementById("tour-btn");
+          el.click();
+        })
+        .onCancel(() => {
+          // console.log('Cancel')
+        })
+        .onDismiss(() => {
+          // console.log('I am triggered on both OK and Cancel')
+        });
+    }
+
     const matchMediaDesktop = ref(false),
       matchMediaMobile = ref(false);
 
@@ -240,6 +272,10 @@ export default {
       matchMediaMobile.value = window.matchMedia("(max-width: 768px)").matches;
       matchMediaDesktop.value = window.matchMedia("(min-width: 768px)").matches;
       console.log(matchMediaDesktop.value, matchMediaMobile.value);
+    });
+
+    onMounted(() => {
+      alert();
     });
     return {
       drawer: ref(false),

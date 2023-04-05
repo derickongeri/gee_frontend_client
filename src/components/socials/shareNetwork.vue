@@ -9,8 +9,8 @@
       <div class="text-grey-9 q-px-xl q-py-md">Click to copy and paste link in email or chart</div>
       <div class="rrow justify-evenly items-center q-px-xl">
         <q-btn-group outlined rounded flat>
-          <q-btn align="between" class="btn-fixed-width" no-caps outline color="lime-9"><span>{{url}}</span></q-btn>
-          <q-btn rounded color="lime-9" label="Copy" />
+          <q-btn align="between" class="btn-fixed-width" no-caps outline color="lime-9" @click="clipboard"><span>{{url}}</span></q-btn>
+          <q-btn rounded color="lime-9" label="Copy" @click="clipboard"/>
         </q-btn-group>
       </div>
     </q-card-section>
@@ -30,8 +30,8 @@ export default {
   data() {
     return {
       showDialog: false,
-      message: 'Hello World, I have finally made it',
-      url: 'http://78.141.234.158/spa/#/',
+      message: `Hi! Check out this application that uses earth observation data to monitor and track environmental changes, helping you stay informed about our planet's health`,
+      url: 'http://derickongeri.com/spa/#/',
       resolve: null,
       reject: null
     };

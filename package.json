@@ -32,6 +32,7 @@
     "vue-i18n": "^9.0.0",
     "vue-router": "^4.0.0",
     "vue-social-sharing": "^4.0.0-alpha4",
+    "vue3-tour": "^0.3.4",
     "wkt": "^0.1.1",
     "wkt-parser-helper": "^4.1.0"
   },
