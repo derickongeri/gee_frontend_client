@@ -171,7 +171,6 @@
             </q-tab-panel>
           </q-tab-panels>
         </div>
-        <div class="my-font q-pa-none q-gutter-sm">
           <q-dialog v-model="confirm" persistent >
             <q-card class="my-font q-pa-md" style="min-width:fit-content">
               <q-card-section class="row items-center q-pb-none" style="min-width:40vw">
@@ -198,7 +197,6 @@
               </q-card-actions> -->
             </q-card>
           </q-dialog>
-        </div>
       </q-page>
     </q-page-container>
 

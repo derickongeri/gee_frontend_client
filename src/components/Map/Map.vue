@@ -271,7 +271,12 @@
             label="Map"
             icon="mdi-tune-vertical"
           >
-            <q-menu flat auto-close class="q-pa-sm menu-card" :offset="[10, 10]">
+            <q-menu
+              flat
+              auto-close
+              class="q-pa-sm menu-card"
+              :offset="[10, 10]"
+            >
               <div class="">
                 <div
                   class="menu-content bg-grey-2 q-pa-sm q-ma-sm"
@@ -513,17 +518,24 @@
           />
         </div>
 
-            <div class="row q-my-sm">
-              <q-space />
-              <q-btn
-                class="bg-white"
-                size="sm"
-                round
-                flat
-                color="lime-9"
-                icon="mdi-layers"
-                @click="openCloseStats"
-              ><q-menu flat auto-close class="q-pa-sm menu-card" anchor="center left" self="center right" :offset="[0, 0]">
+        <div class="row q-my-sm mobile-map-control">
+          <q-space />
+          <q-btn
+            class="bg-white"
+            size="sm"
+            round
+            flat
+            color="lime-9"
+            icon="mdi-layers"
+            @click="openCloseStats"
+            ><q-menu
+              flat
+              auto-close
+              class="q-pa-sm menu-card"
+              anchor="center left"
+              self="center right"
+              :offset="[0, 0]"
+            >
               <div class="row">
                 <div
                   class="menu-content bg-grey-2 q-pa-sm q-ma-sm"
@@ -614,12 +626,16 @@
                     />
                   </div>
                 </div>
-                <div class="arrow-up q-ma-xs" style="left: 89%;top:50%;"></div>
-              </div>
-            </q-menu></q-btn>
-            </div>
+                <div class="arrow-up q-ma-xs" style="left: 89%; top: 50%"></div>
+              </div> </q-menu
+          ></q-btn>
+        </div>
+      </div>
+      <div class="q-my-sm mobile-map-control" style="position:absolute; z-index:2000; bottom:5%; right:2%">
+        <socials />
       </div>
     </div>
+
     <tour />
   </div>
 </template>
@@ -1342,7 +1358,7 @@ leaflet-browser-print-content {
 }
 
 @media screen and (max-width: 768px) {
-  .desktop-control{
+  .desktop-control {
     display: none;
   }
 
@@ -1378,6 +1394,9 @@ leaflet-browser-print-content {
 }
 
 @media screen and (min-width: 768px) {
+  .mobile-map-control {
+    display: none;
+  }
   .area-selection {
     position: absolute;
     z-index: 3000;
