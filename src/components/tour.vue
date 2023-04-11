@@ -24,19 +24,19 @@ export default {
         // },
         {
           target: "#drawingtools",
-          content: `Scroll through the <strong>Statistics Panel</strong> to select and view layer statistics for different counties and sub-counties. The panel also has a short summary descriptions of the loaded area and statistics`,
+          content: `click on the <strong>draw polygon tool</strong> to toggle drawing tools. The drawing tools can be used to draw custom polygons for analysis`,
         },
         {
           target: "#selectarea",
-          content: `Use this <strong>Area selection panel</strong> to select your county or subcounty of interest. Sub-county list is filtered to the selected county`,
+          content: `Use this <strong>select National park dropdonw</strong> to select National parks or National reserve boundary.`,
         },
         {
           target: "#maplegend",
-          content: `This section will display the summary of the Selected Region ie the name of the region, the total crop area, and the total land area`,
+          content: `This section contains the map legend. You can also set the layer opacity using the opacity toool on the top-right conner of the legend <img src="https://www-it.fmi.uni-sofia.bg/courses/maten/module1/image1.gif" style="width: 250px"/>`,
         },
         {
           target: "#mapcontrols",
-          content: `Click on the listed chart items to visualize the ratio between specific items of interest eg ratio of sugarcan and tea <img src="~/src/assets/chart.png" style="width: 250px"/>`,
+          content: `Click on the listed chart items to visualize the ratio between specific items of interest eg ratio of sugarcan and tea <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" style="width: 250px"/>`,
         },
       ],
     };

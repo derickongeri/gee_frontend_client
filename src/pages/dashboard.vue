@@ -171,32 +171,46 @@
             </q-tab-panel>
           </q-tab-panels>
         </div>
-          <q-dialog v-model="confirm" persistent >
-            <q-card class="my-font q-pa-md" style="min-width:fit-content">
-              <q-card-section class="row items-center q-pb-none" style="min-width:40vw">
-                <div class="text-h6" style="font-weight:bold">Welcome to GreenPulse Dashboard!</div>
-                <q-space />
-                <q-btn icon="close" color="grey-9" flat round dense v-close-popup />
-              </q-card-section>
+        <q-dialog v-model="confirm" persistent>
+          <q-card class="my-font q-pa-md" style="min-width: fit-content">
+            <q-card-section
+              class="row items-center q-pb-none"
+              style="min-width: 25vw"
+            >
+              <div class="text-h6" style="font-size: 1em; font-weight: bold">
+                Welcome to GreenPulse Dashboard!
+              </div>
+              <q-space />
+              <q-btn
+                icon="close"
+                color="grey-7"
+                flat
+                round
+                dense
+                v-close-popup
+                size="sm"
+              />
+            </q-card-section>
 
-              <q-card-section class="row items-center">
-                <q-avatar
-                  icon="mdi-human-male-board"
-                  color="white"
-                  text-color="orange"
-                />
-                <span class="q-ml-none"
-                  >Would you like to take a quick, step by step guided
-                  tour of how to navigate through the dashboard?</span
-                ><q-btn icon="mdi-arrow-right-bold" color="orange" flat round dense @click="this.$tours['myTour'].start()" />
-              </q-card-section>
+            <q-card-section class="row items-center">
+              <span class="q-ml-none"
+                >Would you like to take a quick, step by step guided tour of how
+                to navigate through the dashboard?</span
+              >
+            </q-card-section>
 
-              <!-- <q-card-actions align="right">
-                <q-btn flat label="Show me" color="primary" v-close-popup />
-                <q-btn flat label="I'm a pro" color="primary" v-close-popup />
-              </q-card-actions> -->
-            </q-card>
-          </q-dialog>
+            <q-card-actions align="right">
+              <q-btn
+                flat
+                label="Show me"
+                color="primary"
+                @click="this.$tours['myTour'].start()"
+                v-close-popup
+              />
+              <q-btn flat label="Skip tour" color="primary" v-close-popup />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </q-page>
     </q-page-container>
 
