@@ -57,7 +57,7 @@
             "
           />
         </div>
-        <div v-show="showAnalysismobile" class="analysis-panel-mobile bg-white">
+        <!-- <div v-show="showAnalysismobile" class="analysis-panel-mobile bg-white">
           <div class="row">
             <h6 class="q-pa-md q-ma-none">Statistics</h6>
             <q-space />
@@ -75,7 +75,7 @@
           <div>
             <analysisPanel class="" style="" />
           </div>
-        </div>
+        </div> -->
 
         <div
           v-show="showLayerSelection"
@@ -201,8 +201,8 @@
 
             <q-card-actions align="right">
               <q-btn
-                flat
-                label="Show me"
+                outline
+                label="Start tour"
                 color="primary"
                 @click="this.$tours['myTour'].start()"
                 v-close-popup
@@ -225,8 +225,18 @@
           narrow-indicator
           @click="showLayerSelection = true"
         >
-          <q-tab name="mails" icon="mdi-map-plus" label="Layers" />
-          <q-tab name="alarms" icon="mdi-poll" label="Analysis" />
+          <q-tab
+            class="layer-selection"
+            name="mails"
+            icon="mdi-map-plus"
+            label="Layers"
+          />
+          <q-tab
+            class="toggle-statistics"
+            name="alarms"
+            icon="mdi-poll"
+            label="Analysis"
+          />
         </q-tabs>
         <!-- <div class="row" style="min-width: 100%">
           <div class="col">

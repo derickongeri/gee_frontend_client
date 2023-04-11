@@ -32,11 +32,11 @@ export default {
         },
         {
           target: "#maplegend",
-          content: `This section contains the map legend. You can also set the layer opacity using the opacity toool on the top-right conner of the legend <img src="https://www-it.fmi.uni-sofia.bg/courses/maten/module1/image1.gif" style="width: 250px"/>`,
+          content: `This section contains the map legend. You can also set the layer opacity using the opacity toool on the top-right conner of the legend`,
         },
         {
           target: "#mapcontrols",
-          content: `Click on the listed chart items to visualize the ratio between specific items of interest eg ratio of sugarcan and tea <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" style="width: 250px"/>`,
+          content: `Use these map controls and settings tool to change the base layers, zoom in and zoom out, reset the zoom level, and open print layout`,
         },
       ],
     };
