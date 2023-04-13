@@ -2,23 +2,30 @@
   <q-layout view="hHh lpR fFf">
     <q-header bordered class="bg-white q-ma-none text-grey-10">
       <q-toolbar class="q-ma-none">
-        <q-avatar square size="50px" class="q-ma-none">
+        <!-- <q-avatar square size="50px" class="q-ma-none">
           <img
-            src="~/src/assets/africa.png"
+            src="~/src/assets/logo1.png"
             style="position: relative; width: 100%; height: 100%; left: -1%"
           />
-        </q-avatar>
+        </q-avatar> -->
+        <div square class="q-ma-none" style="max-width:100px">
+          <img
+            src="~/src/assets/logo2.png"
+            style="position: relative; width: 100%; height: 100%; left: -1%"
+          />
+        </div>
         <q-toolbar-title
           class="text-h6 q-pa-none q-ma-none item-center"
           style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
-          >GREEN<span style="font-weight: light"
+          >
+          <!-- GREEN<span style="font-weight: light"
             ><q-icon
               id="pulse"
               square
               size="md"
               class="q-ma-none q-pa-none"
               name="mdi-pulse"
-          /></span>
+          /></span> -->
         </q-toolbar-title>
         <q-btn
           id="tour-btn"
