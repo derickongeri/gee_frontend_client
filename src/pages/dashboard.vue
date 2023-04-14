@@ -1,44 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header bordered class="bg-white q-ma-none text-grey-10">
-      <q-toolbar class="q-ma-none">
-        <!-- <q-avatar square size="50px" class="q-ma-none">
-          <img
-            src="~/src/assets/logo1.png"
-            style="position: relative; width: 100%; height: 100%; left: -1%"
-          />
-        </q-avatar> -->
-        <div square class="q-ma-none" style="max-width:100px">
-          <img
-            src="~/src/assets/logo2.png"
-            style="position: relative; width: 100%; height: 100%; left: -1%"
-          />
-        </div>
-        <q-toolbar-title
-          class="text-h6 q-pa-none q-ma-none item-center"
-          style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
-          >
-          <!-- GREEN<span style="font-weight: light"
-            ><q-icon
-              id="pulse"
-              square
-              size="md"
-              class="q-ma-none q-pa-none"
-              name="mdi-pulse"
-          /></span> -->
-        </q-toolbar-title>
-        <q-btn
-          id="tour-btn"
-          flat
-          round
-          dense
-          icon="mdi-human-male-board"
-          @click="this.$tours['myTour'].start()"
-        />
-        <q-btn flat round dense icon="mdi-information-outline" />
-      </q-toolbar>
-    </q-header>
-    <q-page-container style="padding-bottom: 0px">
+  <!-- <q-layout view="hHh lpR fFf">
+    <q-page-container style="padding-bottom: 0px"> -->
       <q-page class="row bg-grey-2">
         <div
           class="col bg-grey-2 q-my-sm items-center web-view"
@@ -219,7 +181,7 @@
           </q-card>
         </q-dialog>
       </q-page>
-    </q-page-container>
+    <!-- </q-page-container> -->
 
     <q-footer bordered class="mobile-veiw bg-white">
       <q-toolbar>
@@ -290,7 +252,7 @@
       </q-toolbar>
     </q-footer>
     <tour />
-  </q-layout>
+  <!-- </q-layout> -->
 </template>
 
 <script>

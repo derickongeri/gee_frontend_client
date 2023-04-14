@@ -26,7 +26,8 @@ module.exports = configure(function (ctx) {
       'i18n',
       'axios',
       'VueSocialSharing',
-      'tour'
+      'tour',
+      'supabase'
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
