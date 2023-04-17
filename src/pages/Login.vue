@@ -71,7 +71,7 @@
             dense
             no-caps
             color="primary"
-            label="Sing up"
+            label="Sign up"
             to="/register"
           />
         </div>

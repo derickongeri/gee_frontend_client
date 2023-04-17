@@ -118,7 +118,7 @@
             unelevated
             rounded
             color="primary"
-            label="Sing up"
+            label="Sign up"
             @click="handleRegister"
           />
           <p class="q-mt-sm q-mb-xs text-grey">Already have an acount?</p>

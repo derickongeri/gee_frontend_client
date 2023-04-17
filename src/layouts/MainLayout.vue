@@ -19,14 +19,12 @@
           class="text-h6 my-font q-pa-none q-ma-none item-center"
           style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
         >
-          GREEN<span style="font-weight: light"
-            ><q-icon
-              id="pulse"
-              square
-              size="md"
-              class="q-ma-none q-pa-none"
-              name="mdi-pulse"
-          /></span>
+          <div
+            class="row items-end q-pl-xs q-ma-none q-gutter-none"
+            style="max-height: 50px"
+          >
+            <img src="~/src/assets/logoname.svg" />
+          </div>
         </q-toolbar-title>
         <!-- <q-btn
           id="tour-btn"
@@ -175,9 +173,9 @@
         </q-btn>
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
-    </q-header>
+    </q-header> -->
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" style="z-index: 5000">
+    <q-drawer class="mobile-view"  v-model="rightDrawerOpen" side="right" style="z-index: 5000">
       <div
         class="bg-primary"
         style="position: absolute; height: 100vh; width: 100%; z-index: 5000"
@@ -263,7 +261,7 @@
           </q-item>
         </q-list>
       </div>
-    </q-drawer> -->
+    </q-drawer>
 
     <q-page-container style="padding-bottom: 0px" class="my-font">
       <router-view />

@@ -20,6 +20,7 @@
         </p>
         <p>Best regards,</p>
         <p>The GreenPulse</p>
+        <p><a href="">  Proceed to Login <span><q-icon name="mdi-arrow-right"></q-icon></span></a></p>
       </div>
     </div>
   </q-page>
