@@ -218,32 +218,32 @@
               <q-item-section>Dashboard</q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple>
+            <q-item clickable v-ripple @click="toggleSettings = !toggleSettings">
               <q-item-section avatar>
                 <q-icon size="xs" name="mdi-cog" />
               </q-item-section>
 
               <q-item-section>Settings</q-item-section>
-
-              <q-menu class="my-font" no-focus fit>
-                <q-list style="min-width: 100px">
-                  <q-item clickable>
-                    <q-item-section avatar>
-                      <q-icon size="xs" name="mdi-translate" />
-                    </q-item-section>
-
-                    <q-item-section>Language</q-item-section>
-                  </q-item>
-                  <q-item clickable>
-                    <q-item-section avatar>
-                      <q-icon size="xs" name="mdi-account-cog" />
-                    </q-item-section>
-
-                    <q-item-section>My Profile</q-item-section>
-                  </q-item>
-                </q-list></q-menu
-              >
             </q-item>
+
+            <q-separator  spaced />
+
+            <q-list v-if="toggleSettings" class="q-mx-md" style="min-width: 100px">
+              <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon size="xs" name="mdi-translate" />
+                </q-item-section>
+
+                <q-item-section>Language</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon size="xs" name="mdi-account-cog" />
+                </q-item-section>
+
+                <q-item-section>My Profile</q-item-section>
+              </q-item>
+            </q-list>
           </q-list>
         </div>
 
@@ -320,6 +320,7 @@ export default defineComponent({
         rightDrawerOpen.value = !rightDrawerOpen.value;
       },
       link: ref("inbox"),
+      toggleSettings: ref(false)
     };
   },
 });
