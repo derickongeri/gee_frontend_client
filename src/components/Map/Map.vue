@@ -185,7 +185,7 @@
         <q-separator vertical inset />
         <div
           class="col"
-          style="z-index: 3000; background-color: #00000000"
+          style="z-index: 2000; background-color: #00000000"
           id="selectarea"
         >
           <areaSelection
@@ -201,7 +201,7 @@
         id="maplegend"
         style="
           position: absolute;
-          z-index: 3000;
+          z-index: 2000;
           bottom: 2%;
           left: 1%;
           max-width: 40%;
@@ -1369,7 +1369,7 @@ leaflet-browser-print-content {
 
   .area-selection {
     position: absolute;
-    z-index: 3000;
+    z-index: 2000;
     top: 0%;
     left: 0%;
     min-width: 100%;
@@ -1399,7 +1399,7 @@ leaflet-browser-print-content {
   }
   .area-selection {
     position: absolute;
-    z-index: 3000;
+    z-index: 2000;
     top: 2%;
     left: 1%;
     max-width: 60%;
