@@ -99,30 +99,6 @@
           </div>
         </q-toolbar-title>
 
-        <q-btn
-          class="my-font q-mr-xl"
-          style="font-weight: bold"
-          flat
-          no-caps
-          color="black"
-          icon="mdi-account-outline"
-          :label="user.user_metadata.firstName"
-        >
-          <q-menu fit>
-            <q-list>
-              <q-item clickable v-close-popup to="/me">
-                <q-item-section>
-                  <q-item-label>My Profile</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item clickable v-close-popup @click="handleLogout">
-                <q-item-section>
-                  <q-item-label>Logout</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-        </q-btn>
         <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
     </q-header>
@@ -175,91 +151,123 @@
       </q-toolbar>
     </q-header> -->
 
-    <q-drawer class="mobile-view"  v-model="rightDrawerOpen" side="right" style="z-index: 5000">
+    <q-drawer
+      class="mobile-view"
+      v-model="rightDrawerOpen"
+      side="right"
+      style="z-index: 5000"
+    >
       <div
-        class="bg-primary"
+        class="row"
+        style="position: absolute; z-index: 5001; left: -5%; top: 2%"
+      >
+        <q-btn
+          color="grey-1"
+          text-color="lime-9"
+          round
+          unelevated
+          icon="mdi-chevron-right"
+          size="md"
+          @click="toggleRightDrawer"
+        ></q-btn>
+      </div>
+      <div
+        class="column justify-between bg-grey-1 text-grey-9"
         style="position: absolute; height: 100vh; width: 100%; z-index: 5000"
       >
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-avatar color="grey-5" text-color="white"> R </q-avatar>
-          </q-item-section>
-
-          <q-item-section>Letter avatar-type</q-item-section>
-        </q-item>
-        <q-list padding class="rounded-borders text-white my-font">
-          <q-item
-            clickable
-            v-ripple
-            :active="link === 'inbox'"
-            @click="link = 'inbox'"
-            active-class="my-menu-link"
+        <div class="row" style="width: 100%">
+          <q-list
+            padding
+            class="rounded-borders text-lime-9 my-font"
+            style="width: 100%"
           >
-            <q-item-section avatar>
-              <q-icon size="xs" name="inbox" />
-            </q-item-section>
+            <q-item class="q-my-lg q-pt-lg">
+              <q-item-section>
+                <q-item-label class="text-h6"
+                  >{{ user.user_metadata.firstName }}
+                  {{ user.user_metadata.lastName }}</q-item-label
+                >
+                <q-item-label caption style="font-size: 0.75em">{{
+                  user.email
+                }}</q-item-label>
+              </q-item-section>
 
-            <q-item-section>Home</q-item-section>
-          </q-item>
+              <q-item-section avatar>
+                <q-avatar color="grey-5" text-color="lime-9"
+                  >{{ user.user_metadata.firstName.charAt(0)
+                  }}{{ user.user_metadata.lastName.charAt(0) }}</q-avatar
+                >
+              </q-item-section>
+            </q-item>
 
-          <q-item
-            clickable
-            v-ripple
-            :active="link === 'outbox'"
-            @click="link = 'outbox'"
-            active-class="my-menu-link"
+            <q-separator spaced />
+
+            <q-item clickable v-ripple to="home">
+              <q-item-section avatar>
+                <q-icon size="xs" name="mdi-home" />
+              </q-item-section>
+
+              <q-item-section>Home</q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple to="dashboard">
+              <q-item-section avatar>
+                <q-icon size="xs" name="mdi-view-dashboard" />
+              </q-item-section>
+
+              <q-item-section>Dashboard</q-item-section>
+            </q-item>
+
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon size="xs" name="mdi-cog" />
+              </q-item-section>
+
+              <q-item-section>Settings</q-item-section>
+
+              <q-menu class="my-font" no-focus fit>
+                <q-list style="min-width: 100px">
+                  <q-item clickable>
+                    <q-item-section avatar>
+                      <q-icon size="xs" name="mdi-translate" />
+                    </q-item-section>
+
+                    <q-item-section>Language</q-item-section>
+                  </q-item>
+                  <q-item clickable>
+                    <q-item-section avatar>
+                      <q-icon size="xs" name="mdi-account-cog" />
+                    </q-item-section>
+
+                    <q-item-section>My Profile</q-item-section>
+                  </q-item>
+                </q-list></q-menu
+              >
+            </q-item>
+          </q-list>
+        </div>
+
+        <div class="row">
+          <q-list
+            padding
+            class="rounded-borders text-lime-9 my-font"
+            style="width: 100%"
           >
-            <q-item-section avatar>
-              <q-icon size="xs" name="send" />
-            </q-item-section>
+            <q-separator spaced />
+            <q-item
+              clickable
+              v-ripple
+              :active="link === 'help'"
+              @click="handleLogout"
+            >
+              <q-item-section avatar>
+                <q-icon size="xs" name="logout" />
+              </q-item-section>
 
-            <q-item-section>Outbox</q-item-section>
-          </q-item>
-
-          <q-item
-            clickable
-            v-ripple
-            :active="link === 'trash'"
-            @click="link = 'trash'"
-            active-class="my-menu-link"
-          >
-            <q-item-section avatar>
-              <q-icon size="xs" name="delete" />
-            </q-item-section>
-
-            <q-item-section>Trash</q-item-section>
-          </q-item>
-
-          <q-separator class="q-mx-lg" spaced />
-
-          <q-item
-            clickable
-            v-ripple
-            :active="link === 'settings'"
-            @click="link = 'settings'"
-            active-class="my-menu-link"
-          >
-            <q-item-section avatar>
-              <q-icon name="settings" />
-            </q-item-section>
-
-            <q-item-section>Settings</q-item-section>
-          </q-item>
-
-          <q-item
-            clickable
-            v-ripple
-            :active="link === 'help'"
-            @click="link = 'help'"
-            active-class="my-menu-link"
-          >
-            <q-item-section avatar>
-              <q-icon name="help" />
-            </q-item-section>
-
-            <q-item-section>Help</q-item-section>
-          </q-item>
-        </q-list>
+              <q-item-section>Logout</q-item-section>
+            </q-item>
+          </q-list>
+        </div>
       </div>
     </q-drawer>
 
@@ -335,4 +343,3 @@ export default defineComponent({
   }
 }
 </style>
-
