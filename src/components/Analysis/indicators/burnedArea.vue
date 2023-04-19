@@ -103,14 +103,15 @@
 
     <div class="sub-content">
       <div class="text-justify my-font">
-        <p class="my-font" style="font-size: 16px">
-          The <b>total burned area</b> was <b>{{ totalArea }}Ha</b>, which
+        <!-- <p class="my-font" style="font-size: 16px"> -->
+          <!-- The <b>total burned area</b> was <b>{{ totalArea }}Ha</b>, which
           coresponds to the sum of all burn Severity categories i.e very high
           severity <b>{{ arealist[0] }}Ha</b>, High severity
           <b>{{ arealist[1] }}Ha</b>, Moderate severity
           <b>{{ arealist[2] }}Ha</b> and the Low severity
-          <b>{{ arealist[3] }}Ha</b>.
-        </p>
+          <b>{{ arealist[3] }}Ha</b>. -->
+          <div style="font-size: 16px" v-html="$t('burnt_area_summary', { totalBurnedArea: `<b>${totalArea}</b>`, veryHighSeverity: `<b>${arealist[0]}</b>`, highSeverity: `<b>${arealist[1]}</b>`, moderateSeverity: `<b>${arealist[2]}</b>`, lowSeverity: `<b>${arealist[3]}</b>` })"></div>
+        <!-- </p> -->
       </div>
 
       <div>

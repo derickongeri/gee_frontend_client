@@ -147,7 +147,7 @@
               style="min-width: 25vw"
             >
               <div class="text-h6" style="font-size: 1em; font-weight: bold">
-                Welcome to GreenPulse Dashboard!
+                {{$t('welcome')}}
               </div>
               <q-space />
               <q-btn
@@ -163,20 +163,19 @@
 
             <q-card-section class="row items-center">
               <span class="q-ml-none"
-                >Would you like to take a quick, step by step guided tour of how
-                to navigate through the dashboard?</span
+                >{{$t('welcomeMsg')}}?</span
               >
             </q-card-section>
 
             <q-card-actions align="right">
               <q-btn
                 outline
-                label="Start tour"
+                :label="$t('start_tour')"
                 color="primary"
                 @click="this.$tours['myTour'].start()"
                 v-close-popup
               />
-              <q-btn flat label="Skip tour" color="primary" v-close-popup />
+              <q-btn flat :label="$t('skip_tour')" color="primary" v-close-popup />
             </q-card-actions>
           </q-card>
         </q-dialog>

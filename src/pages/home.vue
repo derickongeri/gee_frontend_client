@@ -11,13 +11,13 @@
           left: 17%;
         "
       >
-        <div class="col-2 brand" style="width: 150px">
+        <!-- <div class="col-2 brand" style="width: 150px">
           <img
             src="~/src/assets/misland.ecd2c45b.png"
             alt=""
             style="width: 100px"
           />
-        </div>
+        </div> -->
         <q-space />
         <div class=""><sitenav /></div>
       </div>

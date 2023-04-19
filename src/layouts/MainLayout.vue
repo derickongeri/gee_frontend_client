@@ -41,7 +41,7 @@
           flat
           no-caps
           color="black"
-          label="Home"
+          :label="$t(`home`)"
           to="/home"
         ></q-btn>
         <q-btn
@@ -50,12 +50,12 @@
           flat
           no-caps
           color="black"
-          label="Dashboard"
+          :label="$t('dashboard')"
           to="/dashboard"
         >
         </q-btn>
         <q-btn
-          class="my-font q-mr-xl"
+          class="my-font"
           style="font-weight: bold"
           flat
           no-caps
@@ -67,17 +67,41 @@
             <q-list>
               <q-item clickable v-close-popup to="/me">
                 <q-item-section>
-                  <q-item-label>My Profile</q-item-label>
+                  <q-item-label>{{ $t("profile") }}</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item clickable v-close-popup @click="handleLogout">
                 <q-item-section>
-                  <q-item-label>Logout</q-item-label>
+                  <q-item-label>{{ $t("logout") }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
           </q-menu>
         </q-btn>
+        <div class="my-font q-mr-xl">
+          <q-item dense clickable>
+            <!-- <q-item-section avatar>
+              <q-icon size="xs" name="mdi-translate" />
+            </q-item-section> -->
+            <q-item-section>
+              <q-select
+                label-color="grey-9"
+                v-model="locale"
+                :options="localeOptions"
+                :label="$t('select_language')"
+                dense
+                borderless
+                emit-value
+                map-options
+                options-dense
+                style="min-width: 150px"
+              >
+              </q-select>
+            </q-item-section>
+
+            <!-- <q-item-section>Language</q-item-section> -->
+          </q-item>
+        </div>
       </q-toolbar>
       <q-toolbar class="q-ma-none mobile-view">
         <q-avatar square size="50px" class="q-ma-none">
@@ -172,8 +196,8 @@
         ></q-btn>
       </div>
       <div
-        class="column justify-between bg-grey-1 text-grey-9"
-        style="position: absolute; height: 100vh; width: 100%; z-index: 5000"
+        class="column justify-between bg-grey-1 text-lime-9"
+        style="position: absolute; height: 100%; width: 100%; z-index: 5000"
       >
         <div class="row" style="width: 100%">
           <q-list
@@ -193,7 +217,7 @@
               </q-item-section>
 
               <q-item-section avatar>
-                <q-avatar color="grey-5" text-color="lime-9"
+                <q-avatar color="primary" text-color="grey-1"
                   >{{ user.user_metadata.firstName.charAt(0)
                   }}{{ user.user_metadata.lastName.charAt(0) }}</q-avatar
                 >
@@ -202,12 +226,17 @@
 
             <q-separator spaced />
 
-            <q-item clickable v-ripple to="home">
+            <q-item
+              v-show="currentPath !== '/home'"
+              clickable
+              v-ripple
+              to="home"
+            >
               <q-item-section avatar>
                 <q-icon size="xs" name="mdi-home" />
               </q-item-section>
 
-              <q-item-section>Home</q-item-section>
+              <q-item-section>{{ $t("home") }}</q-item-section>
             </q-item>
 
             <q-item clickable v-ripple to="dashboard">
@@ -215,33 +244,56 @@
                 <q-icon size="xs" name="mdi-view-dashboard" />
               </q-item-section>
 
-              <q-item-section>Dashboard</q-item-section>
+              <q-item-section>{{ $t("dashboard") }}</q-item-section>
             </q-item>
 
-            <q-item clickable v-ripple @click="toggleSettings = !toggleSettings">
+            <q-item
+              clickable
+              v-ripple
+              @click="toggleSettings = !toggleSettings"
+            >
               <q-item-section avatar>
                 <q-icon size="xs" name="mdi-cog" />
               </q-item-section>
 
-              <q-item-section>Settings</q-item-section>
+              <q-item-section>{{ $t("settings") }}</q-item-section>
             </q-item>
 
-            <q-separator  spaced />
+            <q-separator spaced />
 
-            <q-list v-if="toggleSettings" class="q-mx-md" style="min-width: 100px">
-              <q-item clickable>
-                <q-item-section avatar>
-                  <q-icon size="xs" name="mdi-translate" />
-                </q-item-section>
-
-                <q-item-section>Language</q-item-section>
-              </q-item>
-              <q-item clickable>
+            <q-list
+              v-if="toggleSettings"
+              class="q-mx-md"
+              style="min-width: 100px"
+            >
+              <q-item clickable v-ripple to="me">
                 <q-item-section avatar>
                   <q-icon size="xs" name="mdi-account-cog" />
                 </q-item-section>
 
-                <q-item-section>My Profile</q-item-section>
+                <q-item-section>{{ $t("my_profile") }}</q-item-section>
+              </q-item>
+              <q-item clickable>
+                <q-item-section avatar>
+                  <q-icon size="xs" name="mdi-translate" />
+                </q-item-section>
+                <q-item-section>
+                  <q-select
+                    label-color="grey-9"
+                    v-model="locale"
+                    :options="localeOptions"
+                    :label="$t('select_language')"
+                    dense
+                    borderless
+                    emit-value
+                    map-options
+                    options-dense
+                    style="min-width: 150px"
+                  >
+                  </q-select>
+                </q-item-section>
+
+                <!-- <q-item-section>Language</q-item-section> -->
               </q-item>
             </q-list>
           </q-list>
@@ -264,7 +316,7 @@
                 <q-icon size="xs" name="logout" />
               </q-item-section>
 
-              <q-item-section>Logout</q-item-section>
+              <q-item-section>{{ $t("logout") }}</q-item-section>
             </q-item>
           </q-list>
         </div>
@@ -278,11 +330,12 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 
 import userAuthUser from "src/composables/userAuthUser";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "MainLayout",
@@ -297,6 +350,8 @@ export default defineComponent({
     const router = useRouter();
 
     const { logout, user } = userAuthUser();
+
+    const { locale } = useI18n({ useScope: "global" });
 
     const rightDrawerOpen = ref(false);
 
@@ -313,14 +368,21 @@ export default defineComponent({
     };
 
     return {
+      currentPath: ref(router.currentRoute.value.path),
       handleLogout,
       user,
       rightDrawerOpen,
       toggleRightDrawer() {
         rightDrawerOpen.value = !rightDrawerOpen.value;
+        console.log(router.currentRoute.value.path);
       },
       link: ref("inbox"),
-      toggleSettings: ref(false)
+      toggleSettings: ref(false),
+      locale,
+      localeOptions: [
+        { value: "en-US", label: "English" },
+        { value: "fr", label: "French" },
+      ],
     };
   },
 });

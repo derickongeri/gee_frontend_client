@@ -23,10 +23,7 @@
           <q-separator />
           <q-card-section>
             <div class="text-justify">
-              The burned area is calculated from pre and post-fire images to
-              creates burn severity assessment maps. The classification of burn
-              severity follows USGS proposed classification system for burn
-              severity ranges.
+              {{$t('burnt_area_info')}}
               <a
                 href="https://www.un-spider.org/advisory-support/recommended-practices/recommended-practice-burn-severity/burn-severity-earth-engine"
               >

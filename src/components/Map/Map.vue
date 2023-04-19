@@ -749,6 +749,8 @@ export default defineComponent({
 
       current_top_base_layer.value = "satellite";
 
+      // map.value.addLayer(baseMaps.value[1])
+
       // L.control
       //   .attribution({
       //     position: "bottomright",
@@ -842,6 +844,7 @@ export default defineComponent({
 
     //get the base map object of leaflet according to the selection clicked
     const change_base_map = function (basemap) {
+
       const selected_base_map = baseMaps.value[basemap];
       map.value.addLayer(selected_base_map);
       selected_base_map.bringToFront();
