@@ -203,15 +203,15 @@
           <q-list
             padding
             class="rounded-borders text-lime-9 my-font"
-            style="width: 100%"
+            style="width: 100%; font-size:16px; font-weight:bold"
           >
             <q-item class="q-my-lg q-pt-lg">
               <q-item-section>
-                <q-item-label class="text-h6"
+                <q-item-label class="text-h6" style="font-size: 21px;font-weight:bold"
                   >{{ user.user_metadata.firstName }}
                   {{ user.user_metadata.lastName }}</q-item-label
                 >
-                <q-item-label caption style="font-size: 0.75em">{{
+                <q-item-label caption style="font-size: 12px">{{
                   user.email
                 }}</q-item-label>
               </q-item-section>
@@ -227,7 +227,6 @@
             <q-separator spaced />
 
             <q-item
-              v-show="currentPath !== '/home'"
               clickable
               v-ripple
               to="home"
@@ -303,7 +302,7 @@
           <q-list
             padding
             class="rounded-borders text-lime-9 my-font"
-            style="width: 100%"
+            style="width: 100% ;font-size:16px; font-weight:bold"
           >
             <q-separator spaced />
             <q-item

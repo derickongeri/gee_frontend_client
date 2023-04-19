@@ -322,20 +322,20 @@ export default {
 </script>
 
 <style lang="scss">
-#pulse {
-  animation-name: beat;
-  animation-duration: 1.5s;
-  animation-iteration-count: 5;
-}
+// #pulse {
+//   animation-name: beat;
+//   animation-duration: 1.5s;
+//   animation-iteration-count: 5;
+// }
 
-@keyframes beat {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+// @keyframes beat {
+//   from {
+//     opacity: 0;
+//   }
+//   to {
+//     opacity: 1;
+//   }
+// }
 
 .q-dialog_top25 .q-dialog_inner-top {
   top: 600px;
