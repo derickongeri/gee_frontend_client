@@ -48,16 +48,6 @@
         >
         </q-btn>
         <q-btn
-          class="my-font q-mr-lg"
-          style="font-weight: 700; font-size: 16px"
-          flat
-          no-caps
-          color="grey-9"
-          icon="mdi-account"
-          label="login"
-          to="/login"
-        />
-        <q-btn
           v-if="user"
           class="my-font q-mr-lg"
           style="font-weight: 700; font-size: 16px"
@@ -83,7 +73,17 @@
             </q-list>
           </q-menu>
         </q-btn>
-
+        <q-btn
+          v-else
+          class="my-font q-mr-lg"
+          style="font-weight: 700; font-size: 16px"
+          flat
+          no-caps
+          color="grey-9"
+          icon="mdi-account"
+          :label="$t('login')"
+          to="/login"
+        />
         <div class="my-font q-mr-xl" style="font-weight: 700">
           <q-select
             label-color="grey-9"
@@ -378,6 +378,8 @@ export default defineComponent({
       localeOptions: [
         { value: "en-US", label: "English" },
         { value: "fr", label: "French" },
+        { value: "es-ES", label: "Spanish" },
+        { value: "sw", label: "Swahili" },
       ],
     };
   },

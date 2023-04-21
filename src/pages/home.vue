@@ -7,16 +7,16 @@
             class="head-text my-font text-center text-white q-pa-md q-pt-xl"
             style="font-weight: 700; background: none"
           >
-            Unlocking Insights for sustainability through Earth Observation . . .
+            {{$t("tagline")}}
           </div>
         </div>
         <div class="text-center text-white" style="font-weight:700; font-size:16px"> <p class="self-center q-pa-md">Launch Application</p></div>
         <div class="row justify-center">
 
           <div class="text-center q-pa-md q-gutter-md" style="min-width: 400px">
-            <q-btn size="lg"  color="primary" label="Earth Pulse Forest" to="/dashboard"/>
-            <q-btn size="lg"  color="primary" label="Earth Pulse Agro" />
-            <q-btn size="lg"  color="primary" label="Earth Pulse Water" />
+            <q-btn size="lg"  color="primary" :label="$t('forest')" to="/dashboard"/>
+            <q-btn size="lg"  color="primary" :label="$t('agro')" />
+            <q-btn size="lg"  color="primary" :label="$t('water')" />
           </div>
         </div>
       </div>

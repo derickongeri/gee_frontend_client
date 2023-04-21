@@ -282,6 +282,8 @@ export default defineComponent({
       localeOptions: [
         { value: "en-US", label: "English" },
         { value: "fr", label: "French" },
+        { value: "es-ES", label: "Spanish" },
+        { value: "sw", label: "Swahili" },
       ],
     };
   },
