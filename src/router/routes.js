@@ -5,9 +5,11 @@ const routes = [
     component: () => import('layouts/LoginLayout.vue'),
     children: [
       { path: '', name: 'loginDefault', component: () => import('pages/Login.vue') },
+      { path: 'home', name: 'home', component: () => import('pages/home.vue') },
       { path: 'login', name: 'login', component: () => import('pages/Login.vue') },
       { path: 'register', name: 'register', component: () => import('pages/Register.vue') },
       { path: 'email-confirmation', name: 'email-confirmation', component: () => import('pages/EmailConfirmation.vue') },
+      { path: 'confirm-signup', name: 'confirm-signup', component: () => import('pages/confirm-signup.vue') },
 
     ]
   },
@@ -18,7 +20,7 @@ const routes = [
     children: [
       { path: 'me', name: 'me', component: () => import('pages/user.vue') },
       { path: 'dashboard', name: 'dashboard', component: () => import('pages/dashboard.vue') },
-      { path: 'home', component: () => import('pages/home.vue') },
+      { path: 'home', name: 'home', component: () => import('pages/home.vue') },
       { path: 'login', component: () => import('pages/Login.vue') },
     ],
     meta: {

@@ -1,6 +1,9 @@
 <template>
-  <q-page padding>
-    <div class="q-pa-md login-card absolute-center" style="max-width: 100%">
+  <q-page padding class="page-tint bg-white" id="hero">
+    <div
+      class="q-pa-md login-card absolute-center"
+      style="max-width: 100%; border-radius: 15px"
+    >
       <q-form @submit.prevent="">
         <!-- <div class="text-primary row">
         <div style="width: 450px"></div>
@@ -8,18 +11,25 @@
         <q-btn icon="close" size="8px" outline round dense v-close-popup />
       </div> -->
         <div class="text-center text-primary" style="height: fit-content">
-          <h6 class="q-px-md q-my-none q-pb-xs">Log in</h6>
+          <h6
+            class="q-px-md q-my-none q-pb-xs"
+            style="font-weight: 700; font-size: 21px"
+          >
+            {{$t('login')}}
+          </h6>
         </div>
 
         <div class="col text-primary q-gutter-xl q-py-xs q-px-md">
           <div>
-            <q-label class="q-ma-md">Your Email *</q-label>
+            <!-- <q-label class="q-ma-md" style="font-weight: 700; font-size: 16px"
+              >Your Email *</q-label
+            > -->
             <q-input
               rounded
               outlined
               dense
               v-model="form.email"
-              label="Email"
+              :label="$t('emailAddress')"
               lazy-rules
               :rules="[
                 (val) => (val && val.length > 0) || 'Field is required *',
@@ -29,21 +39,23 @@
         </div>
         <div class="text-primary q-py-xs q-px-md">
           <div>
-            <q-label class="q-ma-md">Password *</q-label>
+            <!-- <q-label class="q-ma-md" style="font-weight: 700; font-size: 16px"
+              >Password *</q-label
+            > -->
             <q-input
               :type="isPwd ? 'password' : 'text'"
               rounded
               outlined
               dense
               v-model="form.password"
-              label="Password"
+              :label="$t('password')"
               lazy-rules
               :rules="[
                 (val) => (val && val.length > 0) || 'Field is required *',
               ]"
-            ><template v-slot:append>
+              ><template v-slot:append>
                 <q-icon
-                size="xs"
+                  size="xs"
                   :name="isPwd ? 'visibility_off' : 'visibility'"
                   class="cursor-pointer"
                   @click="isPwd = !isPwd"
@@ -53,6 +65,7 @@
         </div>
         <div class="col q-gutter-md text-center q-ma-none">
           <q-btn
+            style="font-size: 16px; font-weight: 700"
             type="submit"
             class="q-mt-none q-px-xl"
             unelevated
@@ -60,20 +73,25 @@
             no-caps
             rounded
             color="primary"
-            label="Log in"
+            :label="$t('login')"
             @click="handleLogin"
           />
-          <p class="q-mt-sm q-mb-xs text-grey">Don't have an acount?</p>
-          <q-btn
-            class="q-px-xl"
-            outline
-            rounded
-            dense
-            no-caps
-            color="primary"
-            label="Sign up"
-            to="/register"
-          />
+          <p
+            class="q-mt-sm q-mb-xs text-grey"
+            style="font-size: 16px; font-weight: 400"
+          >
+            {{$t('dontHaveAnAccount')}}
+            <q-btn
+              style="font-size: 16px; font-weight: 700px"
+              class="q-px-xs"
+              flat
+              dense
+              no-caps
+              color="primary"
+              :label="$t('signup')"
+              to="/register"
+            />
+          </p>
         </div>
       </q-form>
     </div>
@@ -83,7 +101,7 @@
 <script>
 import { defineComponent, ref, onMounted } from "vue";
 import userAuthUser from "src/composables/userAuthUser";
-import useNotify from 'src/composables/useNotify'
+import useNotify from "src/composables/useNotify";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
@@ -91,7 +109,7 @@ export default defineComponent({
     const router = useRouter();
     const { login, isLoggedIn } = userAuthUser();
 
-    const { notifyError, notifySuccess } = useNotify()
+    const { notifyError, notifySuccess } = useNotify();
 
     //Object to hold the form data
     const form = ref({
@@ -109,34 +127,54 @@ export default defineComponent({
     const handleLogin = async () => {
       try {
         await login(form.value);
-        notifySuccess('Login successfully!')
+        notifySuccess("Login successfully!");
         router.push({
           name: "dashboard",
         });
       } catch (error) {
-        notifyError(error.message)
+        notifyError(error.message);
       }
     };
 
     return {
       form,
       handleLogin,
-      isPwd: ref(true)
+      isPwd: ref(true),
     };
   },
 });
 </script>
 
 <style>
+/* .page-tint{
+  background-color: rgba(107, 107, 107, 0.89);
+  background-blend-mode: multiply;
+} */
+
+#hero {
+  /* background-image: url("~/src/assets/hero2.jpg"); */
+  background-blend-mode: multiply;
+  background-size: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* animation-name: beat;
+  animation-duration: 1.5s;
+  animation-iteration-count: 5; */
+}
+
 @media screen and (max-width: 768px) {
   .login-card {
     width: 100%;
+    background-color: rgba(0, 0, 0, 0);
   }
 }
 
 @media screen and (min-width: 768px) {
   .login-card {
     width: 40%;
+    background-color: rgba(255, 255, 255, 0);
   }
 }
 </style>

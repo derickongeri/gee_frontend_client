@@ -17,50 +17,55 @@
         </div> -->
         <q-toolbar-title
           class="text-h6 my-font q-pa-none q-ma-none item-center"
-          style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
+          style="color: #3c4e3d; font-size: 21px; font-weight: bold"
         >
           <div
             class="row items-end q-pl-xs q-ma-none q-gutter-none"
-            style="max-height: 50px"
+            style="font-size: 21px;"
           >
             <img src="~/src/assets/logoname.svg" />
           </div>
         </q-toolbar-title>
-        <!-- <q-btn
-          id="tour-btn"
-          flat
-          round
-          dense
-          icon="mdi-human-male-board"
-          @click="this.$tours['myTour'].start()"
-        />
-        <q-btn flat round dense icon="mdi-information-outline" /> -->
         <q-btn
           class="my-font"
-          style="font-weight: bold"
+          style="font-weight: 700; font-size: 16px"
           flat
           no-caps
-          color="black"
+          color="grey-9"
+          icon="mdi-home"
           :label="$t(`home`)"
           to="/home"
         ></q-btn>
         <q-btn
           class="my-font"
-          style="font-weight: bold"
+          style="font-weight: 700; font-size: 16px"
           flat
           no-caps
-          color="black"
+          color="grey-9"
+          icon="mdi-view-dashboard"
           :label="$t('dashboard')"
           to="/dashboard"
         >
         </q-btn>
         <q-btn
-          class="my-font"
-          style="font-weight: bold"
+          class="my-font q-mr-lg"
+          style="font-weight: 700; font-size: 16px"
           flat
           no-caps
-          color="black"
-          icon="mdi-account-outline"
+          color="grey-9"
+          icon="mdi-account"
+          label="login"
+          to="/login"
+        />
+        <q-btn
+          v-if="user"
+          class="my-font q-mr-lg"
+          style="font-weight: 700; font-size: 16px"
+          flat
+          no-caps
+          color="grey-9"
+          icon="mdi-account"
+          icon-right="mdi-menu-down"
           :label="user.user_metadata.firstName"
         >
           <q-menu fit>
@@ -78,29 +83,23 @@
             </q-list>
           </q-menu>
         </q-btn>
-        <div class="my-font q-mr-xl">
-          <q-item dense clickable>
-            <!-- <q-item-section avatar>
-              <q-icon size="xs" name="mdi-translate" />
-            </q-item-section> -->
-            <q-item-section>
-              <q-select
-                label-color="grey-9"
-                v-model="locale"
-                :options="localeOptions"
-                :label="$t('select_language')"
-                dense
-                borderless
-                emit-value
-                map-options
-                options-dense
-                style="min-width: 150px"
-              >
-              </q-select>
-            </q-item-section>
 
-            <!-- <q-item-section>Language</q-item-section> -->
-          </q-item>
+        <div class="my-font q-mr-xl" style="font-weight: 700">
+          <q-select
+            label-color="grey-9"
+            v-model="locale"
+            :options="localeOptions"
+            :label="$t('select_language')"
+            dense
+            borderless
+            emit-value
+            map-options
+            style="min-width: 150px; font-weight: 700; font-size: 16px"
+          >
+            <template v-slot:prepend
+              ><q-icon size="xs" name="mdi-web"
+            /></template>
+          </q-select>
         </div>
       </q-toolbar>
       <q-toolbar class="q-ma-none mobile-view">
@@ -203,11 +202,13 @@
           <q-list
             padding
             class="rounded-borders text-lime-9 my-font"
-            style="width: 100%; font-size:16px; font-weight:bold"
+            style="width: 100%; font-size: 16px; font-weight: bold"
           >
-            <q-item class="q-my-lg q-pt-lg">
+            <q-item v-if="user" class="q-my-lg q-pt-lg">
               <q-item-section>
-                <q-item-label class="text-h6" style="font-size: 21px;font-weight:bold"
+                <q-item-label
+                  class="text-h6"
+                  style="font-size: 21px; font-weight: bold"
                   >{{ user.user_metadata.firstName }}
                   {{ user.user_metadata.lastName }}</q-item-label
                 >
@@ -226,11 +227,7 @@
 
             <q-separator spaced />
 
-            <q-item
-              clickable
-              v-ripple
-              to="home"
-            >
+            <q-item clickable v-ripple to="home">
               <q-item-section avatar>
                 <q-icon size="xs" name="mdi-home" />
               </q-item-section>
@@ -302,7 +299,7 @@
           <q-list
             padding
             class="rounded-borders text-lime-9 my-font"
-            style="width: 100% ;font-size:16px; font-weight:bold"
+            style="width: 100%; font-size: 16px; font-weight: bold"
           >
             <q-separator spaced />
             <q-item

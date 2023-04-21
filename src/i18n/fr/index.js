@@ -16,5 +16,17 @@ export default {
   settings: 'Paramètres',
   my_profile: 'Mon profil',
   burnt_area_info: 'La zone brûlée est calculée à partir d\'images prises avant et après l\'incendie afin de créer des cartes d\'évaluation de la gravité des brûlures. La classification de la gravité des brûlures suit le système de classification proposé par l\'USGS pour les plages de gravité des brûlures.',
-  burnt_area_summary: "La superficie totale brûlée était de <b>{totalBurnedArea}Ha</b>, ce qui correspond à la somme de toutes les catégories de gravité des brûlures, c'est-à-dire très élevée <b>{veryHighSeverity}Ha</b>, élevée <b>{highSeverity}Ha</b>, modérée <b>{moderateSeverity}Ha</b> et faible <b>{lowSeverity}Ha</b>."
+  burnt_area_summary: "La superficie totale brûlée était de <b>{totalBurnedArea}Ha</b>, ce qui correspond à la somme de toutes les catégories de gravité des brûlures, c'est-à-dire très élevée <b>{veryHighSeverity}Ha</b>, élevée <b>{highSeverity}Ha</b>, modérée <b>{moderateSeverity}Ha</b> et faible <b>{lowSeverity}Ha</b>.",
+
+  // Login and sign up page
+
+  firstName: 'Prénom',
+  lastName: 'Nom de famille',
+  emailAddress: 'Adresse e-mail',
+  password: 'Mot de passe',
+  alreadyHaveAnAccount: 'Vous avez déjà un compte?',
+  dontHaveAnAccount: 'Vous n\'avez pas de compte?',
+  signup: 'S\'inscrire',
+  login: 'Connexion',
+  registerNewAccount: 'Créer un nouveau compte'
 }
