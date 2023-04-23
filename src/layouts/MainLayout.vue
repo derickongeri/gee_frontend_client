@@ -225,7 +225,7 @@
               </q-item-section>
             </q-item>
 
-            <q-item v-else class="q-my-lg q-pt-lg">
+            <q-item v-else class="q-my-lg q-pt-lg" clickable to="/login">
               <q-item-section avatar>
                 <q-icon size="" name="mdi-login-variant" />
               </q-item-section>

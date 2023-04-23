@@ -205,12 +205,13 @@
             class="rounded-borders text-lime-9 my-font"
             style="width: 100%; font-size: 16px; font-weight: bold"
           >
-            <q-item class="q-my-lg q-pt-lg">
-              <!-- <q-item-section>
+                        <q-item v-if="user" class="q-my-lg q-pt-lg">
+              <q-item-section>
                 <q-item-label
                   class="text-h6"
                   style="font-size: 21px; font-weight: bold"
-                  >Login</q-item-label
+                  >{{ user.user_metadata.firstName }}
+                  {{ user.user_metadata.lastName }}</q-item-label
                 >
                 <q-item-label caption style="font-size: 12px">{{
                   user.email
@@ -221,6 +222,26 @@
                 <q-avatar color="primary" text-color="grey-1"
                   >{{ user.user_metadata.firstName.charAt(0)
                   }}{{ user.user_metadata.lastName.charAt(0) }}</q-avatar
+                >
+              </q-item-section>
+            </q-item>
+
+            <q-item v-else class="q-my-lg q-pt-lg" clickable to="/login">
+              <q-item-section avatar>
+                <q-icon size="" name="mdi-login-variant" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label
+                  class="text-h6"
+                  style="font-size: 21px; font-weight: bold"
+                  >{{ $t('login') }}</q-item-label
+                >
+                <q-item-label caption style="font-size: 12px">Sign in to access features</q-item-label>
+              </q-item-section>
+
+              <!-- <q-item-section avatar>
+                <q-avatar color="primary" text-color="grey-1"
+                  ></q-avatar
                 >
               </q-item-section> -->
             </q-item>
