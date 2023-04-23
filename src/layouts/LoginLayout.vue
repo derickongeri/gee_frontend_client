@@ -350,6 +350,7 @@ export default defineComponent({
       currentPath: ref(router.currentRoute.value.path),
       handleLogout,
       user,
+      rightDrawerOpen,
       toggleRightDrawer,
       link: ref("inbox"),
       toggleSettings: ref(false),
