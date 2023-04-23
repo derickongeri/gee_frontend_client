@@ -5,7 +5,7 @@
       style="max-width: inherit"
     >
       <div class="col text-grey-9 q-my-none">
-        <strong> Burned Area Severity Statistics</strong>
+        <strong> {{$t('burnedAreaAnalysis')}}</strong>
       </div>
       <q-space />
       <div id="chart-btns">
@@ -24,7 +24,7 @@
             anchor="top middle"
             self="bottom middle"
             :offset="[5, 5]"
-            >switch to pie chart</q-tooltip
+            >{{$t('switchtopie')}}</q-tooltip
           >
         </q-btn>
         <q-btn
@@ -43,7 +43,7 @@
             anchor="top middle"
             self="bottom middle"
             :offset="[5, 5]"
-            >switch to bar chart</q-tooltip
+            >{{$t('switchtobar')}}</q-tooltip
           >
         </q-btn>
         <q-btn
@@ -62,7 +62,7 @@
             anchor="top middle"
             self="bottom middle"
             :offset="[5, 5]"
-            >download chart image</q-tooltip
+            >{{$t('downloadImage')}}</q-tooltip
           >
         </q-btn>
         <q-btn
@@ -81,7 +81,7 @@
             anchor="top middle"
             self="bottom middle"
             :offset="[5, 5]"
-            >download csv data
+            >{{$t('downloadCsv')}}
           </q-tooltip>
         </q-btn>
         <q-btn
@@ -143,9 +143,9 @@
         <template v-slot:default>
           <q-spinner-dots size="50px" color="primary" />
           <span class="text-grey-9 text-center"
-            ><b>Computing Burned Area Statistics</b>.<br />
-            This may take a while.<br />
-            <i>Please wait...</i></span
+            ><b>{{$t('computing')}}</b>.<br />
+            {{$t('loadingMsg')}}.<br />
+            <i>{{$t('wati')}}...</i></span
           >
         </template>
       </q-inner-loading>

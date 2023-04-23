@@ -13,11 +13,12 @@
       >
         <q-card flat bordered class="q-mb-sm q-mx-sm">
           <q-card-section class="bg-grey-4 text-grey-9">
-            <div class="text-h6"><b>{{ selectedArea }}</b> Burned Area</div>
-            <div class="text-subtitle2">
+            <div class="text-h6"><b>{{ selectedArea }}</b> {{$t('burnedArea')}}</div>
+            <!-- <div class="text-subtitle2">
               fire occurred between <b>{{ fireperiod[0].to }}</b> and
               <b>{{ fireperiod[1].from }}</b>
-            </div>
+            </div> -->
+            <div class="text-subtitle2" style="font-size: 16px" v-html="$t('fireDates', { start: `<b>${fireperiod[0].to}</b>`, end: `<b>${fireperiod[1].from}</b>` })"></div>
           </q-card-section>
 
           <q-separator />

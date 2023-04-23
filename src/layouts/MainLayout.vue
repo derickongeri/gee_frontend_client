@@ -225,6 +225,26 @@
               </q-item-section>
             </q-item>
 
+            <q-item v-else class="q-my-lg q-pt-lg">
+              <q-item-section avatar>
+                <q-icon size="" name="mdi-login-variant" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label
+                  class="text-h6"
+                  style="font-size: 21px; font-weight: bold"
+                  >{{ $t('login') }}</q-item-label
+                >
+                <q-item-label caption style="font-size: 12px">Login to access features</q-item-label>
+              </q-item-section>
+
+              <!-- <q-item-section avatar>
+                <q-avatar color="primary" text-color="grey-1"
+                  ></q-avatar
+                >
+              </q-item-section> -->
+            </q-item>
+
             <q-separator spaced />
 
             <q-item clickable v-ripple to="home">
@@ -262,7 +282,7 @@
               class="q-mx-md"
               style="min-width: 100px"
             >
-              <q-item clickable v-ripple to="me">
+              <q-item clickable v-ripple to="me" v-if="user">
                 <q-item-section avatar>
                   <q-icon size="xs" name="mdi-account-cog" />
                 </q-item-section>
@@ -295,7 +315,7 @@
           </q-list>
         </div>
 
-        <div class="row">
+        <div class="row" v-if="user">
           <q-list
             padding
             class="rounded-borders text-lime-9 my-font"

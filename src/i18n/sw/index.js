@@ -33,9 +33,45 @@ export default {
   registerNewAccount: "Jisajili akaunti mpya",
 
   //home
-
-  tagline: "Maarifa na ufahamu wa maendeleo endelevu kupitia taswira ya ardhi kutoka angani",
+  tagline:
+    "Maarifa na ufahamu wa maendeleo endelevu kupitia taswira ya ardhi kutoka angani",
   forest: "Earth Pulse Misitu",
   agro: "Earth Pulse Kilimo",
   water: "Earth Pulse Maji",
+
+  //map buttons
+  layers: "Tabaka",
+  analysis: "Uchambuzi",
+  map: "Ramani",
+  baseMap: "chagua ramani msingi",
+  maplabels: "Lebo za Ramani",
+  maplabelsToggle: "Onyesha Lebo za Ramani",
+  feedback: "Maoni yako",
+  Help: "Usaidizi",
+  share: "Sambaza",
+  helpmessage: 'Ungependa kufanya nini?',
+  documentation: "Tembelea Nyaraka",
+  tour: 'Fanya Ziara',
+  drawingTools: "Zana za Kuchora",
+  opacity: "Usowazi",
+  burnedArea: 'Majivu ya Misitu',
+  fireDates: 'moto umetokea kati ya <b>{start}Ha</b> na <b>{end}Ha</b>',
+  statistics: 'Takwimu',
+  layerSettings: 'Mipangilio ya Tabaka',
+  burnedAreaStats: 'Takwimu za Majivu ya Misitu',
+  switchtopie: 'Badilisha kwenye chati ya duara',
+  switchtobar: 'Badilisha kwenye chati ya mstari',
+  downloadImage: 'Pakua Picha ya Grafu',
+  downloadCsv: 'Pakua Data ya CSV',
+
+  //Burned Ara Analysis Card
+  burnedAreaAnalysis: 'Uchambuzi wa Majivu ya Misitu',
+  prefireSelect: 'Chagua Kipindi Kabla ya Moto',
+  postfire: 'Chagua Kipindi Baada ya Moto',
+  from: 'kutoka',
+  to: 'hadi',
+  submit: 'Wasilisha',
+  computing: 'Kuhesabu Takwimu za Majivu ya Misitu',
+  loadingMsg: 'Hii inaweza kuchukua muda kidogo',
+  wait: 'Tafadhali subiri'
 };

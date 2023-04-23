@@ -15,7 +15,7 @@
       "
       leaflet-browser-print-content
     >
-      {{ selectedArea }} Burned Area {{ fireDates[0].to.replace(/-/g, "/") }} -
+      {{ selectedArea }} {{$t('burnedArea')}} {{ fireDates[0].to.replace(/-/g, "/") }} -
       {{ fireDates[1].from.replace(/-/g, "/") }}
     </h6>
     <div
@@ -177,7 +177,7 @@
               color="grey-9"
               icon="mdi-selection-drag"
               @click="toggleDrawingTools"
-              ><q-tooltip class="bg-black">drawing tools</q-tooltip>
+              ><q-tooltip class="bg-black">{{$t('drawingTools')}}</q-tooltip>
             </q-btn>
             <!-- {{ scaleBar }} -->
           </div>
@@ -217,7 +217,7 @@
         <div class="col q-pa-sm" style="border-radius: 15px">
           <div class="row">
             <span class="my-font q-px-xs q-ma-none" style="font-weight: bold"
-              >Burnt Area</span
+              >{{$t('burnedArea')}}</span
             >
             <q-space />
             <q-icon
@@ -230,7 +230,7 @@
           </div>
           <div class="row" v-show="opacityslider">
             <div class="row items-center bg-grey-2" style="min-width: 100%">
-              <span class="my-font q-px-xs">Opacity</span>
+              <span class="my-font q-px-xs">{{$t('opacity')}}</span>
               <q-slider
                 dense
                 :min="1"
@@ -268,7 +268,7 @@
             align="between"
             class="bg-white btn-fixed-width q-px-md"
             color="lime-9"
-            label="Map"
+            :label="$t('map')"
             icon="mdi-tune-vertical"
           >
             <q-menu
@@ -286,7 +286,7 @@
                   <span
                     class="q-mx-sm"
                     style="font-size: 0.75em; font-color: #838c48"
-                    >Select Base Map</span
+                    >{{$t('baseMap')}}</span
                   >
                   <q-separator />
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
@@ -355,7 +355,7 @@
                   </div>
                   <q-separator />
                   <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em"
-                    >Map Labels</span
+                  >{{$t('maplabels')}}</span
                   >
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
                     <q-toggle
@@ -363,7 +363,7 @@
                       size="sm"
                       v-model="setLabels"
                       color="lime-9"
-                      label="Show Map Labels"
+                      :label="$t('maplabelsToggle')"
                       left-label
                     />
                   </div>
@@ -379,7 +379,7 @@
             align="between"
             class="bg-white btn-fixed-width q-px-md desktop-control"
             color="lime-9"
-            label="Share"
+            :label="$t('share')"
             icon="mdi-share-variant"
             @click="share = true"
           >
@@ -395,7 +395,7 @@
             align="between"
             class="bg-white btn-fixed-width q-px-md desktop-control"
             color="lime-9"
-            label="Help"
+            :label="$t('Help')"
             icon="mdi-help-circle-outline"
           >
             <q-menu
@@ -411,7 +411,7 @@
                 >
                   <div class="arrow-up q-ma-xs" style="left: 60%"></div>
                   <span class="text-lime-9 q-mx-sm" style="font-size: 0.75em"
-                    >What would you like to do?</span
+                    >{{$t('helpmessage')}}</span
                   >
                   <q-separator />
                   <div class="q-my-none q-mx-none" style="min-width: 150px">
@@ -423,7 +423,7 @@
                           color="lime-9"
                           no-caps
                           class="q-py-xs full-width"
-                          label="Show Welcome Message"
+                          :label="$t('documentation')"
                         />
                         <q-btn
                           flat
@@ -431,7 +431,7 @@
                           color="lime-9"
                           no-caps
                           class="q-py-xs full-width"
-                          label="Visit Documentation"
+                          :label="$t('tour')"
                         />
                         <q-btn
                           flat
@@ -439,7 +439,7 @@
                           color="lime-9"
                           no-caps
                           class="q-py-xs full-width"
-                          label="Take a Tour"
+                          :label="$t('tour')"
                         />
                       </div>
                     </div>
@@ -456,7 +456,7 @@
             align="between"
             class="bg-white btn-fixed-width q-px-md desktop-control"
             color="lime-9"
-            label="Feedback"
+            :label="$t('feedback')"
             icon="mdi-comment-quote-outline"
           >
             <a href="malito:derickongeri@gmail.com" />
@@ -544,7 +544,7 @@
                   <span
                     class="q-mx-sm"
                     style="font-size: 0.75em; font-color: #838c48"
-                    >Select Base Map</span
+                    >{{$t('baseMap')}}</span
                   >
                   <q-separator />
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
@@ -613,7 +613,7 @@
                   </div>
                   <q-separator />
                   <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em"
-                    >Map Labels</span
+                  >{{$t('maplabels')}}</span
                   >
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
                     <q-toggle
@@ -621,7 +621,7 @@
                       size="sm"
                       v-model="setLabels"
                       color="lime-9"
-                      label="Show Map Labels"
+                      :label="$t('maplabelsToggle')"
                       left-label
                     />
                   </div>

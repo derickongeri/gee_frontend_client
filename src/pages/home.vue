@@ -10,9 +10,8 @@
             {{$t("tagline")}}
           </div>
         </div>
-        <div class="text-center text-white" style="font-weight:700; font-size:16px"> <p class="self-center q-pa-md">Launch Application</p></div>
         <div class="row justify-center">
-
+          <div class="row justify-center text-white" style="font-weight:700; font-size:21px;width:100%">Choose an Application to Launch</div>
           <div class="text-center q-pa-md q-gutter-md" style="min-width: 400px">
             <q-btn size="lg"  color="primary" :label="$t('forest')" to="/dashboard"/>
             <q-btn size="lg"  color="primary" :label="$t('agro')" />

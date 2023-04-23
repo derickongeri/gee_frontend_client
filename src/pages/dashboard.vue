@@ -88,7 +88,7 @@
           >
             <q-tab-panel name="mails" class="q-pa-none q-ma-none">
               <div class="row bg-white">
-                <h6 class="my-font q-pa-md q-ma-none">Layer Settings</h6>
+                <h6 class="my-font q-pa-md q-ma-none">{{$t('layerSettings')}}</h6>
                 <q-space />
                 <div class="show-stats-btn-mobile q-pa-md" style="">
                   <q-btn
@@ -113,7 +113,7 @@
 
             <q-tab-panel name="alarms" class="q-pa-none q-ma-none">
               <div class="row bg-white">
-                <h6 class="my-font q-pa-md q-ma-none">Statistics</h6>
+                <h6 class="my-font q-pa-md q-ma-none">{{$t('statistics')}}</h6>
                 <q-space />
                 <div class="show-stats-btn-mobile q-pa-md" style="">
                   <q-btn
@@ -195,15 +195,15 @@
         >
           <q-tab
             class="layer-selection"
-            name="mails"
+            name="layers"
             icon="mdi-map-plus"
-            label="Layers"
+            :label="$t('layers')"
           />
           <q-tab
             class="toggle-statistics"
-            name="alarms"
+            name="analysis"
             icon="mdi-poll"
-            label="Analysis"
+            :label="$t('analysis')"
           />
         </q-tabs>
         <!-- <div class="row" style="min-width: 100%">
@@ -314,7 +314,7 @@ export default {
       showLayerSelection: ref(false),
       matchMediaDesktop,
       matchMediaMobile,
-      tab: ref("mails"),
+      tab: ref("layers"),
       confirm,
     };
   },

@@ -34,10 +34,44 @@ export default {
   registerNewAccount: "Créer un nouveau compte",
 
   //home
-
   tagline:
     "Débloquer des informations pour la durabilité grâce à l'observation de la Terre",
   forest: "Earth Pulse Forêt",
   agro: "Earth Pulse Agriculture",
   water: "Earth Pulse Eau",
+  //boutons de la carte
+  layers: "Couches",
+  analysis: "Analyse",
+  map: "Carte",
+  baseMap: "Sélectionnez la carte de base",
+  maplabels: "Étiquettes de carte",
+  maplabelsToggle: "Afficher les étiquettes de carte",
+  feedback: "Retour d'information",
+  Help: "aide",
+  share: "Partager",
+  helpmessage: "Que voulez-vous faire ?",
+  documentation: "Visitez la documentation",
+  tour: "Faire une visite",
+  drawingTools: "Outils de dessin",
+  opacity: "Opacité",
+  burnedArea: "Zone brûlée",
+  fireDates: "Feu survenu entre <b>{start}Ha</b> et <b>{end}Ha</b>",
+  statistics: "Statistiques",
+  layerSettings: "Paramètres de couche",
+  burnedAreaStats: "Statistiques de la zone brûlée",
+  switchtopie: "Passer au graphique circulaire",
+  switchtobar: "Passer au graphique à barres",
+  downloadImage: "Télécharger l'image du graphique",
+  downloadCsv: "Télécharger les données CSV",
+
+  //Card d'analyse de la zone brûlée
+  burnedAreaAnalysis: "Analyse de la zone brûlée",
+  prefireSelect: "Sélectionnez la période avant l'incendie",
+  postfire: "Sélectionnez la période après l'incendie",
+  from: "de",
+  to: "à",
+  submit: "Envoyer",
+  computing: "Calcul des statistiques de la zone brûlée",
+  loadingMsg: "Cela peut prendre un certain temps",
+  wait: "Veuillez patienter",
 };

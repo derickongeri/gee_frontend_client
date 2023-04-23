@@ -36,6 +36,54 @@
           :label="$t(`home`)"
           to="/home"
         ></q-btn>
+        <q-btn
+          class="my-font"
+          style="font-weight: 700; font-size: 16px"
+          flat
+          no-caps
+          color="grey-9"
+          icon="mdi-view-dashboard"
+          :label="$t('dashboard')"
+          to="/dashboard"
+        >
+        </q-btn>
+        <q-btn
+          v-if="user"
+          class="my-font q-mr-lg"
+          style="font-weight: 700; font-size: 16px"
+          flat
+          no-caps
+          color="grey-9"
+          icon="mdi-account"
+          icon-right="mdi-menu-down"
+          :label="user.user_metadata.firstName"
+        >
+          <q-menu fit>
+            <q-list>
+              <q-item clickable v-close-popup to="/me">
+                <q-item-section>
+                  <q-item-label>{{ $t("profile") }}</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup @click="handleLogout">
+                <q-item-section>
+                  <q-item-label>{{ $t("logout") }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+        <q-btn
+          v-else
+          class="my-font q-mr-lg"
+          style="font-weight: 700; font-size: 16px"
+          flat
+          no-caps
+          color="grey-9"
+          icon="mdi-account"
+          :label="$t('login')"
+          to="/login"
+        />
 
         <div class="my-font q-mr-xl" style="font-weight: 700">
           <q-select
@@ -75,7 +123,7 @@
           </div>
         </q-toolbar-title>
 
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
+        <q-btn dense flat icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
     </q-header>
     <!-- <q-header bordered class="bg-white q-ma-none text-grey-10 mobile-view">
@@ -258,6 +306,9 @@
 <script>
 import { ref, defineComponent } from "vue";
 
+import userAuthUser from "src/composables/userAuthUser";
+import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({
@@ -268,14 +319,38 @@ export default defineComponent({
   // },
 
   setup() {
+    const $q = useQuasar();
+
+    const router = useRouter();
+
+    const { logout, user } = userAuthUser();
+
     const { locale } = useI18n({ useScope: "global" });
 
+    const rightDrawerOpen = ref(false);
+
+    const toggleRightDrawer = () => {
+      rightDrawerOpen.value = !rightDrawerOpen.value;
+      //console.log(router.currentRoute.value.path);
+    };
+
+    const handleLogout = async () => {
+      $q.dialog({
+        title: "Logout",
+        message: "Do you really want to leave?",
+        cancel: true,
+        persistent: true,
+      }).onOk(async () => {
+        await logout();
+        router.replace({ name: "login" });
+      });
+    };
+
     return {
-      rightDrawerOpen: ref(false),
-      toggleRightDrawer() {
-        rightDrawerOpen.value = !rightDrawerOpen.value;
-        console.log(router.currentRoute.value.path);
-      },
+      currentPath: ref(router.currentRoute.value.path),
+      handleLogout,
+      user,
+      toggleRightDrawer,
       link: ref("inbox"),
       toggleSettings: ref(false),
       locale,

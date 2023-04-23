@@ -20,7 +20,7 @@
                 class="text-h6"
                 style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
               >
-                Burned Area Analysis
+                {{$t('burnedAreaAnalysis')}}
               </div>
               <q-space />
               <q-btn icon="close" size="sm" flat round dense v-close-popup />
