@@ -91,21 +91,6 @@
             :label="$t('submit')"
             @click="updatePassword"
           />
-          <!-- <p
-            class="q-mt-sm q-mb-xs text-grey"
-            style="font-weight: 400; font-size: 16px"
-          >
-            {{$t('alreadyHaveAnAccount')}}<q-btn
-              style="font-weight: 400; font-size: 16px"
-              no-caps
-              flat
-              class="q-mt-none q-px-md"
-              outline
-              color="primary"
-              :label="$t('login')"
-              to="/login"
-            />
-          </p> -->
         </div>
       </q-form>
     </div>
@@ -142,7 +127,7 @@ export default defineComponent({
           await updateUserPassword(form.value.password);
           notifySuccess("Success");
           router.push({
-            name: "login",
+            name: "home",
           });
         } catch (error) {
           notifyError(error.message);

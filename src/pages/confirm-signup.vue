@@ -9,10 +9,16 @@
           We're excited to have you on board. Your account has been activated.
         </p>
         <p>
-          <a :href="$route.query.confirmation_url">
-            Proceed to Login
-            <span><q-icon name="mdi-arrow-right"></q-icon></span
-          ></a>
+          <q-btn
+            style="font-size: 16px; font-weight: 700px"
+            class="q-px-xs"
+            flat
+            dense
+            no-caps
+            color="primary"
+            :label="$t('home')"
+            to="home"
+          />
         </p>
       </div>
     </div>
