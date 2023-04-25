@@ -11,11 +11,11 @@
           </div>
         </div>
         <div class="row justify-center">
-          <div class="row justify-center text-white" style="font-weight:700; font-size:21px;width:100%">Choose an Application to Launch</div>
+          <!-- <div class="row justify-center text-white" style="font-weight:700; font-size:21px;width:100%">Choose an Application to Launch</div> -->
           <div class="text-center q-pa-md q-gutter-md" style="min-width: 400px">
-            <q-btn size="lg"  color="primary" :label="$t('forest')" to="/dashboard"/>
-            <q-btn size="lg"  color="primary" :label="$t('agro')" />
-            <q-btn size="lg"  color="primary" :label="$t('water')" />
+            <q-btn rounded size="lg"  color="primary" :label="$t('forest')" to="/dashboard"/>
+            <q-btn rounded size="lg"  color="primary" :label="$t('agro')" />
+            <q-btn rounded size="lg"  color="primary" :label="$t('water')" />
           </div>
         </div>
       </div>

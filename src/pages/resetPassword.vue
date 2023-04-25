@@ -10,12 +10,15 @@
         <q-space />
         <q-btn icon="close" size="8px" outline round dense v-close-popup />
       </div> -->
-        <div class="text-center text-primary q-my-xl" style="height: fit-content">
+        <div
+          class="text-center text-primary q-my-xl"
+          style="height: fit-content"
+        >
           <h6
             class="q-px-md q-my-none q-pb-xs"
             style="font-weight: 700; font-size: 21px"
           >
-            {{$t('login')}}
+            {{ $t("passwordReset") }}
           </h6>
         </div>
 
@@ -36,33 +39,7 @@
               ]"
             />
           </div>
-        </div>
-        <div class="text-primary q-py-xs q-px-md">
-          <div>
-            <!-- <q-label class="q-ma-md" style="font-weight: 700; font-size: 16px"
-              >Password *</q-label
-            > -->
-            <q-input
-              :type="isPwd ? 'password' : 'text'"
-              rounded
-              outlined
-              dense
-              v-model="form.password"
-              :label="$t('password')"
-              lazy-rules
-              :rules="[
-                (val) => (val && val.length > 0) || 'Field is required *',
-              ]"
-              ><template v-slot:append>
-                <q-icon
-                  size="xs"
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                /> </template
-            ></q-input>
-          </div>
-        <p
+          <p
             class="q-mt-none q-mb-xs text-grey"
             style="font-size: 16px; font-weight: 400"
           >
@@ -73,11 +50,12 @@
               dense
               no-caps
               color="primary"
-              :label="$t('resetPassword')"
-              to="/reset-password"
+              :label="$t('backtologin')"
+              to="/login"
             />
           </p>
         </div>
+
         <div class="col q-gutter-md text-center q-ma-none q-my-lg">
           <q-btn
             style="font-size: 16px; font-weight: 700"
@@ -88,14 +66,14 @@
             no-caps
             rounded
             color="primary"
-            :label="$t('login')"
-            @click="handleLogin"
+            :label="$t('submit')"
+            @click="handlePasswordResset"
           />
           <p
             class="q-mt-sm q-mb-xs text-grey"
             style="font-size: 16px; font-weight: 400"
           >
-            {{$t('dontHaveAnAccount')}}
+            {{ $t("dontHaveAnAccount") }}
             <q-btn
               style="font-size: 16px; font-weight: 700px"
               class="q-px-xs"
@@ -122,27 +100,22 @@ import { useRouter } from "vue-router";
 export default defineComponent({
   setup() {
     const router = useRouter();
-    const { login, isLoggedIn } = userAuthUser();
+    const { login, isLoggedIn, sendPasswordRestEmail } = userAuthUser();
 
     const { notifyError, notifySuccess } = useNotify();
 
     //Object to hold the form data
     const form = ref({
       email: "",
-      password: "",
+      // password: "",
     });
 
-    // onMounted(() => {
-    //   if (isLoggedIn) {
-    //     router.push({ name: "me" });
-    //   }
-    // });
-
     //method to handle login and redirect to dashboard
-    const handleLogin = async () => {
+    const handlePasswordResset = async () => {
+      console.log('email', form.value.email)
       try {
-        await login(form.value);
-        notifySuccess("Login successfully!");
+        await sendPasswordRestEmail(form.value.email);
+        notifySuccess("Password reset email sent!");
         router.push({
           name: "dashboard",
         });
@@ -153,7 +126,7 @@ export default defineComponent({
 
     return {
       form,
-      handleLogin,
+      handlePasswordResset,
       isPwd: ref(true),
     };
   },

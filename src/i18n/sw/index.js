@@ -34,7 +34,7 @@ export default {
 
   //home
   tagline:
-    "Maarifa na ufahamu wa maendeleo endelevu kupitia taswira ya ardhi kutoka angani",
+    "Maarifa kuhusu uendelevu wa dunia kupitia taswira ya ardhi kutoka angani",
   forest: "Earth Pulse Misitu",
   agro: "Earth Pulse Kilimo",
   water: "Earth Pulse Maji",

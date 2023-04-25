@@ -10,7 +10,7 @@ const routes = [
       { path: 'register', name: 'register', component: () => import('pages/Register.vue') },
       { path: 'email-confirmation', name: 'email-confirmation', component: () => import('pages/EmailConfirmation.vue') },
       { path: 'confirm-signup', name: 'confirm-signup', component: () => import('pages/confirm-signup.vue') },
-
+      { path: 'reset-password', name: 'reset-password', component: () => import('pages/resetPassword.vue') },
     ]
   },
 

@@ -33,6 +33,9 @@ export default {
   signup: "Signup",
   login: "Login",
   registerNewAccount: "Register New Account",
+  resetPassword: "Forgot your password?",
+  passwordReset: "Reset Password",
+  backtologin: "Cancel password reset?",
 
   //home
   tagline: "Unlocking Insights for sustainability through Earth Observation",
