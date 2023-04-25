@@ -28,6 +28,8 @@ export default {
   lastName: "Last Name",
   emailAddress: "Email Address",
   password: "Password",
+  newPassword: "New Password",
+  confirmPassword: "Confirm Password",
   alreadyHaveAnAccount: "Already have an account?",
   dontHaveAnAccount: "Don't have an account?",
   signup: "Signup",
@@ -36,6 +38,7 @@ export default {
   resetPassword: "Forgot your password?",
   passwordReset: "Reset Password",
   backtologin: "Cancel password reset?",
+  updatePassword: "Reset Password",
 
   //home
   tagline: "Unlocking Insights for sustainability through Earth Observation",

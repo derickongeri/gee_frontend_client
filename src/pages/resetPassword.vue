@@ -117,7 +117,8 @@ export default defineComponent({
         await sendPasswordRestEmail(form.value.email);
         notifySuccess("Password reset email sent!");
         router.push({
-          name: "dashboard",
+          name: "reset-password-confirmation",
+          query: { email: form.value.email },
         });
       } catch (error) {
         notifyError(error.message);

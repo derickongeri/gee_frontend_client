@@ -7,7 +7,10 @@ export default function userAuthUser() {
   const { supabase } = useSupabase();
 
   const login = async ({ email, password }) => {
-    const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { user, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) throw error;
     return user;
   };
@@ -28,16 +31,16 @@ export default function userAuthUser() {
   };
 
   const register = async ({ email, password, ...meta }) => {
-    console.log(meta)
+    console.log(meta);
     const { user, error } = await supabase.auth.signUp(
       {
         email: email,
         password: password,
-        options:{
-           data: meta,
-           redirectTo: `${window.location.origin}/me?fromEmail=registrationConfirmation`,
-        }
-   }
+        options: {
+          data: meta,
+          redirectTo: `http://derickongeri.com/greenpulse/confirm-signup?`,
+        },
+      }
       // {
       //   email,
       //   password,
@@ -58,15 +61,19 @@ export default function userAuthUser() {
   };
 
   const sendPasswordRestEmail = async (email) => {
-    const { user, error } = await supabase.auth.resetPasswordForEmail(email);
+    const { user, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "http://derickongeri.com/greenpulse/update-password",
+    });
     if (error) throw error;
     return user;
   };
 
-  const updateUserPassword = async (email) => {
-    const { data, error } = await supabase.auth.updateUser({
-      password: new_password
-    })
+  const updateUserPassword = async (new_password) => {
+    const { user, error } = await supabase.auth.updateUser({
+      password: new_password,
+    });
+    if (error) throw error;
+    return user;
   };
 
   return {
@@ -78,5 +85,6 @@ export default function userAuthUser() {
     register,
     update,
     sendPasswordRestEmail,
+    updateUserPassword,
   };
 }

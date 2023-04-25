@@ -11,6 +11,8 @@ const routes = [
       { path: 'email-confirmation', name: 'email-confirmation', component: () => import('pages/EmailConfirmation.vue') },
       { path: 'confirm-signup', name: 'confirm-signup', component: () => import('pages/confirm-signup.vue') },
       { path: 'reset-password', name: 'reset-password', component: () => import('pages/resetPassword.vue') },
+      { path: 'reset-password-confirmation', name: 'reset-password-confirmation', component: () => import('pages/resetPasswordConfirmation.vue') },
+      { path: 'update-password', name: 'update-password', component: () => import('pages/updatePassword.vue') },
     ]
   },
 
