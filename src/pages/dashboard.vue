@@ -86,7 +86,7 @@
               border-radius: 15px 15px 0px 0px;
             "
           >
-            <q-tab-panel name="mails" class="q-pa-none q-ma-none">
+            <q-tab-panel name="layers" class="q-pa-none q-ma-none">
               <div class="row bg-white">
                 <h6 class="my-font q-pa-md q-ma-none">{{$t('layerSettings')}}</h6>
                 <q-space />
@@ -111,7 +111,7 @@
               </div>
             </q-tab-panel>
 
-            <q-tab-panel name="alarms" class="q-pa-none q-ma-none">
+            <q-tab-panel name="analysis" class="q-pa-none q-ma-none">
               <div class="row bg-white">
                 <h6 class="my-font q-pa-md q-ma-none">{{$t('statistics')}}</h6>
                 <q-space />
@@ -268,31 +268,6 @@ export default {
     tour: require("components/tour.vue"),
   },
   setup() {
-    // const $q = useQuasar();
-
-    // function alert() {
-    //   $q.dialog({
-    //     title: "Confirm",
-    //     message: "Would you like to take a tour?",
-    //     cancel: true,
-    //     persistent: true,
-    //   })
-    //     .onOk(() => {
-    //       // console.log('OK')
-    //       const el = document.getElementById("tour-btn");
-    //       el.click();
-    //     })
-    //     .onOk(() => {
-    //       // console.log('>>>> second OK catcher')
-    //     })
-    //     .onCancel(() => {
-    //       // console.log('Cancel')
-    //     })
-    //     .onDismiss(() => {
-    //       // console.log('I am triggered on both OK and Cancel')
-    //     });
-    // }
-
     const matchMediaDesktop = ref(false),
       matchMediaMobile = ref(false),
       confirm = ref(false);
