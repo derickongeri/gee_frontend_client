@@ -3,159 +3,8 @@
     class="q-pa-none bg-grey-2 box"
     style="position: relative; min-height: 100%; min-width: 100%"
   >
-    <h6
-      class="title bg-white q-px-md q-py-none"
-      style="
-        text-decoration: underline;
-        display: none;
-        top: 2px;
-        width: 98.5%;
-        position: fixed;
-        z-index: 10000;
-      "
-      leaflet-browser-print-content
-    >
-      {{ selectedArea }} {{$t('burnedArea')}} {{ fireDates[0].to.replace(/-/g, "/") }} -
-      {{ fireDates[1].from.replace(/-/g, "/") }}
-    </h6>
-    <div
-      class="north-arrow"
-      style="
-        width: fit-content;
-        height: fit-content;
-        display: none;
-        position: absolute;
-        z-index: 100000;
-        top: 10%;
-        right: 250px;
-      "
-      leaflet-browser-print-content
-    >
-      <q-avatar square size="50px" class="q-ma-none">
-        <img
-          src="~/src/assets/northarrow2.png"
-          style="position: relative; width: 100%; height: 100%; left: -1%"
-        />
-      </q-avatar>
-    </div>
-    <div
-      class="target-div"
-      style="
-        width: fit-content;
-        height: fit-content;
-        display: none;
-        position: absolute;
-        z-index: 100000;
-        bottom: 4%;
-        left: 3%;
-      "
-      leaflet-browser-print-content
-    ></div>
-    <div
-      class="my-font sub-content q-mt-none q-ml-none q-pa-none"
-      style="display: none"
-      leaflet-browser-print-content
-    >
-      <div
-        class="column justify-between q-ma-none q-px-xs"
-        style="position: relative; height: 100%"
-      >
-        <h6 class="q-mt-none"></h6>
-        <div class="q-pa-xs gutter-md">
-          <h6 class="q-my-none" style="font-size: 1em; font-weight: bold">
-            Note:
-          </h6>
-          <p class="text-justify" style="font-size: 0.75em; max-width: 200px">
-            Burn severity map generated automatically using Normalized Burn
-            Ratio (NBR),using near-infrared (NIR) and shortwave-infrared (SWIR)
-            wavelengths. The post-fire image is subtracted from the pre-fire
-            image to create the delta NBR (dNBR), which can be used to assess
-            burn severity
-          </p>
-          <div class="row" style="font-size: 0.75em; min-width: 200px">
-            <div class="col-6"><b>Data-Source</b></div>
-            <div class="col-6"><b>Sentinel 2</b></div>
-          </div>
-          <div class="row" style="font-size: 0.75em; min-width: 200px">
-            <div class="col-6"><b>Pre-fire Date</b></div>
-            <div class="col-6">
-              <div class="row">
-                <span>From:</span><q-space /><span>{{
-                  fireDates[0].from
-                }}</span>
-              </div>
-              <div class="row">
-                <span>To:</span><q-space /><span>{{ fireDates[0].to }}</span>
-              </div>
-            </div>
-          </div>
-          <div
-            class="row text-justify"
-            style="font-size: 0.75em; min-width: 200px"
-          >
-            <div class="col-6"><b>Post-fire Dates</b></div>
-            <div class="col-6">
-              <div class="row">
-                <span>From:</span><q-space /><span>{{
-                  fireDates[1].from
-                }}</span>
-              </div>
-              <div class="row">
-                <span>To:</span><q-space /><span>{{ fireDates[1].to }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row q-ma-none">
-          <div class="q-pa-xs" style="border: 1px solid grey; min-width: 200px">
-            <h6 class="q-my-none" style="font-size: 1em; font-weight: bold">
-              Burned Area Severity
-            </h6>
-            <Maplegend />
-          </div>
-        </div>
-
-        <div class="row q-mt-xs q-mb-xs">
-          <div class="q-my-none q-pa-xs">
-            <h6 class="q-my-none" style="font-size: 1em; font-weight: bold">
-              Disclaimer
-            </h6>
-            <p
-              class="text-justify q-my-none"
-              style="font-size: 0.75em; max-width: 200px"
-            >
-              The developer of the application from which this map document was
-              generated is not liable for the correctness of outputs or
-              decisions derived as a consequence.
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="row items-center q-mt-xs q-mb-xs"
-          style="max-width: 100px; max-height: 100px"
-        >
-          <q-avatar square size="50px" class="q-ma-none">
-            <img
-              src="~/src/assets/africa.png"
-              style="position: relative; width: 100%; height: 100%; left: -1%"
-            />
-          </q-avatar>
-          <div
-            class="col text-h6"
-            style="color: #3c4e3d; font-size: 1.2rem; font-weight: bold"
-          >
-            GREEN<span style="color: #000000; font-weight: normal">EYE</span>
-          </div>
-          <span
-            class="my-font"
-            style="min-width: 200px; font-weight: light; font-size: 0.75em"
-            >created by
-            <a href="https://derickongeri.github.io">Derick Ongeri</a></span
-          >
-        </div>
-      </div>
+    <div>
+      <burnedAreaLayout />
     </div>
 
     <div class="col bg-black q-mx-none map-content" id="mapid" style="">
@@ -177,7 +26,7 @@
               color="grey-9"
               icon="mdi-selection-drag"
               @click="toggleDrawingTools"
-              ><q-tooltip class="bg-black">{{$t('drawingTools')}}</q-tooltip>
+              ><q-tooltip class="bg-black">{{ $t("drawingTools") }}</q-tooltip>
             </q-btn>
             <!-- {{ scaleBar }} -->
           </div>
@@ -216,9 +65,9 @@
       >
         <div class="col q-pa-sm" style="border-radius: 15px">
           <div class="row">
-            <span class="my-font q-px-xs q-ma-none" style="font-weight: bold"
-              >{{$t('burnedArea')}}</span
-            >
+            <span class="my-font q-px-xs q-ma-none" style="font-weight: bold">{{
+              $t("burnedArea")
+            }}</span>
             <q-space />
             <q-icon
               clickable
@@ -230,7 +79,7 @@
           </div>
           <div class="row" v-show="opacityslider">
             <div class="row items-center bg-grey-2" style="min-width: 100%">
-              <span class="my-font q-px-xs">{{$t('opacity')}}</span>
+              <span class="my-font q-px-xs">{{ $t("opacity") }}</span>
               <q-slider
                 dense
                 :min="1"
@@ -286,7 +135,7 @@
                   <span
                     class="q-mx-sm"
                     style="font-size: 0.75em; font-color: #838c48"
-                    >{{$t('baseMap')}}</span
+                    >{{ $t("baseMap") }}</span
                   >
                   <q-separator />
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
@@ -354,9 +203,9 @@
                     </div>
                   </div>
                   <q-separator />
-                  <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em"
-                  >{{$t('maplabels')}}</span
-                  >
+                  <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em">{{
+                    $t("maplabels")
+                  }}</span>
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
                     <q-toggle
                       dense
@@ -410,9 +259,9 @@
                   style="border-radius: 5px"
                 >
                   <div class="arrow-up q-ma-xs" style="left: 60%"></div>
-                  <span class="text-lime-9 q-mx-sm" style="font-size: 0.75em"
-                    >{{$t('helpmessage')}}</span
-                  >
+                  <span class="text-lime-9 q-mx-sm" style="font-size: 0.75em">{{
+                    $t("helpmessage")
+                  }}</span>
                   <q-separator />
                   <div class="q-my-none q-mx-none" style="min-width: 150px">
                     <div class="map-selection q-pa-xs" style="">
@@ -544,7 +393,7 @@
                   <span
                     class="q-mx-sm"
                     style="font-size: 0.75em; font-color: #838c48"
-                    >{{$t('baseMap')}}</span
+                    >{{ $t("baseMap") }}</span
                   >
                   <q-separator />
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
@@ -612,9 +461,9 @@
                     </div>
                   </div>
                   <q-separator />
-                  <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em"
-                  >{{$t('maplabels')}}</span
-                  >
+                  <span class="text-grey-9 q-mx-sm" style="font-size: 0.75em">{{
+                    $t("maplabels")
+                  }}</span>
                   <div class="q-my-sm q-mx-sm" style="min-width: 150px">
                     <q-toggle
                       dense
@@ -631,7 +480,10 @@
           ></q-btn>
         </div>
       </div>
-      <div class="q-my-sm mobile-map-control" style="position:absolute; z-index:2000; bottom:5%; right:2%">
+      <div
+        class="q-my-sm mobile-map-control"
+        style="position: absolute; z-index: 2000; bottom: 5%; right: 2%"
+      >
         <socials />
       </div>
     </div>
@@ -671,6 +523,8 @@ import setSelectedVect from "./Modals/fetchVectors";
 import setSelectedRaster from "./Modals/fetchRaster";
 import html2canvas from "html2canvas";
 
+import { axios } from "src/boot/axios";
+
 export default defineComponent({
   components: {
     selectionTab: require("components/Layerselections.vue").default,
@@ -680,6 +534,7 @@ export default defineComponent({
     socials: require("components/socials/shareNetwork.vue").default,
     tour: require("components/tour.vue").default,
     socials: require("components/socials/shareNetwork.vue").default,
+    burnedAreaLayout: require("./Modals/printlayouts/burnedarea.vue").default,
   },
 
   setup() {
@@ -844,7 +699,6 @@ export default defineComponent({
 
     //get the base map object of leaflet according to the selection clicked
     const change_base_map = function (basemap) {
-
       const selected_base_map = baseMaps.value[basemap];
       map.value.addLayer(selected_base_map);
       selected_base_map.bringToFront();
@@ -993,6 +847,30 @@ export default defineComponent({
       }
     };
 
+    const validationPoints = async function () {
+      const pointsURL = "http://wemast.glenwell.com/fieldtableData.geojson";
+      const pointData = await axios.get(pointsURL, {
+        headers: {
+          Origin: 'http://wemast.glenwell.com/fieldtableData.geojson',
+        },
+      });
+
+      const pointLayer = new L.geoJSON(pointData, {
+        pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng, {
+            radius: 6,
+            fillColor: "blue",
+            color: "blue",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8,
+          });
+        },
+      });
+
+      pointLayer.addTo(map.value).bringToFront();
+    };
+
     const resetZoomLevel = async function () {
       if (customGeometry.value) {
         map.value.fitBounds(customGeometry.value.getBounds(), {
@@ -1132,6 +1010,7 @@ export default defineComponent({
         toggleDrawingTools();
       });
       setCurrentVector().then(() => {
+        validationPoints();
         setRasterLayer();
       });
     });

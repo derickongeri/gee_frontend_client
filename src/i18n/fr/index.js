@@ -74,4 +74,17 @@ export default {
   computing: "Calcul des statistiques de la zone brûlée",
   loadingMsg: "Cela peut prendre un certain temps",
   wait: "Veuillez patienter",
+
+  // Burned area map print layout
+  note: "Remarque",
+  burnedAreaNotes:
+    "Carte de gravité de brûlure générée automatiquement à l'aide du rapport de brûlure normalisé (NBR), utilisant des longueurs d'onde proches infrarouges (NIR) et infrarouges à ondes courtes (SWIR). L'image post-incendie est soustraite de l'image pré-incendie pour créer le delta NBR (dNBR), qui peut être utilisé pour évaluer la gravité de la brûlure",
+  dataSource: "Source de données",
+  pre_fire_date: "Date avant l'incendie",
+  post_fire_date: "Date après l'incendie",
+  severity: "Gravité de la zone brûlée",
+  disclaimer: "Avertissement",
+  the_disclaimer:
+    "Le développeur de l'application à partir de laquelle ce document de carte a été généré n'est pas responsable de la véracité des sorties ou des décisions dérivées en conséquence.",
+  createdby: "créé par",
 };

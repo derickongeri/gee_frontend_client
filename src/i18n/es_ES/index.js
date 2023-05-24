@@ -74,4 +74,17 @@ export default {
   computing: "Calculando estadísticas de área quemada",
   loadingMsg: "Esto puede tardar un tiempo",
   wait: "Por favor espera",
+
+  // Burned area map print layout
+  note: "Nota",
+  burnedAreaNotes:
+    "Mapa de gravedad de quemaduras generado automáticamente usando la Relación de Quemadura Normalizada (NBR), utilizando longitudes de onda de infrarrojo cercano (NIR) e infrarrojo de onda corta (SWIR). La imagen posterior al incendio se resta de la imagen anterior al incendio para crear el delta NBR (dNBR), que se puede utilizar para evaluar la gravedad de la quemadura.",
+  dataSource: "Fuente de datos",
+  pre_fire_date: "Fecha previa al incendio",
+  post_fire_date: "Fecha posterior al incendio",
+  severity: "Gravedad del área quemada",
+  disclaimer: "Descargo de responsabilidad",
+  the_disclaimer:
+    "El desarrollador de la aplicación a partir de la cual se generó este documento de mapa no es responsable de la corrección de las salidas o decisiones derivadas como consecuencia.",
+  createdby: "creado por"
 };

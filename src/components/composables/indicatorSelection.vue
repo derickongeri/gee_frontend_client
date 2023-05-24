@@ -4,7 +4,7 @@
       <q-item clickable v-ripple @click="seamless = !seamless">
         <q-item-section class="text-center">
           <q-item-label
-            ><q-icon name="mdi-fire" color="grey-10" size="md"
+            ><q-icon name="mdi-pine-tree-fire" color="grey-10" size="md"
           /></q-item-label>
           <q-item-label caption style="font-size: 0.75em"
             >BURNED <br/> AREA</q-item-label
@@ -36,10 +36,10 @@
       <q-item clickable v-ripple>
         <q-item-section class="text-center">
           <q-item-label
-            ><q-icon name="mdi-leaf" color="grey-7" size="md"
+            ><q-icon name="mdi-forest" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >VEGETATION <br /> QUALITY</q-item-label
+            >FOREST <br /> LOSS</q-item-label
           >
         </q-item-section>
       </q-item>
@@ -47,10 +47,10 @@
       <q-item clickable v-ripple>
         <q-item-section class="text-center">
           <q-item-label
-            ><q-icon name="mdi-water" color="grey-7" size="md"
+            ><q-icon name="mdi-fire-alert" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >SURFACE <br /> WATER</q-item-label
+            >FIRE <br /> ALERT</q-item-label
           >
         </q-item-section>
       </q-item>
@@ -93,10 +93,10 @@
       <q-item clickable v-ripple>
         <q-item-section class="text-center">
           <q-item-label
-            ><q-icon name="mdi-leaf" color="grey-7" size="md"
+            ><q-icon name="mdi-forest" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >VEGETATION <br /> QUALITY</q-item-label
+            >FOREST <br /> LOSS</q-item-label
           >
         </q-item-section>
       </q-item>
@@ -104,10 +104,10 @@
       <q-item clickable v-ripple>
         <q-item-section class="text-center">
           <q-item-label
-            ><q-icon name="mdi-water" color="grey-7" size="md"
+            ><q-icon name="mdi-fire-alert" color="grey-7" size="md"
           /></q-item-label>
           <q-item-label style="font-size: 0.75em" caption
-            >SURFACE <br /> WATER</q-item-label
+            >FIRE <br /> ALERT</q-item-label
           >
         </q-item-section>
       </q-item>

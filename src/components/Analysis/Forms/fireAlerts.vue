@@ -159,12 +159,10 @@ import { ref, defineComponent } from "vue";
 import { Notify } from "quasar";
 import moment from "moment/dist/moment.js";
 import { useVectorStore } from "../../../stores/vector_store/index.js";
-import { useIndicatorSelectionStore } from "./../../../stores/indicator_selection_store.js"
 
 export default defineComponent({
   setup() {
     const store = useVectorStore()
-    const indicator_store = useIndicatorSelectionStore()
     const preFiredates = ref(null),
       postFiredates = ref(null),
       closePopUp = ref(false);
@@ -172,7 +170,6 @@ export default defineComponent({
     const daterangeSubmit = () => {
       let dates = [preFiredates.value, postFiredates.value];
       store.setDatesSelected(dates)
-      indicator_store.setIndicator('burned_area')
     };
 
     return {
